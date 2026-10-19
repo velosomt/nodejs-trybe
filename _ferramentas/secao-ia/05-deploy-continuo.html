@@ -1,0 +1,71 @@
+<p>Com a CI funcionando (IA.3) e a <code>main</code> protegida (IA.4), falta a última peça: <strong>só fazer deploy quando a CI passar</strong>. Para a API Cookmaster no Railway há dois caminhos. Escolha <strong>um</strong>.</p>
+
+<h2>Opção 1 (recomendada): Railway com "Wait for CI"</h2>
+<p>Mantém o deploy automático que você configurou na <a href="@@LESSON:4505303-9-7-deploy-da-aplicacao-no-railway@@">lição 9.7</a>, mas o Railway passa a <strong>esperar o GitHub Actions</strong> terminar antes de publicar.</p>
+<ol>
+<li>Garanta que o workflow tem o gatilho de push na branch de deploy. O <code>ci.yml</code> da lição IA.3 já tem:
+<pre><code class="language-yaml">on:
+  push:
+    branches: [main]</code></pre></li>
+<li>No Railway, abra o serviço <code>cookmaster-backend</code> → <strong>Settings</strong> → seção de deploy a partir do GitHub → ligue <strong>Wait for CI</strong>.<br>Se a opção não aparecer, aceite as permissões atualizadas do app do Railway no GitHub (<em>GitHub → Settings → Applications</em>).</li>
+<li>Faça um push na <code>main</code>. O deploy fica em estado <strong>WAITING</strong> enquanto os workflows rodam:
+<ul>
+<li>workflow <strong>falhou</strong> → o deploy é <strong>pulado</strong> e a produção continua com a versão anterior;</li>
+<li>todos passaram → o deploy segue normalmente.</li>
+</ul></li>
+</ol>
+<p>Vantagem: nenhuma credencial do Railway fica no GitHub. O Railway continua fazendo o build (pelo Dockerfile) e o deploy.</p>
+
+<h2>Opção 2: o GitHub Actions faz o deploy</h2>
+<p>Útil quando você quer o controle no pipeline: aprovação manual via environment, deploy só por tag, vários serviços na ordem certa. Desligue o autodeploy no Railway (<strong>Settings → Disable</strong>) e acrescente um segundo job ao <code>ci.yml</code>:</p>
+<pre><code class="language-yaml">  deploy:
+    needs: test
+    if: github.event_name == 'push' &amp;&amp; github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Deploy no Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: npx --yes @railway/cli up --service cookmaster-backend --detach</code></pre>
+<ul>
+<li><code>needs: test</code> — o deploy só começa se o job <code>test</code> passou.</li>
+<li><code>if: ...</code> — pull requests rodam só os testes. Deploy só em push na <code>main</code>.</li>
+<li><code>environment: production</code> — usa o segredo <code>RAILWAY_TOKEN</code> desse ambiente e respeita as aprovações configuradas (lição IA.4).</li>
+<li><code>concurrency</code> com <code>cancel-in-progress: false</code> — dois deploys nunca rodam ao mesmo tempo e um deploy em andamento não é cancelado no meio.</li>
+<li><code>RAILWAY_TOKEN</code> é um <strong>project token</strong> criado nas configurações do projeto no Railway, com escopo só daquele projeto/ambiente. As opções da CLI podem mudar, então confira com <code>railway up --help</code> e na documentação do Railway.</li>
+</ul>
+
+<h2>E o banco de dados?</h2>
+<p>Na <a href="@@LESSON:4505303-9-7-deploy-da-aplicacao-no-railway@@">lição 9.7</a> o banco foi populado <strong>manualmente</strong>. Isso funciona na primeira vez, mas não escala: toda mudança de tabela vira um passo manual que alguém esquece.</p>
+<ul>
+<li>O caminho profissional são <strong>migrations</strong>: arquivos versionados no Git, cada um com uma alteração de schema, aplicados em ordem por uma ferramenta (Knex, Prisma Migrate, Sequelize, Flyway, entre outras). O pipeline, ou o próprio start da aplicação, aplica as que faltam.</li>
+<li>No Railway, isso pode ir no <strong>pre-deploy command</strong> do serviço (ex.: <code>npm run migrate</code>): se a migration falhar, a nova versão não entra no ar.</li>
+<li>Escreva migrations compatíveis com a versão anterior (adicionar coluna é seguro, renomear/remover exige duas etapas). Durante o deploy, as duas versões da aplicação podem conviver por alguns segundos.</li>
+</ul>
+
+<h2>Verificar depois do deploy</h2>
+<ul>
+<li>Crie uma rota simples de saúde, por exemplo <code>GET /health</code> respondendo <code>200</code>, e configure-a como <strong>healthcheck path</strong> no Railway. A nova versão só recebe tráfego quando responder OK.</li>
+<li>Um "smoke test" no fim do pipeline também ajuda: <code>curl --fail https://sua-api.up.railway.app/health</code>. Se falhar, o job fica vermelho e você é avisado.</li>
+</ul>
+
+<h2>Quando algo dá errado: rollback</h2>
+<ul>
+<li><strong>Rápido:</strong> no painel do Railway, faça <em>redeploy</em> de um deployment anterior que estava saudável.</li>
+<li><strong>Definitivo:</strong> <code>git revert &lt;commit&gt;</code> → pull request → CI → merge → deploy automático. O histórico fica limpo e o pipeline valida a correção.</li>
+<li>Evite corrigir direto no servidor: a próxima execução do pipeline apaga a correção.</li>
+</ul>
+
+<h2>Visão geral do fluxo</h2>
+<ol>
+<li>Pull request aberto → <strong>CI</strong> (lint, testes, build da imagem).</li>
+<li>CI verde + revisão → merge na <code>main</code>.</li>
+<li>Push na <code>main</code> → CI de novo → <strong>CD</strong> (Railway com Wait for CI <em>ou</em> job <code>deploy</code>).</li>
+<li>Healthcheck/smoke test confirma a nova versão. Se falhar, rollback.</li>
+</ol>

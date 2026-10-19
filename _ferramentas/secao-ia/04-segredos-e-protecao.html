@@ -1,0 +1,72 @@
+<p>Um pipeline que faz deploy precisa de credenciais: token do Railway, senha do banco, usuário técnico do BTP. Esta lição mostra onde guardá-las, como evitar vazamentos e como impedir que código não testado chegue à <code>main</code>.</p>
+
+<h2>Secrets e Variables</h2>
+<p>No repositório: <strong>Settings → Secrets and variables → Actions</strong>. Existem dois tipos:</p>
+<table>
+<thead><tr><th></th><th>Secrets</th><th>Variables</th></tr></thead>
+<tbody>
+<tr><td>Para quê</td><td>Senhas, tokens, chaves</td><td>Configuração não sensível (URL de API, nome da org/space, região)</td></tr>
+<tr><td>Uso no YAML</td><td><code>${{ secrets.RAILWAY_TOKEN }}</code></td><td><code>${{ vars.CF_API }}</code></td></tr>
+<tr><td>Pode ser lido depois de salvo?</td><td>Não. Só pode ser sobrescrito.</td><td>Sim</td></tr>
+<tr><td>Aparece no log?</td><td>Não. É mascarado como <code>***</code>.</td><td>Sim</td></tr>
+</tbody>
+</table>
+<p>Passe segredos para os comandos via <code>env</code>, não colados direto no script:</p>
+<pre><code class="language-yaml">      - name: Deploy
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: npx --yes @railway/cli up --service cookmaster-backend --detach</code></pre>
+
+<h3>Regras de ouro</h3>
+<ul>
+<li><strong>Nunca</strong> faça commit de segredo (nem "só para testar"). Se aconteceu, considere-o vazado: <strong>revogue e gere outro</strong>. Apagar o commit não basta, porque o histórico e os forks continuam com ele.</li>
+<li>Não imprima segredos (<code>echo $TOKEN</code>), nem transformados (base64, substring). A máscara só reconhece o valor exato.</li>
+<li>Workflows disparados por pull request vindo de <strong>fork</strong> não recebem os segredos. Isso é proposital: não tente contornar.</li>
+<li>Use um token/usuário <strong>dedicado ao pipeline</strong>, com a menor permissão possível, nunca a sua conta pessoal. Assim dá para revogá-lo sem afetar ninguém.</li>
+<li>Para nuvens que suportam <strong>OIDC</strong> (AWS, Azure, GCP), prefira-o a segredos fixos: o GitHub troca uma identidade temporária por uma credencial de curta duração, e não há senha para vazar.</li>
+</ul>
+
+<h2>Environments: homologação e produção</h2>
+<p>Em <strong>Settings → Environments</strong> você cria ambientes como <code>staging</code> e <code>production</code>. Cada um pode ter:</p>
+<ul>
+<li><strong>Segredos e variáveis próprios.</strong> O mesmo nome (<code>CF_SPACE</code>, <code>RAILWAY_TOKEN</code>) com valor diferente por ambiente.</li>
+<li><strong>Required reviewers.</strong> O job só roda depois que alguém aprova. É a diferença entre Continuous <em>Delivery</em> e Continuous <em>Deployment</em>.</li>
+<li><strong>Deployment branches.</strong> Só a <code>main</code> (ou só tags) pode fazer deploy em produção.</li>
+</ul>
+<pre><code class="language-yaml">  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    environment: production   # usa os segredos e as regras desse ambiente
+    steps:
+      - ...</code></pre>
+<p>Em repositórios privados de contas gratuitas, algumas regras de proteção (como required reviewers) podem não estar disponíveis. Os segredos por ambiente funcionam do mesmo jeito.</p>
+
+<h2>Proteja a branch main</h2>
+<p>De nada adianta a CI ficar vermelha se ainda for possível fazer merge. Em <strong>Settings → Rules → Rulesets</strong> (ou <em>Branches → Branch protection rules</em>), crie uma regra para a <code>main</code> com:</p>
+<ul>
+<li><strong>Require a pull request before merging</strong> — ninguém faz push direto na <code>main</code>.</li>
+<li><strong>Require status checks to pass</strong> — selecione o job <code>test</code> do workflow da lição IA.3. Com o ✗ vermelho, o botão de merge fica bloqueado.</li>
+<li><strong>Block force pushes</strong> — protege o histórico.</li>
+</ul>
+<p>O fluxo do dia a dia passa a ser:</p>
+<ol>
+<li>Criar uma branch → commitar → abrir um pull request.</li>
+<li>A CI roda no PR. Se falhar, corrigir e dar push de novo.</li>
+<li>Revisão de código → merge na <code>main</code>.</li>
+<li>O push na <code>main</code> dispara a CI de novo e, se passar, o deploy (lição IA.5).</li>
+</ol>
+
+<h2>Dependências e actions atualizadas (Dependabot)</h2>
+<p>Crie <code>.github/dependabot.yml</code> para receber pull requests automáticos de atualização das dependências npm e das actions. Cada PR passa pela CI antes de você aceitar:</p>
+<pre><code class="language-yaml">version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly</code></pre>
+<p>Se quiser, adicione também um passo <code>npm audit --audit-level=high</code> na CI para barrar dependências com vulnerabilidade conhecida grave.</p>
+<p>Para segurança máxima, há quem fixe as actions pelo <strong>SHA do commit</strong> (<code>uses: actions/checkout@&lt;sha&gt;</code>) em vez da tag, porque uma tag pode ser movida. O Dependabot também atualiza esse formato.</p>

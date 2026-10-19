@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.5 - Operações de leitura (GET) · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476472-3-5-operacoes-de-leitura-get">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 3 - API REST com Express</span><span>·</span><span>Lição 5 de 20</span></div>
+      <h1>3.5 - Operações de leitura (GET)</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>4 blocos de código</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>1 vídeo</span>
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Vamos começar a utilizar os métodos do CRUD, iniciando pelo método GET, que é o mais comumente usado para <strong>buscar informações</strong> do servidor.</p>
+<h2 id="estrutura-do-projeto">Estrutura do Projeto</h2>
+<p>Primeiro, vamos adicionar um arquivo <code>teams.json</code> dentro na pasta <code>src/data/</code>. Confira abaixo como ficará a estrutura do projeto:</p>
+<pre><code class="language-bash">.
+├── node_modules/
+├── src/
+├── ├── data/
+│   │   ├── teams.json
+│   ├── app.js
+│   └── server.js
+├── package-lock.json
+├── package.json
+└── .gitignore
+</code></pre>
+
+<p>Agora adicione o seguinte conteúdo em <code>teams.json</code>:</p>
+<pre><code class="language-json">[
+  {
+    "id": 1,
+    "name": "Avaí/Kindermann",
+    "initials": "AVA"
+  },
+  {
+    "id": 2,
+    "name": "Ferroviária",
+    "initials": "FER"
+  },
+  {
+    "id": 3,
+    "name": "Napoli-SC",
+    "initials": "NAP"
+  }
+]
+</code></pre>
+
+<p>Por fim, modifique o seu script <code>dev</code> no <code>package.json</code> para que o nodemon ignore quaisquer alterações que forem feitas no <code>teams.json</code>:</p>
+<pre><code class="language-json">// package.json
+"dev": "nodemon src/server.js --ignore src/data/teams.json",
+</code></pre>
+
+<h2 id="criando-o-endpoint-get">Criando o Endpoint GET</h2>
+<p>Agora, vamos criar um endpoint do tipo <code>GET</code> com a rota <code>/teams</code>, que irá fazer a <strong>leitura</strong> do arquivo <code>teams.json</code> e retornar os dados. Veja o código:</p>
+<pre><code class="language-javascript">// src/app.js
+
+// const express = require('express');
+const fs = require('fs').promises;
+const path = require('path');
+
+// const app = express();
+
+// app.get('/', (req, res) =&gt; res.status(200).json({ message: 'Hello, World!' }));
+
+app.get('/teams', async (req, res) =&gt; {
+
+  // Leitura do arquivo teams.json
+  const readTeamsFile = await fs.readFile(path.resolve(__dirname, 'data', 'teams.json'), 'utf8');
+  const teams = JSON.parse(readTeamsFile);
+
+  return res.status(200).json({ teams })
+});
+
+// module.exports = app;
+</code></pre>
+
+<h3 id="entendendo-o-codigo">Entendendo o código</h3>
+<p>Vamos destrinchar o que está acontecendo neste código:</p>
+<ol>
+<li>Importamos o módulo <code>fs</code> para realizar a leitura do arquivo <code>teams.json</code> de forma assíncrona;</li>
+<li>O módulo <code>path</code> nos ajuda a encontrar o caminho até o arquivo <code>teams.json</code>;</li>
+<li>A constante <code>readTeamsFile</code> recebe o conteúdo do arquivo <code>teams.json</code> utilizando <code>fs.readFile()</code>, que retorna uma <strong>string</strong> com o conteúdo do arquivo. Para ler o arquivo corretamente, usamos <code>path.resolve()</code> para indicar o caminho correto do arquivo.</li>
+<li>Como o conteúdo do arquivo é retornado como uma <strong>string</strong>, usamos <code>JSON.parse()</code> para converter essa string em um <strong>array de objetos</strong> JavaScript que podemos manipular.</li>
+</ol>
+<blockquote>
+<p>Quando lemos um arquivo <strong>JSON</strong> usando <code>fs</code>, o conteúdo é lido como uma <strong>string</strong>. Para transformá-lo em um objeto ou array JavaScript, usamos <code>JSON.parse()</code>.</p>
+</blockquote>
+<ol>
+<li>Depois de ler e converter os dados, retornamos o array de times dentro de um objeto JSON como resposta da requisição com o status <code>200</code> (sucesso).</li>
+</ol>
+<p>Para ver a lista de times, certifique-se de que o servidor está rodando e acesse a URL <code>http://localhost:3001/teams</code> em seu API Client.</p>
+<p>Para consolidar o conhecimento, assista ao vídeo a seguir:</p>
+<a class="video-card" href="https://player.vimeo.com/video/1022283636" target="_blank" rel="noopener noreferrer"><span class="video-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span><strong>Vídeo da aula</strong><small>Abrir no Vimeo (requer internet)</small></span></a><details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>Ler o arquivo JSON a cada requisição é didático; em aplicação real os dados ficam em banco (seção 5).</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>No CAP o CRUD inteiro das seções 3.5 a 3.9 é <strong>gerado a partir do modelo</strong> — não se escreve rota GET/POST/PUT/PATCH/DELETE. Os dados iniciais vêm de um CSV e rodam em SQLite em memória no <code>cds watch</code>.</li><li>Endpoints resultantes: <code>GET /odata/v4/teams/Teams</code>, <code>GET /odata/v4/teams/Teams(1)</code>, <code>POST</code>, <code>PATCH</code>, <code>PUT</code> e <code>DELETE</code> no mesmo recurso.</li></ul><pre data-lang="cds"><code class="language-plaintext">// db/schema.cds
+namespace soccer;
+
+entity Teams {
+  key ID   : Integer;
+  name     : String(100);
+  initials : String(3);
+}
+
+// srv/teams-service.cds
+using soccer from '../db/schema';
+
+service TeamsService {
+  entity Teams as projection on soccer.Teams;
+}
+
+// db/data/soccer-Teams.csv
+// ID;name;initials
+// 1;Avaí/Kindermann;AVA</code></pre></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/04%20-%20API%20Clients.html"><small>← Anterior</small><strong>3.4 - API Clients</strong></a>
+        <a class="next" id="next-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/06%20-%20Query%20Strings%20e%20URL%20Parameters.html"><small>Próxima →</small><strong>3.6 - Query Strings e URL Parameters</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

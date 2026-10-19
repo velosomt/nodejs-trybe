@@ -1,0 +1,7 @@
+{
+  "slug": "4476626-8-12-referencias-e-recursos-adicionais-opcional",
+  "title": "8.12 - Referências e recursos adicionais (opcional)",
+  "html": "\n        <h2>Referências</h2>\n<ol>\n<li><a href=\"https://swagger.io/docs/\">Documentação oficial do Swagger</a></li>\n</ol>\n<h2>Recursos adicionais</h2>\n<p>Se você deseja se aprofundar nesses conteúdos, recomendamos os seguintes recursos:</p>\n<ol>\n<li><a href=\"https://medium.com/@gopalkthakur/throttling-or-rate-limiting-41feb9700275\">Throttling Or Rate Limiting ?</a></li>\n<li><a href=\"https://www.imperva.com/learn/application-security/sql-injection-sqli/\">SQL (Structured query language) Injection</a></li>\n<li><a href=\"https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html\">HTTP Security Response Headers Cheat Sheet</a></li>\n<li><a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Compression\">Compression in HTTP - MDN</a></li>\n<li><a href=\"https://www.astera.com/pt/type/blog/api-monitoring\">O que é monitoramento de API? Melhores práticas para monitorar o desempenho e as métricas da API</a></li>\n<li><a href=\"https://developer.mozilla.org/pt-BR/docs/Glossary/CORS\">CORS (Cross-Origin Resource Sharing)</a></li>\n</ol>\n      ",
+  "videos": [],
+  "extras": []
+}

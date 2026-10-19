@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.5 - Variáveis de Ambiente · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476560-5-5-variaveis-de-ambiente">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 5 - Persistência de Dados com Node.js</span><span>·</span><span>Lição 5 de 16</span></div>
+      <h1>5.5 - Variáveis de Ambiente</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>8 blocos de código</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>1 vídeo</span>
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>2 OBSs da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Um ponto importante para mantermos a segurança e a flexibilidade da nossa aplicação é o uso correto de variáveis de ambiente. Isso evita que dados sensíveis, como credenciais de banco de dados, fiquem expostos em nossos arquivos de código, especialmente em ambientes de versionamento público como o <strong>GitHub</strong>.</p>
+<p>Quando deixamos as informações de acesso ao banco de dados diretamente no código, por exemplo, no arquivo <code>src/database/connection.js</code>, arriscamos expor essas credenciais. Se este código for enviado para um repositório público, qualquer pessoa terá acesso aos dados, podendo comprometer até mesmo um banco de dados de produção!</p>
+<p>A solução para essa situação é o uso de <code>variáveis de ambiente</code>, onde essas informações sensíveis são armazenadas fora do código e são acessadas por meio do <code>process.env</code> no Node.js.</p>
+<h2 id="utilizando-variaveis-de-ambiente">Utilizando Variáveis de Ambiente</h2>
+<p>No Node.js, podemos ler variáveis de ambiente diretamente do sistema operacional. Para exemplificar, execute o comando abaixo que exibe o valor da variável <code>$USER</code>, com o nome de usuário atual do sistema:</p>
+<pre><code class="language-bash">echo $USER
+</code></pre>
+
+<p>O Node.js possui acesso direto às variáveis de ambiente por meio do objeto <code>process.env</code>. Vamos verificar um exemplo de como isso funciona. Adicione o seguinte trecho ao seu arquivo <code>server.js</code>:</p>
+<pre><code class="language-javascript">// app.listen(PORT, async () =&gt; {
+//   console.log(`Server running on port ${PORT}`);
+
+  console.log(`Valor da variável de ambiente $USER: ${process.env.USER}`);
+
+  // Verificação de conexão com o MySQL
+  // const [result] = await connection.execute('SELECT 1');
+  // if (result) {
+  //   console.log('MySQL connection successfully established');
+  // }
+// });
+</code></pre>
+
+<h2 id="configurando-o-arquivo-env">Configurando o Arquivo <code>.env</code>
+</h2>
+<p>Para facilitar a criação e a organização das variáveis de ambiente, utilizamos um arquivo <code>.env</code> na raiz do projeto. Esse arquivo armazena variáveis no formato <code>NOME_DA_VARIÁVEL=VALOR</code>. No nosso caso, ele pode ser configurado assim:</p>
+<pre><code class="language-bash">MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=password
+MYSQL_DATABASE_NAME=school_management_system
+</code></pre>
+
+<p>O próximo passo é configurar o ambiente para carregar automaticamente essas variáveis. Agora iremos modificar os nossos scrits para utilizar a flag <code>--env-file=.env</code> no <code>package.json</code>. Isso permite que a aplicação carregue o arquivo <code>.env</code> diretamente, simplificando a inicialização.</p>
+<pre><code class="language-json">  "start": "node --env-file=.env src/server.js",
+  "dev": "nodemon --env-file=.env src/server.js",
+</code></pre>
+
+<p>Vamos, então, refatorar nosso arquivo <code>src/database/connection.js</code> para se conectar ao MySQL utilizando apenas variáveis de ambiente através do <code>process.env</code>:</p>
+<pre><code class="language-javascript">// src/database/connection.js
+
+const mysql = require('mysql2/promise');
+
+const connection = mysql.createPool({
+  host: process.env.MYSQL_HOST,
+  port: process.env.MYSQL_PORT,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE_NAME,
+});
+
+module.exports = connection;
+</code></pre>
+
+<p><strong>Anota aí 🖊:</strong> Para garantir a segurança, adicione o arquivo <code>.env</code> ao <code>.gitignore</code> para evitar que ele seja versionado.</p>
+<p>É também uma boa prática criar um <code>.env-example</code> para indicar quais variáveis de ambiente o projeto utiliza, facilitando a configuração do ambiente para outras pessoas:</p>
+<pre><code class="language-bash">MYSQL_HOST=<endere>
+MYSQL_PORT=<porta>
+MYSQL_USER=<usu>
+MYSQL_PASSWORD=<senha>
+MYSQL_DATABASE_NAME=<nome_do_banco>
+</nome_do_banco></senha></usu></porta></endere></code></pre>
+
+<details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>O curso já usa a forma moderna: <code>node --env-file=.env</code> (Node 20.6+), dispensando o pacote <code>dotenv</code>. Também existe <code>process.loadEnvFile()</code> (Node 21.7+) para carregar via código.</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>O CAP centraliza configuração em <code>cds.env</code> (<code>package.json</code> → <code>cds</code>, <code>.cdsrc.json</code>) com <strong>profiles</strong> (<code>[development]</code>, <code>[production]</code>, <code>[hybrid]</code>). Credenciais locais vão em <code>.cdsrc-private.json</code> (fora do git). No SAP BTP as credenciais vêm dos service bindings, e <code>cds bind</code> conecta o ambiente local a serviços reais da nuvem.</li></ul></div></details><h2 id="variaveis-de-ambiente-no-docker-compose">Variáveis de Ambiente no Docker Compose</h2>
+<p>Para configurar variáveis de ambiente no Docker Compose, temos algumas opções:</p>
+<ol>
+<li>
+<strong>Direto no arquivo</strong>:</li>
+</ol>
+<p>Inclua as variáveis diretamente no arquivo <code>docker-compose.yml</code> usando o atributo environment:</p>
+<pre><code class="language-yaml">    # depends_on:
+    #   mysqldb:
+    #     condition: service_healthy
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_HOST: mysqldb
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE_NAME: school_management_system
+    # networks:
+    #   - backend
+</code></pre>
+
+<ol>
+<li>
+<strong>Usando env_file</strong>:</li>
+</ol>
+<p>Especifique o caminho do arquivo <code>.env</code>, de modo que o Docker Compose carrega as variáveis automaticamente:</p>
+<pre><code class="language-yaml">    # depends_on:
+    #   mysqldb:
+    #     condition: service_healthy
+    env_file:
+      - .env
+    # networks:
+    #   - backend
+</code></pre>
+
+<p>É possível também combinar as duas abordagens para maior flexibilidade.</p>
+<p>Vamos agora fixar os conceitos aprendidos com o vídeo a seguir:</p>
+<a class="video-card" href="https://player.vimeo.com/video/1039088065" target="_blank" rel="noopener noreferrer"><span class="video-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span><strong>Vídeo da aula</strong><small>Abrir no Vimeo (requer internet)</small></span></a><details class="obs-ia" id="obs-ia-2"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label obs-ia__label--cicd">CI/CD</p><ul><li>No pipeline não existe <code>.env</code>: os valores sensíveis vêm de <strong>Secrets</strong> do GitHub (<code>${{ secrets.NOME }}</code>) e chegam à aplicação como variáveis de ambiente. Faça commit só de um <code>.env.example</code>, com as chaves e valores fictícios.</li><li>Veja <a href="../12%20-%20OBS%20da%20IA%20-%20CI-CD%20-%20o%20m%C3%ADnimo%20para%20deploy%20automatizado/04%20-%20Segredos%2C%20ambientes%20e%20prote%C3%A7%C3%A3o%20da%20branch%20main.html">IA.4 - Segredos, ambientes e proteção da branch main</a>.</li></ul></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../07%20-%20Se%C3%A7%C3%A3o%205%20-%20Persist%C3%AAncia%20de%20Dados%20com%20Node.js/04%20-%20Configurando%20o%20MySQL%20no%20Node%20com%20Express.html"><small>← Anterior</small><strong>5.4 - Configurando o MySQL no Node com Express</strong></a>
+        <a class="next" id="next-link" href="../07%20-%20Se%C3%A7%C3%A3o%205%20-%20Persist%C3%AAncia%20de%20Dados%20com%20Node.js/06%20-%20Resolu%C3%A7%C3%A3o%20de%20Conflitos%20de%20configura%C3%A7%C3%A3o.html"><small>Próxima →</small><strong>5.6 - Resolução de Conflitos de configuração</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

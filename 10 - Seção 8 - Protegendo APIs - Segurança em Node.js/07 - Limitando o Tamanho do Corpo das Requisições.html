@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8.7 - Limitando o Tamanho do Corpo das Requisições · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476622-8-7-limitando-o-tamanho-do-corpo-das-requisicoes">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 8 - Protegendo APIs: Segurança em Node.js</span><span>·</span><span>Lição 7 de 12</span></div>
+      <h1>8.7 - Limitando o Tamanho do Corpo das Requisições</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>3 blocos de código</span>
+        
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><!-- Vídeo que traz qual problema isso resolve -->
+
+<p>Controlar o tamanho do corpo das requisições HTTP enviadas à sua aplicação é uma medida essencial para melhorar a segurança e a performance do servidor. Isso evita que usuários mal-intencionados ou erros acidentais enviem dados excessivamente grandes, que podem sobrecarregar o sistema ou criar vulnerabilidades, como <a href="https://developer.mozilla.org/en-US/docs/Glossary/DOS_attack" target="_blank" rel="noopener noreferrer" class="external">ataques de negação de serviço (DoS)</a>.</p>
+<h2 id="principais-beneficios">Principais Benefícios</h2>
+<ol>
+<li>
+<p><strong>Mitigação de Ataques DoS</strong>: Requisições com corpos muito grande podem consumir recursos desnecessários e sobrecarregar o servidor.</p>
+</li>
+<li>
+<p><strong>Proteção contra falhas</strong>: Dados excessivamente grandes podem causar falhas em operações como parsing ou validação.</p>
+</li>
+<li>
+<p><strong>Melhoria de performance</strong>: Limitar o tamanho evita o processamento desnecessário de grandes quantidades de dados.</p>
+</li>
+<li>
+<p><strong>Boa prática de segurança</strong>: Estabelece limites nítidos para a aplicação, evitando comportamentos imprevisíveis.</p>
+</li>
+</ol>
+<h2 id="como-funciona-o-controle-de-tamanho">Como funciona o controle de tamanho?</h2>
+<p>O middleware <code>express.json</code> ou <code>express.urlencoded</code>, utilizado para parsing de requisições JSON ou dados codificados como URL, permite definir o tamanho máximo do corpo da requisição. Isso é feito configurando o parâmetro limit ao inicializar esses middlewares.</p>
+<h2 id="implementacao-na-api-cookmaster">Implementação na API Cookmaster</h2>
+<p>Para implementar o controle de tamanho, basta ajustar as configurações do middleware no arquivo <code>src/app.js</code>:</p>
+<pre><code class="language-javascript">// src/app.js
+
+// const express = require('express');
+// Outras Importações
+
+// const app = express();
+
+app.use(express.json({ limit: '1mb' })); // Limita o corpo JSON a 1 MB
+app.use(express.urlencoded({ limit: '1mb', extended: true })); // Limita dados de formulários a 1 MB
+
+
+// Outras Configurações e Rotas
+</code></pre>
+
+<p><strong>O que analisar</strong>:</p>
+<ul>
+<li>
+<p><code>limit: '1mb'</code>: Define que o tamanho máximo permitido para o corpo da requisição é de 1 megabyte.</p>
+</li>
+<li>
+<p><code>extended: true</code>: Permite o parsing de dados complexos em <code>urlencoded</code>.</p>
+</li>
+</ul>
+<h2 id="teste-enviando-uma-requisicao-excedente">Teste: Enviando uma Requisição Excedente</h2>
+<p>Se o corpo da requisição ultrapassar o limite configurado, o Express retornará uma resposta com <code>status 413</code> (Payload Too Large) por padrão. Para facilitar o teste, você pode alterar o limite para um valor menor e enviar uma requisição que exceda esse tamanho.</p>
+<pre><code class="language-javascript">app.use(express.json({ limit: '1b' })); // Limita o corpo JSON a 1 byte
+</code></pre>
+
+<p>Para visualizar o erro, execute uma requisicão POST com um corpo maior que 1 byte e crie um middleware de tratamento de erros no arquivo <code>src/app.js</code>:</p>
+<pre><code class="language-javascript">// src/app.js
+
+// Outras Configurações e Rotas
+
+app.use((err, req, res, next) =&gt; {
+  if (err.type === 'entity.too.large') {
+    return res.status(413).json({ error: 'Payload Too Large' });
+  }
+  next(err);
+});
+app.use(errorHandler);
+
+module.exports = app;
+</code></pre>
+
+<p><strong>O que analisar</strong>:</p>
+<ul>
+<li>
+<p><code>err.type === 'entity.too.large'</code>: Verifica se o erro gerado é devido ao tamanho do corpo da requisição.</p>
+</li>
+<li>
+<p><code>res.status(413).json({ error: 'Payload Too Large' })</code>: Retorna uma resposta com status 413 e uma mensagem de erro.</p>
+</li>
+<li>
+<p><code>next(err)</code>: Chama o próximo middleware de tratamento de erros (<code>app.use(errorHandler)</code>).</p>
+</li>
+</ul>
+<h2 id="boas-praticas">Boas Práticas</h2>
+<ol>
+<li>
+<p><strong>Defina limites realistas</strong>: Ajuste o tamanho máximo permitido com base nas necessidades da aplicação.</p>
+</li>
+<li>
+<p>APIs que lidam com arquivos podem ter limites mais altos (ex.: 10 MB para imagens).</p>
+</li>
+<li>
+<p>APIs apenas com texto (ex.: dados de cadastro) podem ter limites menores (ex.: 500 KB ou 1 MB).</p>
+</li>
+<li>
+<p><strong>Monitore a utilização</strong>: Use ferramentas de log, como o Morgan, para identificar requisições que frequentemente atingem o limite.</p>
+</li>
+<li>
+<p><strong>Valide dados no cliente</strong>: Antes de enviar grandes payloads, valide e compacte os dados no lado do cliente, quando possível.</p>
+</li>
+</ol><details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>No Express 5, <code>express.urlencoded()</code> tem <code>extended: false</code> por padrão; o curso passa <code>extended: true</code> explicitamente, então o comportamento se mantém.</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>No CAP o limite do body é configurado em <code>cds.server.body_parser.limit</code> (ex.: <code>"1mb"</code>), sem middleware próprio.</li></ul></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../10%20-%20Se%C3%A7%C3%A3o%208%20-%20Protegendo%20APIs%20-%20Seguran%C3%A7a%20em%20Node.js/06%20-%20Monitorando%20Logs%20de%20Requisi%C3%A7%C3%B5es%20com%20Morgan.html"><small>← Anterior</small><strong>8.6 - Monitorando Logs de Requisições com Morgan</strong></a>
+        <a class="next" id="next-link" href="../10%20-%20Se%C3%A7%C3%A3o%208%20-%20Protegendo%20APIs%20-%20Seguran%C3%A7a%20em%20Node.js/08%20-%20Pol%C3%ADtica%20de%20Origem%20com%20CORS.html"><small>Próxima →</small><strong>8.8 - Política de Origem com CORS</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<h2>Para não esquecer mais</h2>
+<ul>
+<li><strong>CI</strong> = todo push/PR é instalado e testado automaticamente. <strong>Continuous Delivery</strong> = sempre pronto para deploy, com aprovação. <strong>Continuous Deployment</strong> = deploy automático quando tudo passa.</li>
+<li>O pipeline roda em uma máquina <strong>limpa</strong>: commit do <code>package-lock.json</code>, <code>npm ci</code>, versão do Node fixada (<code>.nvmrc</code>/<code>engines</code>) e nada de depender do seu <code>.env</code> local.</li>
+<li>Os <strong>scripts do <code>package.json</code></strong> são o contrato com o pipeline. Código de saída diferente de <code>0</code> = pipeline vermelho. Nada de modo watch no <code>npm test</code>.</li>
+<li>No GitHub Actions: <strong>workflow</strong> (arquivo em <code>.github/workflows/</code>) → <strong>jobs</strong> (uma máquina cada, em paralelo, ou em sequência com <code>needs</code>) → <strong>steps</strong> (<code>run</code> ou <code>uses</code>).</li>
+<li>Rode a CI em <code>pull_request</code> <strong>e</strong> em <code>push</code> na <code>main</code>. Proteja a <code>main</code> exigindo PR e o status check da CI.</li>
+<li>Credenciais vão em <strong>Secrets</strong> (<code>${{ secrets.X }}</code>), configuração não sensível em <strong>Variables</strong> (<code>${{ vars.X }}</code>). Passe segredos via <code>env</code>, nunca dê <code>echo</code> neles e use um usuário/token dedicado com a menor permissão possível.</li>
+<li><strong>Environments</strong> (<code>staging</code>, <code>production</code>) separam segredos por ambiente e permitem exigir aprovação antes do deploy.</li>
+<li>Deploy só depois da CI: no Railway, <strong>Wait for CI</strong>; no pipeline, job <code>deploy</code> com <code>needs: test</code> e <code>if</code> restrito à <code>main</code>.</li>
+<li>Mudanças de banco via <strong>migrations</strong> versionadas. Confirme cada deploy com <strong>healthcheck</strong> e tenha um caminho de <strong>rollback</strong>.</li>
+<li>No <strong>SAP CAP</strong>: <code>cds add mta</code> → <code>mbt build</code> → <code>cf deploy</code>. Para gerar os workflows: <code>cds add gha</code> (variáveis <code>CF_API</code>, <code>CF_USERNAME</code>, <code>CF_ORG</code>, <code>CF_SPACE</code> e o segredo <code>CF_PASSWORD</code>). Alternativas da SAP: <strong>SAP Continuous Integration and Delivery</strong> e <strong>Project Piper</strong>. Para promover entre subaccounts: <strong>Cloud Transport Management</strong>.</li>
+</ul>
+
+<h2>Exercício proposto</h2>
+<p>Use o repositório da API Cookmaster que você publicou na <a href="@@LESSON:4505303-9-7-deploy-da-aplicacao-no-railway@@">lição 9.7</a>.</p>
+<ol>
+<li>Adicione um <code>.nvmrc</code> com a versão LTS do Node usada no Dockerfile e confira se <code>npm ci &amp;&amp; npm test</code> passa em um clone limpo.</li>
+<li>Crie <code>.github/workflows/ci.yml</code> (lição IA.3) com os gatilhos <code>push</code> na <code>main</code> e <code>pull_request</code>, rodando <code>npm ci</code>, <code>npm test</code> e <code>docker build</code>.</li>
+<li>Crie uma ruleset para a <code>main</code> exigindo pull request e o status check do job <code>test</code>.</li>
+<li>Abra um PR que <strong>quebra um teste</strong> de propósito. Confira o ✗ e o bloqueio do merge. Corrija e veja o ✓.</li>
+<li>Ligue o <strong>Wait for CI</strong> no serviço do Railway, faça o merge e acompanhe o deploy passar de <em>WAITING</em> para ativo.</li>
+<li><strong>Desafio:</strong> adicione a rota <code>GET /health</code>, configure-a como healthcheck no Railway e adicione o <code>.github/dependabot.yml</code> da lição IA.4.</li>
+</ol>
+<p><strong>Bônus SAP CAP:</strong> em um projeto <code>cds init</code> com <code>cds add sample,mta</code>, rode <code>cds add gha</code>, leia os workflows gerados e identifique onde ficam o build, os testes e o deploy.</p>

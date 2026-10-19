@@ -1,0 +1,13 @@
+{
+  "name": "curso-node-offline-builder",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "turndown": "^7.2.0",
+    "turndown-plugin-gfm": "^1.0.2"
+  }
+}

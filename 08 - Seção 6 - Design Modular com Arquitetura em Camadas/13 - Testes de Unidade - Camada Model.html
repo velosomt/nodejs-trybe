@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6.13 - Testes de Unidade - Camada Model · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476585-6-13-testes-de-unidade-camada-model">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 6 - Design Modular com Arquitetura em Camadas</span><span>·</span><span>Lição 13 de 19</span></div>
+      <h1>6.13 - Testes de Unidade - Camada Model</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>6 blocos de código</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>1 vídeo</span>
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Até este ponto, concentramos nossos esforços em testes de integração, mas agora vamos explorar os <strong>testes de unidade</strong>. A diferença fundamental entre esses tipos de testes é a granularidade: um teste unitário valida uma única função ou método de forma isolada, variando apenas os cenários de entrada e saída esperados para essa unidade específica.</p>
+<p>No caso da nossa aplicação, vamos criar nossos primeiros testes unitários para a camada Model da API. Validaremos o comportamento de funções específicas do <code>studentModel.js</code>, assegurando que cada função funcione corretamente e retorne os valores esperados, independentemente de outras partes do sistema.</p>
+<h2 id="funcoes-a-serem-testadas">Funções a serem testadas</h2>
+<p>Vamos testar duas funções do arquivo <code>src/model/studentModel.js</code>:</p>
+<ol>
+<li>
+<code>findById</code>: responsável por buscar um estudante específico pelo <code>Id</code>;</li>
+<li>
+<code>insert</code>: responsável por cadastrar um novo estudante no banco de dados.</li>
+</ol>
+<p>Para isso, criaremos o arquivo de testes <code>tests/unit/model/studentModel.test.js</code>, onde cada teste será independente e usará um mock de conexão para simular a interação com o banco de dados sem realizar operações reais.</p>
+<blockquote>
+<p><strong>Anota aí 📝:</strong> um mock é um objeto simulado que imita o comportamento de dependências reais em testes. Tem o objetivo de substituir componentes externos ou complexos (como bancos de dados, APIs) durante os testes.</p>
+</blockquote>
+<h2 id="configurando-o-jest-para-testes-unitarios">Configurando o Jest para Testes Unitários</h2>
+<p>Para evitar conflitos com os testes de integração criados anteriormente, vamos configurar um arquivo de testes específico, <code>jest.config.unit.js</code>, que limitará a execução somente a testes unitários.</p>
+<pre><code class="language-javascript">// jest.config.unit.js
+/** @type {import('jest').Config} */
+module.exports = {
+  rootDir: './tests',
+  testMatch: ['<rootdir>/unit/**/*.test.js'],
+  testTimeout: 10000,
+  testEnvironment: 'node',
+};
+</rootdir></code></pre>
+
+<p>Em seguida, vamos adicionar um novo script ao <code>package.json</code> para rodar apenas os testes unitários:</p>
+<pre><code class="language-json">// "scripts": {
+  "test:unit": "jest --config=jest.config.unit.js"
+// }
+</code></pre>
+
+<p>Agora, podemos executar nossos testes unitários com o comando <code>npm run test:unit</code>.</p>
+<h2 id="codigo-da-camada-model">Código da Camada Model</h2>
+<p>Vamos revisar as funções que iremos testar:</p>
+<pre><code class="language-javascript">// src/model/studentModel.js
+
+const findById = async (id) =&gt; {
+  const [result] = await conn.execute('SELECT * FROM students WHERE id = ?;', [id]);
+  return camelize(result[0]);
+};
+
+const insert = async (student) =&gt; {
+  const { name, cpf, birthDate, email, cep, address } = student;
+  const [result] = await conn.execute(
+    `INSERT INTO students (name, cpf, birth_date, email, cep, address) VALUES (?, ?, ?, ?, ?, ?)`,
+    [name, cpf, birthDate, email, cep, address],
+  );
+
+  return { id: result.insertId, ...student };
+};
+</code></pre>
+
+<h3 id="estrutura-de-mocks-para-os-testes">Estrutura de mocks para os testes</h3>
+<p>Criaremos o arquivo <code>tests/unit/mocks/studentModelMocks.js</code> para definir os dados de mock que usaremos nos testes:</p>
+<pre><code class="language-javascript">// tests/unit/mocks/studentModelMocks.js
+
+const studentMock = {
+  id: 1,
+  name: 'Ana Souza',
+  cpf: '123.456.789-01',
+  birth_date: '2000-05-14T03:00:00.000Z',
+  email: 'ana.souza@example.com',
+  cep: '01000-000',
+  address: 'Rua A, Bairro B, Cidade C - SP',
+};
+
+const studentMockFormated = {
+  id: 1,
+  name: 'Ana Souza',
+  cpf: '123.456.789-01',
+  birthDate: '2000-05-14T03:00:00.000Z',
+  email: 'ana.souza@example.com',
+  cep: '01000-000',
+  address: 'Rua A, Bairro B, Cidade C - SP',
+};
+
+const newStudent = {
+  name: 'Lucas Almeida',
+  cpf: '321.654.987-00',
+  birthDate: '1998-02-10',
+  email: 'lucas.almeida@example.com',
+  cep: '04000-000',
+  address: 'Rua J, Bairro K, Cidade L - SP'
+};
+
+module.exports = {
+  studentMock,
+  studentMockFormated,
+  newStudent,
+};
+</code></pre>
+
+<h3 id="arquivo-tests-unit-model-studentmodel-test-js-funcao-findbyid">Arquivo: <code>tests/unit/model/studentModel.test.js</code> - Função <code>findById</code>
+</h3>
+<p>Para testar <code>findById</code>, utilizaremos <code>jest.spyOn</code> para simular o comportamento de <code>conn.execute</code>, evitando interações reais com o banco de dados.</p>
+<pre><code class="language-javascript">// tests/unit/model/studentModel.test.js
+
+const { findById } = require('../../../src/model/studentModel');
+const conn = require('../../../src/model/connection');
+const { studentMock, studentMockFormated } = require('../mocks/studentModelMocks');
+
+describe('Camada Model - studentModel', () =&gt; {
+  afterEach(() =&gt; {
+    jest.clearAllMocks();
+  });
+
+  describe('findById', () =&gt; {
+    test('deve retornar o estudante correspondente ao ID fornecido', async () =&gt; {
+      // Mock da conexão com banco de dados
+      jest.spyOn(conn, 'execute').mockResolvedValue([[studentMock], undefined]);
+
+      const STUDENT_ID = 1;
+
+      // Chama a função e verifica o resultado
+      const result = await findById(STUDENT_ID);
+      expect(result).toEqual(studentMockFormated);
+      expect(conn.execute).toHaveBeenCalled();
+    });
+  });
+});
+</code></pre>
+
+<h4>Explicação dos Testes</h4>
+<ol>
+<li>Configuramos um mock para <code>conn.execute</code>, simulando um retorno específico para a função <code>findById</code>.</li>
+<li>Verificamos se <code>findById</code> retorna os dados transformados corretamente.</li>
+<li>Validamos que a função <code>execute</code> foi chamada, assegurando a interação com o banco.</li>
+</ol>
+<h3 id="arquivo-tests-unit-model-studentmodel-test-js-funcao-insert">Arquivo: <code>tests/unit/model/studentModel.test.js</code> - Função <code>insert</code>
+</h3>
+<pre><code class="language-javascript">// tests/unit/model/studentModel.test.js
+
+const { findById, insert } = require('../../../src/model/studentModel');
+// const conn = require('../../../src/model/connection');
+const { studentMock, studentMockFormated, newStudent } = require('../mocks/studentModelMocks');
+
+// describe('Camada Model - studentModel', () =&gt; {
+
+// Outro teste
+
+  describe('insert', () =&gt; {
+    test('deve inserir um estudante e retornar o objeto com o ID gerado', async () =&gt; {
+      const mockResult = [{ insertId: 2 }, undefined];
+      jest.spyOn(conn, 'execute').mockResolvedValue(mockResult);
+
+      // Chama a função e verifica o resultado
+      const result = await insert(newStudent);
+      expect(result).toEqual({ id: mockResult[0].insertId, ...newStudent });
+      expect(conn.execute).toHaveBeenCalledWith(
+        'INSERT INTO students (name, cpf, birth_date, email, cep, address) VALUES (?, ?, ?, ?, ?, ?)',
+        [newStudent.name, newStudent.cpf, newStudent.birthDate, newStudent.email, newStudent.cep, newStudent.address]
+      );
+    });
+  });
+// });
+</code></pre>
+
+<h4>Explicação dos Testes</h4>
+<ol>
+<li>Configuramos o mock de <code>conn.execute</code> para simular a inserção de um estudante, retornando um <code>insertId</code>.</li>
+<li>Verificamos se a função <code>insert</code> retorna os dados do estudante com o novo <code>id</code> incluído.</li>
+<li>Checamos que a chamada a <code>execute</code> contém a query e os dados corretos, garantindo que a estrutura SQL está sendo gerada conforme esperado.</li>
+</ol>
+<p>Para reforçar os conceitos sobre o conteúdo, assista ao vídeo a seguir:</p>
+<a class="video-card" href="https://player.vimeo.com/video/1040231272" target="_blank" rel="noopener noreferrer"><span class="video-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span><strong>Vídeo da aula</strong><small>Abrir no Vimeo (requer internet)</small></span></a><details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>No CAP a maior parte dos testes é de integração com <code>cds.test</code> (rápidos com SQLite em memória). Testes de unidade com mocks continuam úteis para funções puras de regra de negócio e para isolar chamadas externas — o que se aprende nas lições 6.13 a 6.15 se aplica.</li></ul></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../08%20-%20Se%C3%A7%C3%A3o%206%20-%20Design%20Modular%20com%20Arquitetura%20em%20Camadas/12%20-%20Projeto%20-%20segunda%20fase.html"><small>← Anterior</small><strong>6.12 - Projeto - segunda fase</strong></a>
+        <a class="next" id="next-link" href="../08%20-%20Se%C3%A7%C3%A3o%206%20-%20Design%20Modular%20com%20Arquitetura%20em%20Camadas/14%20-%20Testes%20de%20Unidade%20-%20Camada%20Service.html"><small>Próxima →</small><strong>6.14 - Testes de Unidade - Camada Service</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.9 - Para não esquecer mais · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4207919-2-9-para-nao-esquecer-mais">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 2 - Introdução ao Node.js</span><span>·</span><span>Lição 9 de 11</span></div>
+      <h1>2.9 - Para não esquecer mais</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 min de leitura</span>
+        
+        
+        
+        
+      </div>
+      
+      
+      <div class="content"><p dir="auto">Quantos conceitos diferentes e novas habilidades adquiridas, hein? Sabendo disso, nós preparamos este mini resumo com os principais termos vistos, caso você queira fazer uma breve recapitulação!</p>
+<h2 dir="auto" id="modulos">Módulos</h2>
+<p dir="auto">Módulos são como "caixinhas" que isolam suas funções, variáveis e afins de outras partes do código.&nbsp;<strong>O Node.js possui três tipos de módulos:</strong></p>
+<ol dir="auto"><li><strong>Módulos internos</strong>: também chamados de&nbsp;<em>core modules</em>, são módulos que já vêm com o Node.js quando baixamos o&nbsp;<em>runtime</em>.</li><li><strong>Módulos locais</strong>: são aqueles criados por nós na nossa máquina. Eles representam as funcionalidades ou partes do nosso programa que foram separados em arquivos diferentes.</li><li><strong>Módulos externos</strong>: são módulos publicados no NPM, que as pessoas podem baixar e utilizar em suas aplicações.</li></ol>
+<h2 dir="auto" id="node-js">Node.js</h2>
+<p dir="auto">O Node.js é um interpretador de JavaScript construído a partir do V8 (interpretador utilizado pelo Google Chrome) e que permite a execução de códigos JavaScript fora de navegadores web. De forma resumida, ele nos permite utilizar o JavaScript no backend da aplicação.</p>
+<h2 dir="auto" id="npm">NPM</h2>
+<p dir="auto">O&nbsp;<a href="https://www.npmjs.com/" target="_blank" rel="noopener noreferrer" class="external">NPM</a>&nbsp;é o site em que são publicados os pacotes Node.js.</p>
+<h2 dir="auto" id="npm-2">npm</h2>
+<p dir="auto"><code>npm</code>&nbsp;é a ferramenta de linha de comando(CLI) que realiza o gerenciamento dos pacotes&nbsp;<code>Node.js</code>&nbsp;para nós.</p>
+<blockquote><p dir="auto"><a href="https://github.com/tryber/Trybe-CheatSheets/blob/master/backend/nodejs/npm/README.md" target="_blank" rel="noopener noreferrer" class="external">Neste repositório</a>&nbsp;você encontra uma lista para consultas rápidas dos principais comandos&nbsp;<code>npm</code>&nbsp;(Cheat Sheet).</p></blockquote>
+<h2 dir="auto" id="pacote">Pacote</h2>
+<p dir="auto">Um pacote é um conjunto de arquivos que exportam um ou mais módulos&nbsp;<code>Node.js</code>, facilitando a reutilização de código.</p>
+<h2 dir="auto" id="package-json">package.json</h2>
+<p dir="auto">O&nbsp;<code>package.json</code>&nbsp;é o arquivo onde estão configuradas informações importantes sobre o seu projeto, como nome, versão, dependências e scripts.</p>
+<h2 dir="auto" id="scripts">Scripts</h2>
+<p dir="auto">Scripts são "atalhos" que podemos definir no arquivo&nbsp;<code>package.json</code>&nbsp;para executar tarefas específicas relacionadas ao projeto. Eles são configurados no objeto scripts, onde definimos pares de chave e valor que correspondem ao nome do script e ao comando que será executado.</p>
+<h2 dir="auto" id="para-onde-vamos">Para onde vamos?</h2>
+<p dir="auto">No próximo conteúdo, você aprenderá a:</p>
+<ul dir="auto"><li>Utilizar o Framework Express;</li><li>Criar sua API com Node.js;</li><li>Utilizar métodos HTTP na sua API;</li><li>Trabalhar com Middlewares;</li><li>Construir roteamento na API.</li></ul></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../03%20-%20Se%C3%A7%C3%A3o%202%20-%20Introdu%C3%A7%C3%A3o%20ao%20Node.js/08%20-%20Utilizando%20M%C3%B3dulos%20externos.html"><small>← Anterior</small><strong>2.8 - Utilizando Módulos externos</strong></a>
+        <a class="next" id="next-link" href="../03%20-%20Se%C3%A7%C3%A3o%202%20-%20Introdu%C3%A7%C3%A3o%20ao%20Node.js/10%20-%20Exerc%C3%ADcios%20-%20agora%2C%20a%20pr%C3%A1tica.html"><small>Próxima →</small><strong>2.10 - Exercícios - agora, a prática</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

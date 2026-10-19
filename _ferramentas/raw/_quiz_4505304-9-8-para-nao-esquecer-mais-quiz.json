@@ -1,0 +1,163 @@
+{
+  "slug": "4505304-9-8-para-nao-esquecer-mais-quiz",
+  "href": "/200838-back-end-em-node-js/4505304-9-8-para-nao-esquecer-mais-quiz/quiz_attempts/3518321/review",
+  "title": "9.8 - Para não esquecer mais | Quiz - Quiz",
+  "intro": "",
+  "questions": [
+    {
+      "prompt": "\n          <p>O que é deploy em uma aplicação?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>O processo de escrever o código-fonte da aplicação.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>A configuração do ambiente local para desenvolvimento.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>O ato de disponibilizar a aplicação para ser acessada em um servidor.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "D",
+          "html": "<p>A criação de um banco de dados para a aplicação.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>O processo de depuração e correção de bugs antes do lançamento.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>O que é deploy em uma aplicação?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>O processo de escrever o código-fonte da aplicação.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>A configuração do ambiente local para desenvolvimento.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>O ato de disponibilizar a aplicação para ser acessada em um servidor.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>A criação de um banco de dados para a aplicação.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>O processo de depuração e correção de bugs antes do lançamento.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual das seguintes opções representa corretamente a diferença entre IaaS, PaaS e SaaS?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>IaaS oferece apenas aplicações prontas, PaaS fornece servidores físicos e SaaS gerencia máquinas virtuais.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>IaaS disponibiliza infraestrutura como serviço, PaaS fornece plataformas gerenciadas e SaaS são softwares prontos para uso.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "C",
+          "html": "<p>IaaS permite o gerenciamento de servidores físicos, enquanto PaaS e SaaS são serviços offline.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>PaaS é um serviço que apenas hospeda arquivos estáticos, enquanto IaaS e SaaS são utilizados para aplicações dinâmicas.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>SaaS é voltado para desenvolvedores, enquanto IaaS e PaaS são para usuários finais.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual das seguintes opções representa corretamente a diferença entre IaaS, PaaS e SaaS?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>IaaS oferece apenas aplicações prontas, PaaS fornece servidores físicos e SaaS gerencia máquinas virtuais.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>IaaS disponibiliza infraestrutura como serviço, PaaS fornece plataformas gerenciadas e SaaS são softwares prontos para uso.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>IaaS permite o gerenciamento de servidores físicos, enquanto PaaS e SaaS são serviços offline.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>PaaS é um serviço que apenas hospeda arquivos estáticos, enquanto IaaS e SaaS são utilizados para aplicações dinâmicas.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>SaaS é voltado para desenvolvedores, enquanto IaaS e PaaS são para usuários finais.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Sobre Docker e Docker Compose, qual das afirmações está correta?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>O Docker Compose permite orquestrar múltiplos containers de uma aplicação.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "B",
+          "html": "<p>Docker é utilizado apenas para criar imagens de sistemas operacionais completos.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Containers criados com Docker não podem ser replicados em outros ambientes.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>O Dockerfile é um script que exclui containers automaticamente após o uso.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Docker não é compatível com aplicações desenvolvidas em Node.js.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Sobre Docker e Docker Compose, qual das afirmações está correta?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>O Docker Compose permite orquestrar múltiplos containers de uma aplicação.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>Docker é utilizado apenas para criar imagens de sistemas operacionais completos.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Containers criados com Docker não podem ser replicados em outros ambientes.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>O Dockerfile é um script que exclui containers automaticamente após o uso.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Docker não é compatível com aplicações desenvolvidas em Node.js.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Sobre o Railway, qual das afirmações é falsa?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Railway permite hospedar aplicações Node.js sem necessidade de gerenciar servidores.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>É possível vincular um repositório GitHub ao Railway para facilitar o deploy.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>O Railway oferece suporte para bancos de dados como PostgreSQL e MySQL.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Para usar o Railway, é necessário configurar manualmente um servidor físico.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "E",
+          "html": "<p>A plataforma gera uma URL para acessar a aplicação após o deploy.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Sobre o Railway, qual das afirmações é falsa?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Railway permite hospedar aplicações Node.js sem necessidade de gerenciar servidores.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>É possível vincular um repositório GitHub ao Railway para facilitar o deploy.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>O Railway oferece suporte para bancos de dados como PostgreSQL e MySQL.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Para usar o Railway, é necessário configurar manualmente um servidor físico.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>A plataforma gera uma URL para acessar a aplicação após o deploy.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Analise as seguintes assertivas sobre deploy e escolha a alternativa que contém apenas as afirmativas corretas:</p>\n<p>I. O Docker Compose é uma ferramenta usada para gerenciar múltiplos containers simultaneamente.<br>\nII. O IaaS fornece apenas software como serviço, sem acesso à infraestrutura de servidores.<br>\nIII. O deploy de uma aplicação pode ser feito de maneira automática sempre que um novo commit é enviado para um repositório Git integrado.<br>\nIV. Railway é um serviço exclusivamente pago e não oferece plano gratuito para desenvolvedores.<br>\nV. As variáveis de ambiente são usadas para armazenar configurações sensíveis, como credenciais de banco de dados, sem expô-las no código-fonte.</p>\n<p>Estão corretas as assertivas:</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>I e II</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>II e IV</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>I, III e V</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "D",
+          "html": "<p>III, IV e V</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>II, III e V</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Analise as seguintes assertivas sobre deploy e escolha a alternativa que contém apenas as afirmativas corretas:</p>\n<p>I. O Docker Compose é uma ferramenta usada para gerenciar múltiplos containers simultaneamente.<br>\nII. O IaaS fornece apenas software como serviço, sem acesso à infraestrutura de servidores.<br>\nIII. O deploy de uma aplicação pode ser feito de maneira automática sempre que um novo commit é enviado para um repositório Git integrado.<br>\nIV. Railway é um serviço exclusivamente pago e não oferece plano gratuito para desenvolvedores.<br>\nV. As variáveis de ambiente são usadas para armazenar configurações sensíveis, como credenciais de banco de dados, sem expô-las no código-fonte.</p>\n<p>Estão corretas as assertivas:</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>I e II</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>II e IV</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>I, III e V</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>III, IV e V</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>II, III e V</p>\n</span>\n</div>        </div>\n\n      </div>"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "slug": "4505305-9-9-referencias-e-recursos-adicionais-opcional",
+  "title": "9.9 - Referências e recursos adicionais (opcional)",
+  "html": "\n        <h2>Referências</h2>\n<ol>\n<li><a href=\"https://docs.railway.com/\">Documentação oficial Railway</a></li>\n<li><a href=\"https://docs.railway.app/develop/projects\">Projetos Railway</a></li>\n<li><a href=\"https://docs.railway.app/deploy/dockerfiles\">Dockerfile no Railway</a></li>\n<li><a href=\"https://docs.railway.app/databases/mysql\">MySQL no Railway</a></li>\n</ol>\n<h2>Recursos adicionais</h2>\n<p>Se você deseja se aprofundar nesses conteúdos, recomendamos os seguintes recursos:</p>\n<ol>\n<li><a href=\"https://docs.github.com/pt/actions\">Documentação do Github Actions</a></li>\n<li><a href=\"https://github.com/mentoriaiac/awesome-devops\">Awesome Devops - Conjunto de materiais sobre DevOps (incluindo sobre outras plataformas de deploy)</a></li>\n<li><a href=\"https://github.com/wmariuss/awesome-devops\">Awesome Devops - Material sobre DevOps (incluindo sobre outras plataformas de deploy)</a></li>\n</ol>\n      ",
+  "videos": [],
+  "extras": []
+}

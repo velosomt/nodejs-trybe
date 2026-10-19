@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.10 - E essa tal de arquitetura REST? · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476477-3-10-e-essa-tal-de-arquitetura-rest">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 3 - API REST com Express</span><span>·</span><span>Lição 10 de 20</span></div>
+      <h1>3.10 - E essa tal de arquitetura REST?</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>1 bloco de código</span>
+        
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Antes de falarmos sobre arquitetura REST, é importante entender o que são REST e RESTful:</p>
+<ul>
+<li><code>REST</code> é um conjunto de boas práticas para a construção de APIs;</li>
+<li><code>RESTful</code> refere-se a um serviço web (seja desenvolvido por nós ou por terceiros) que segue as diretrizes do REST.</li>
+</ul>
+<p>Assim, as duas palavras não são exatamente diferentes, mas complementares.</p>
+<p>A sigla <code>REST</code> vem do inglês Representational State Transfer (ou, em português, Transferência de Estado Representacional). Resumindo, REST é um estilo arquitetural definido pelo <a href="https://www.w3c.br/" target="_blank" rel="noopener noreferrer" class="external">W3C</a> que impõe algumas restrições sobre como uma API deve, idealmente, funcionar.</p>
+<h2 id="as-5-restricoes-para-ser-restful">As 5 restrições para ser RESTful</h2>
+<p>Embora o foco aqui não seja entrar em todos os detalhes da construção de APIs RESTful (um tema que vai longe!), vamos listar as cinco principais restrições de forma simplificada:</p>
+<ol>
+<li><strong>Interface uniforme (Uniform Interface):</strong> Seguir um padrão para a troca de informações;</li>
+<li><strong>Arquitetura cliente-servidor:</strong> O REST organiza nossa API de maneira que ela atenda às solicitações dos clientes por meio de requisições HTTP;</li>
+<li><strong>Sem estado (Stateless):</strong> Cada requisição é independente e não carrega informações de estado entre elas. A API não armazena dados de clientes entre uma solicitação e outra;</li>
+<li><strong>Cacheable:</strong> Requisições repetidas podem ser otimizadas usando cache, uma vez que elas retornam os mesmos resultados;</li>
+<li><strong>Sistema em camadas (Layered System):</strong> A implementação interna da API é invisível ao cliente, que interage apenas com a camada que gerencia as requisições.</li>
+</ol>
+<p>Vale lembrar que você só precisa aplicar todas essas restrições se quiser que sua API seja totalmente RESTful. No entanto, esse padrão não é uma solução mágica. Em APIs mais simples, pode ser desnecessário aplicar todos esses princípios.</p>
+<blockquote>
+<p><strong>De olho na dica 👀:</strong> Cada cenário pede uma solução diferente, e no desenvolvimento de software, nada é gravado em pedra. Você pode quebrar algumas dessas regras, desde que tenha uma justificativa plausível.</p>
+</blockquote>
+<p>Agora, se essas restrições pareceram complicadas, fique tranquilo! Veja como aplicamos esse padrão usando Express — você vai se surpreender.</p>
+<h2 id="rest-no-express">REST no Express</h2>
+<p>Os princípios do REST devem ser seguidos independentemente da tecnologia utilizada na construção da API, seja <code>Node.js</code>, <code>Python</code>, <code>Java</code>, ou qualquer outra linguagem.</p>
+<p>No Express, uma grande vantagem é a organização das rotas, que permite separá-las pelos métodos (ou verbos) HTTP usados na requisição. Isso facilita o retorno de um formato específico ao cliente e a definição de códigos de status HTTP adequados.</p>
+<p>Aqui está um exemplo de como usamos os métodos HTTP no Express:</p>
+<pre><code class="language-javascript">app.get(...)
+app.post(...)
+app.put(...)
+app.delete(...)
+</code></pre>
+
+<p>Esse é o <em>pulo do gato</em>! Durante as explicações ao longo do conteúdo, você já utilizou a arquitetura REST em sua API! 😮</p>
+<p>O jeito que você aprendeu a criar APIs já é RESTful! Claro, se aprofundar e saber analisar se uma API respeita todos os princípios RESTful é algo mais avançado, mas por enquanto, o importante é saber que estamos seguindo boas práticas ao criar nossos endpoints.</p>
+<blockquote>
+<p><strong>De olho na dica 👀:</strong> No decorrer do curso, você criará soluções que vão respeitar esses princípios naturalmente. Guarde essa página e volte a consultá-la de tempos em tempos — você vai perceber como buscamos seguir essas boas práticas em todas as criações.</p>
+</blockquote>
+<p>E com isso, concluímos essa parte! Agora, atráves do vídeo a seguir, iremos consolidar todo o aprendizado aprendido.</p>
+<!-- Adicionar vídeo mostrando as operação do CRUD -->
+
+<p>Agora é hora de praticar! Siga para o quiz e valide o seu conhecimento sobre o conteúdo aprendido durante a seção.</p><details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>O protocolo padrão do CAP é <strong>OData V4</strong> (REST com convenções de consulta, metadados e paginação), que é o que os apps SAP Fiori consomem.</li><li>Se precisar de REST "puro", anote o serviço com <code>@protocol: 'rest'</code> (ou <code>@rest</code>). Um mesmo serviço pode ser servido em mais de um protocolo.</li></ul></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/09%20-%20Opera%C3%A7%C3%B5es%20de%20Remo%C3%A7%C3%A3o%20(DELETE).html"><small>← Anterior</small><strong>3.9 - Operações de Remoção (DELETE)</strong></a>
+        <a class="next" id="next-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/11%20-%20Exerc%C3%ADcio%20Movie%20JSON%20CRUD.html"><small>Próxima →</small><strong>3.11 - Exercício Movie JSON CRUD</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

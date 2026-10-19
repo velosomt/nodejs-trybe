@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.10 - Operações de Atualização e Remoção · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476565-5-10-operacoes-de-atualizacao-e-remocao">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 5 - Persistência de Dados com Node.js</span><span>·</span><span>Lição 10 de 16</span></div>
+      <h1>5.10 - Operações de Atualização e Remoção</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>4 blocos de código</span>
+        
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Agora que implementamos as funcionalidades de criação e busca de registros no banco de dados, vamos adicionar as operações de <strong>atualização</strong> e <strong>remoção</strong>. Essas funcionalidades vão permitir <strong>modificar</strong> ou <strong>excluir</strong> registros de estudantes na base de dados, completando o conjunto básico de operações de um CRUD.</p>
+<h2 id="criando-a-funcao-update-para-atualizar-registros">Criando a função <code>update</code> para Atualizar Registros</h2>
+<p>Para modificar informações dos estudantes, criaremos a função <code>update</code> no arquivo <code>src/database/studentsDB.js</code>.</p>
+<pre><code class="language-javascript">// src/database/studentsDB.js
+
+// Outras implementações
+
+const update = async (id, updatedData) =&gt; {
+  const { name, cpf, birthDate, email, cep, address } = updatedData;
+
+  const [result] = await conn.execute(
+    `UPDATE students
+     SET name = ?, cpf = ?, birth_date = ?, email = ?, cep = ?, address = ?
+     WHERE id = ?`,
+    [name, cpf, birthDate, email, cep, address, id],
+  );
+
+  return result;
+};
+
+// module.exports = {
+//   findAll,
+//   findById,
+//   insert,
+  update,
+// };
+</code></pre>
+
+<h3 id="entendendo-o-codigo">Entendendo o Código</h3>
+<ol>
+<li>
+<p><strong>Retorno do Objeto <code>result</code></strong>: O retorno da função é o objeto <code>result</code>, que contém a propriedade <code>affectedRows</code>, indicando quantas linhas foram afetadas pela operação. Isso nos permite validar se o <code>id</code> existe antes de confirmar a atualização.</p>
+</li>
+<li>
+<p><strong>Validação do Registro</strong>: No próximo passo, vamos utilizar essa validação na rota para garantir que apenas registros existentes sejam atualizados.</p>
+</li>
+</ol>
+<h2 id="criando-a-rota-put-para-atualizacao-de-estudante">Criando a rota PUT para atualização de estudante</h2>
+<p>Na rota PUT, vamos chamar a função <code>update</code> e verificar o resultado para validar a existência do <code>id</code>.</p>
+<pre><code class="language-javascript">// src/routes/studentRoutes.js
+
+// Outras implementações
+
+router.put('/:id', async (req, res) =&gt; {
+  const { id } = req.params;
+  const updatedData = req.body;
+
+  try {
+    const result = await studentsDB.update(id, updatedData);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Student Not Found!' });
+    }
+
+    return res.status(200).json({ message: 'Student Successfully Updated' });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({ message: 'Internal Server Error!' });
+  }
+});
+</code></pre>
+
+<p><strong>Observação</strong>: A validação <code>if (result.affectedRows === 0)</code> indica que nenhum estudante com o <code>id</code> informado foi encontrado, respondendo com um status 404 e a mensagem <code>Student Not Found!</code>.</p>
+<h2 id="criando-a-funcao-remove-para-excluir-registros">Criando a função <code>remove</code> para Excluir Registros</h2>
+<p>Para modificar informações dos estudantes, criaremos a função <code>remove</code> no arquivo <code>src/database/studentsDB.js</code>.</p>
+<pre><code class="language-javascript">// src/database/studentsDB.js
+
+// Outras implementações
+
+const remove = async (id) =&gt; {
+  const [result] = await conn.execute('DELETE FROM students WHERE id = ?', [id]);
+  return result;
+};
+
+// module.exports = {
+//   findAll,
+//   findById,
+//   insert,
+//   update,
+  remove,
+// };
+</code></pre>
+
+<h3 id="entendendo-o-codigo-2">Entendendo o Código</h3>
+<ol>
+<li><strong>Retorno do Objeto <code>result</code></strong>: Assim como na função <code>update</code>, <code>remove</code> retorna o objeto <code>result</code>, que indica se algum registro foi excluído por meio de <code>affectedRows</code>.</li>
+</ol>
+<h2 id="criando-a-rota-delete-para-remocao-de-estudante">Criando a rota DELETE para remoção de estudante</h2>
+<p>Na rota DELETE, chamamos a função <code>remove</code> que retorna um objeto, e nele contem a propriedade <code>affectedRows</code>, que indica quantas linhas foram afetadas ao rodar a query do DELETE. Isto é, se retornar 0 nesse valor, sinal que nenhuma linha foi removida.</p>
+<pre><code class="language-javascript">// src/routes/studentRoutes.js
+
+// Outras implementações
+
+router.delete('/:id', async (req, res) =&gt; {
+  const { id } = req.params;
+
+  try {
+    const result = await studentsDB.remove(id);
+
+    if (result.affectedRows === 0) { // Como é igual a zero, sinal que nenhuma linha foi removida.
+      return res.status(404).json({ message: 'Student Not Found!' });
+    }
+
+    return res.status(204).end();
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({ message: 'Internal Server Error!' });
+  }
+});
+</code></pre>
+
+<p>Com essas implementações, nossa API agora possui um CRUD completo para manipulação dos dados referente a estudantes.</p>
+<blockquote>
+<p><strong>Relembrando 🧠:</strong> O código apresentado no conteúdo até este momento, pode ser acessado na pasta <code>05-persistencia-de-dados/parte-02-conexao-mysql</code> ou através desse <strong><a href="https://github.com/learnwithtrybe/node-codigos/tree/main/05-persistencia-de-dados/parte-02-conexao-mysql" target="_blank" rel="noopener noreferrer" class="external">link</a></strong>.</p>
+</blockquote>
+<!-- Adicionar repositório com o link da implementação completa/sem testes --><details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>Equivalentes: <code>await UPDATE(Students, id).with(dados)</code> e <code>await DELETE.from(Students).where({ ID: id })</code>. Também existe <code>UPSERT.into(...)</code>. Em handlers CAP tudo roda na transação da requisição (commit/rollback automático).</li></ul></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../07%20-%20Se%C3%A7%C3%A3o%205%20-%20Persist%C3%AAncia%20de%20Dados%20com%20Node.js/09%20-%20Opera%C3%A7%C3%B5es%20de%20Cria%C3%A7%C3%A3o.html"><small>← Anterior</small><strong>5.9 - Operações de Criação</strong></a>
+        <a class="next" id="next-link" href="../07%20-%20Se%C3%A7%C3%A3o%205%20-%20Persist%C3%AAncia%20de%20Dados%20com%20Node.js/11%20-%20Exerc%C3%ADcio.html"><small>Próxima →</small><strong>5.11 - Exercício</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

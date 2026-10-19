@@ -1,0 +1,9 @@
+{
+  "slug": "4476471-3-4-api-clients",
+  "title": "3.4 - API Clients",
+  "html": "\n        <p>Além do navegador, outra maneira prática de interagir com nossa aplicação é utilizando um API Client como o <code>Postman</code>, <code>Insomnia</code> ou <code>ThunderClient</code>.</p>\n<ul>\n<li><a href=\"https://www.postman.com\">Postman</a></li>\n<li><a href=\"https://insomnia.rest/\">Insomnia</a></li>\n<li><a href=\"https://www.thunderclient.com/\">ThunderClient</a></li>\n</ul>\n<p>Esses apps são plataformas que ajudam na construção e utilização de APIs bem interessantes, pois eles simplificam as etapas do ciclo de vida de uma API e agilizam a colaboração das pessoas desenvolvedoras.</p>\n<p>Utilizando essas ferramentas, podemos interagir com nossos projetos sem depender exclusivamente do navegador, o que torna nosso trabalho diário mais ágil e flexível.</p>\n<p>Vamos ver como funciona essa interação no vídeo a seguir:</p>\n<div class=\"aspect-h-9 aspect-w-16\"><iframe src=\"https://player.vimeo.com/video/1022268796\" width=\"640\" height=\"360\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen=\"\"></iframe></div>\n      ",
+  "videos": [
+    "https://player.vimeo.com/video/1022268796"
+  ],
+  "extras": []
+}

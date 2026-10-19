@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.7 - Testes de Integração com Supertest · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476419-4-7-testes-de-integracao-com-supertest">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 4 - Testes da Aplicação</span><span>·</span><span>Lição 7 de 13</span></div>
+      <h1>4.7 - Testes de Integração com Supertest</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>4 blocos de código</span>
+        
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Dando continuidade ao nosso cenário de testes de integração com base no contrato da API, vamos implementar nossos testes usando Jest e Supertest.</p>
+<p>Na última lição, criamos a rota <code>GET /chocolates</code>, e agora usaremos essa rota para realizar nossos testes de integração.</p>
+<h2 id="supertest">Supertest</h2>
+<p>Supertest é uma biblioteca que facilita a criação de testes para APIs, fornecendo uma maneira simples de enviar requisições HTTP diretamente para o app sem a necessidade de levantar um servidor manualmente. Com ele, podemos testar rotas e verificar se as respostas estão de acordo com o esperado.</p>
+<details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>O <code>@types/jest</code> só serve para autocompletar no editor quando o projeto é JS puro.</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>No CAP o <code>cds.test</code> substitui o supertest: ele devolve clientes HTTP prontos.</li></ul><pre><code class="language-javascript">const cds = require('@sap/cds');
+
+const { GET, POST, expect } = cds.test(__dirname + '/..');
+
+test('lista os times', async () =&gt; {
+  const { status, data } = await GET('/odata/v4/teams/Teams');
+  expect(status).to.equal(200);
+  expect(data.value).to.have.length(3);
+});</code></pre></div></details><h2 id="instalacao-do-jest-e-supertest">Instalação do Jest e Supertest</h2>
+<p>Para começar, vamos instalar as bibliotecas Jest e Supertest:</p>
+<pre><code class="language-bash">npm install --save-dev --save-exact jest@29.7.0 supertest@7.0.0 @types/jest@29.5.13
+</code></pre>
+<p>Depois, vamos ajustar o <code>package.json</code> para que o comando de testes funcione corretamente:</p>
+<pre><code class="language-json">"scripts": {
+  "test": "jest"
+}
+</code></pre>
+<p>Com isso, estamos prontos para transformar os contratos da nossa API em cenários de teste. Vamos agora criar o primeiro teste de integração.</p>
+<h2 id="escrevendo-o-primeiro-teste">Escrevendo o Primeiro Teste</h2>
+<p>Começaremos pela rota <code>GET /chocolates</code> que retorna a lista completa de chocolates.</p>
+<pre><code class="language-javascript">// tests/integration/chocolates.test.js
+
+const request = require('supertest');
+const app = require('../../src/app');
+
+describe('Usando o método GET em /chocolates', () =&gt; {
+  test('Retorna a lista completa de chocolates!', async () =&gt; {
+    const response = await request(app)
+      .get('/chocolates')
+      .expect(200);
+
+  });
+});
+</code></pre>
+<h3 id="entendendo-o-codigo">Entendendo o Código</h3>
+<ol>
+<li>
+<strong><code>require('supertest')</code>:</strong> O Supertest nos permite simular requisições HTTP diretamente no app Express, sem a necessidade de subir o servidor manualmente. Em outras palavras, Supertest cria seu próprio <code>listen()</code><br>
+</li>
+<li>
+<strong><code>require('../../src/app')</code>:</strong> Aqui estamos importando a aplicação que criamos no app.js. Como o Supertest utiliza o app diretamente, não precisamos inicializar o servidor para fazer os testes.<br>
+</li>
+<li>
+<strong><code>describe</code></strong> e <strong><code>test</code>:</strong> A estrutura de <code>describe</code> e <code>test</code> é a mesma que usamos com Jest, organizando os testes por grupos e criando casos de teste específicos.<br>
+</li>
+<li>
+<strong><code>request(app).get('/chocolates').expect(200)</code>:</strong> Esse trecho faz a requisição <code>GET</code> para o endpoint <code>/chocolates</code> (<code>get('/chocolates')</code>) e verifica se o status da resposta é <code>200 - OK</code> (<code>expect(200)</code>).<br>
+</li>
+</ol>
+<blockquote>
+<p><strong>De olho na dica 👀:</strong> Poderíamos também testar o status da resposta, seguindo este outro formato <code>expect(response.status).toBe(200);</code>.</p>
+</blockquote>
+<h2 id="executando-o-teste">Executando o Teste</h2>
+<p>Agora, execute o teste com o comando <code>npm test</code>. Se tudo estiver correto, o teste deverá passar, retornando um status <code>200</code> da nossa API. O resultado será algo parecido com a imagem abaixo:</p>
+<p><img alt="Teste da rota GET-chocolates" src="../assets/img/db811daf04323b.png" loading="lazy"></p>
+<h2 id="verificando-o-conteudo-da-resposta">Verificando o Conteúdo da Resposta</h2>
+<p>No teste acima, você pode ter percebido que verificamos apenas o status da resposta. Agora, vamos garantir que os dados retornados também estão corretos:</p>
+<pre><code class="language-javascript">// tests/integration/chocolates.test.js
+
+const request = require('supertest');
+const app = require('../../src/app');
+
+// describe('Usando o método GET em /chocolates', () =&gt; {
+//   test('Retorna a lista completa de chocolates!', async () =&gt; {
+    const resultExpected = {
+      chocolates: [
+        { id: 1, name: 'Mint Intense', brandId: 1 },
+        { id: 2, name: 'White Coconut', brandId: 1 },
+        { id: 3, name: 'Mon Chéri', brandId: 2 },
+        { id: 4, name: 'Mounds', brandId: 3 },
+      ]
+    };
+
+    // const response = await request(app)
+    //   .get('/chocolates')
+    //   .expect(200);
+
+    expect(response.body).toEqual(resultExpected);
+//   });
+// });
+</code></pre>
+<h3 id="entendendo-as-alteracoes">Entendendo as Alterações</h3>
+<ol>
+<li>
+<strong><code>resultExpected</code>:</strong> Essa constante define o resultado esperado da requisição, com a lista de chocolates.<br>
+</li>
+<li>
+<strong><code>expect</code>:</strong> Estamos verificando se o corpo da resposta do endpoint (<code>response.body</code>) corresponde exatamente à nossa lista de chocolates (<code>resultExpected</code>).<br>
+</li>
+</ol>
+<p>Agora execute novamente os testes com o comando <code>npm test</code> e observe que, além do status <code>200</code>, também estamos validando os dados retornados pela API.</p></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../06%20-%20Se%C3%A7%C3%A3o%204%20-%20Testes%20da%20Aplica%C3%A7%C3%A3o/06%20-%20Construindo%20a%20nossa%20API.html"><small>← Anterior</small><strong>4.6 - Construindo a nossa API</strong></a>
+        <a class="next" id="next-link" href="../06%20-%20Se%C3%A7%C3%A3o%204%20-%20Testes%20da%20Aplica%C3%A7%C3%A3o/08%20-%20Testando%20Novos%20Cen%C3%A1rios.html"><small>Próxima →</small><strong>4.8 - Testando Novos Cenários</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

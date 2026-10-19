@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.17 - Refatoração de Código · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476484-3-17-refatoracao-de-codigo">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 3 - API REST com Express</span><span>·</span><span>Lição 17 de 20</span></div>
+      <h1>3.17 - Refatoração de Código</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>3 blocos de código</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>1 vídeo</span>
+        
+        
+      </div>
+      
+      
+      <div class="content"><p>Para finalizarmos a implementação da nossa API, podemos aplicar uma refatoração para melhorar a legibilidade do nosso código e evitar repetição de lógica em diferentes partes da aplicação.</p>
+<p>Vamos tomar como exemplo o uso das funções <code>fs.readFile</code> e <code>fs.writeFile</code>. Perceba que essas operações se repetem em várias rotas. Para otimizar nosso código e centralizar essa lógica, criaremos duas funções que servirão para leitura e escrita de arquivos, com foco no arquivo teams.json.</p>
+<p>Primeiro, crie um novo arquivo em <code>src/util/readAndWriteFile.js</code> com o seguinte conteúdo:</p>
+<pre><code class="language-javascript">// src/util/readAndWriteFile.js
+
+const fs = require('fs').promises;
+const path = require('path');
+
+const pathFileTeams = path.resolve(__dirname, '..', 'data', 'teams.json');
+
+const readFile = async () =&gt; {
+  const readTeamsFile = await fs.readFile(pathFileTeams, 'utf8');
+  const teams = JSON.parse(readTeamsFile);
+
+  return teams;
+}
+
+const writeFile = async (teams) =&gt; {
+  await fs.writeFile(pathFileTeams, JSON.stringify(teams, null, 2)
+  );
+}
+
+module.exports = {
+  readFile,
+  writeFile,
+}
+</code></pre>
+
+<h3 id="refatorando-o-codigo-existente">Refatorando o Código Existente</h3>
+<p>Agora que temos funções específicas para leitura e escrita de arquivos, podemos simplificar o código dentro de <code>teamsRouter.js</code>, removendo as repetições do uso de <code>fs</code> e <code>path</code>. Além disso, renomeamos as funções para <code>readFile</code> e <code>writeFile</code>, deixando nítido o que elas fazem, mas não vá confundir com os métodos originas do módulo <code>fs</code>.</p>
+<p>Vamos ver como podemos refatorar a rota POST:</p>
+<pre><code class="language-javascript">// src/routes/teamsRouter.js
+
+// Outras importações
+
+const { readFile, writeFile } = require('../util/readAndWriteFile');
+
+// const router = express.Router();
+
+router.post('/', validateTeam, async (req, res) =&gt; {
+  const { name, initials } = req.body;
+
+  // Utilizamos a função readFile que criamos
+  const teams = await readFile();
+
+  const createNewId = teams.at(-1).id + 1;
+
+  teams.push({ id: createNewId, name, initials });
+
+  // Utilizamos a função writeFile que criamos
+  await writeFile(teams);
+
+  return res.status(201).json({ message: 'Team added successfully!' });
+});
+
+// ... Outras rotas da aplicação
+
+// module.exports = router;
+</code></pre>
+
+<h3 id="detalhando-as-alteracoes">Detalhando as alterações</h3>
+<ul>
+<li>
+<p><strong>Reutilização de código:</strong> Com a criação das funções <code>readFile</code> e <code>writeFile</code>, removemos a necessidade de duplicar a lógica de leitura e escrita em múltiplas rotas.</p>
+</li>
+<li>
+<p><strong>Código mais limpo e organizado:</strong> Agora, o arquivo <code>teamsRouter.js</code> está mais enxuto e fácil de entender.</p>
+</li>
+<li>
+<p><strong>Manutenção facilitada:</strong> Se o formato do arquivo <code>teams.json</code> mudar no futuro por exemplo, precisaremos ajustar a lógica de leitura e escrita em apenas um lugar.</p>
+</li>
+</ul>
+<p>Você pode aplicar a mesma abordagem para refatorar as outras rotas, como GET, PUT e DELETE, utilizando as funções criadas para manter a consistência em todo o projeto.</p>
+<h2 id="estrutura-final-do-projeto">Estrutura Final do Projeto</h2>
+<p>Com toda a implementação feita, a nossa estrutura final será essa:</p>
+<pre><code class="language-bash">.
+├── node_modules/
+├── src/
+├── ├── data/
+│   │   ├── teams.json
+├── ├── middlewares/
+│   │   ├── validateTeam.js
+├── ├── routes/
+│   │   ├── teamsRouter.js
+├── ├── util/
+│   │   ├── readAndWriteFile.js
+│   ├── app.js
+│   └── server.js
+├── package-lock.json
+├── package.json
+└── .gitignore
+</code></pre>
+
+<p>Com isso, garantimos uma estrutura modular e bem organizada, facilitando futuras manutenções e extensões da aplicação.</p>
+<p>Assista ao vídeo abaixo para reforçar seus conhecimentos sobre o roteamento e refatoração no Express!</p>
+<a class="video-card" href="https://player.vimeo.com/video/1022293691" target="_blank" rel="noopener noreferrer"><span class="video-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span><strong>Vídeo da aula</strong><small>Abrir no Vimeo (requer internet)</small></span></a></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/16%20-%20Roteamento%20de%20API.html"><small>← Anterior</small><strong>3.16 - Roteamento de API</strong></a>
+        <a class="next" id="next-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/18%20-%20Para%20n%C3%A3o%20esquecer%20mais.html"><small>Próxima →</small><strong>3.18 - Para não esquecer mais</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

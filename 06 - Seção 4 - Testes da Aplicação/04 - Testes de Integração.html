@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.4 - Testes de Integração · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476416-4-4-testes-de-integracao">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 4 - Testes da Aplicação</span><span>·</span><span>Lição 4 de 13</span></div>
+      <h1>4.4 - Testes de Integração</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>2 blocos de código</span>
+        
+        
+        
+      </div>
+      
+      
+      <div class="content"><p>Agora que entendemos o conceito básico de <strong>testes automatizados</strong>, vamos nos aprofundar nos <strong>testes de integração</strong>, que têm como foco testar múltiplas partes da aplicação em conjunto, especialmente em APIs.</p>
+<h2 id="testes-em-apis">Testes em APIs</h2>
+<p>Nas APIs que construímos até o momento, é essencial garantir que elas cumpram seu papel: o cliente faz uma requisição, e o servidor responde com a informação correta. Diferente dos testes unitários, que validam componentes isolados, os testes de integração permitem verificar o comportamento de um sistema mais amplo, simulando o fluxo real entre os componentes da aplicação.</p>
+<blockquote>
+<p><strong>Anota aí 🖊:</strong> Os testes de integração são responsáveis por verificar se a API responde corretamente a requisições, processa corretamente os dados e retorna o status e resposta esperados.</p>
+</blockquote>
+<h2 id="contratos-de-apis">Contratos de APIs</h2>
+<p>Sempre que fornecemos ou consumimos uma API, devemos garantir que o comportamento está conforme o esperado. Isso envolve validar as <strong>regras de entrada e saída de dados da API</strong>, conhecidas como <strong>contratos</strong>.</p>
+<p>Por exemplo, considere um endpoint <code>GET /users/:userId</code>. O contrato pode ser definido da seguinte forma:</p>
+<ul>
+<li>Se uma pessoa usuária com o ID fornecido existir, o código HTTP retornado será <code>200 - OK</code>, e o corpo da resposta <strong>conterá os dados</strong> dessa pessoa.</li>
+<li>Caso a pessoa usuária não exista, o código HTTP será <code>404 - Not Found</code>.</li>
+</ul>
+<p>Perceba que podemos ter vários padrões e comportamentos esperados. Dessa forma, é importante testar se esses comportamentos estão sendo cumpridos, retornando uma resposta compatível com o cenário.</p>
+<blockquote>
+<p><strong>Anota aí 🖊:</strong> O contrato define aquilo que foi previamente acordado, ou seja, como a API deverá se comportar em um determinado cenário.</p>
+</blockquote>
+<h2 id="exemplo-de-contrato">Exemplo de Contrato</h2>
+<p>Para exemplificarmos o conceito de contrato, vamos utilizar novamente o endpoint <code>GET /users/:userId</code>. Podemos definir o contrato assim:</p>
+<ul>
+<li>
+<p>Se a pessoa usuária existir, o retorno esperado da API é:</p>
+</li>
+<li>
+<p>Código HTTP: <code>200 - OK</code>;</p>
+</li>
+<li>Body(Resposta):</li>
+</ul>
+<pre><code class="language-json">{
+  "id": "123",
+  "name": "Rafael",
+  "fullName": "Rafael Santos",
+  "email": "rafael.santos@email.com"
+}
+</code></pre>
+
+<ul>
+<li>
+<p>Caso a pessoa usuária não seja encontrada, a API deverá retornar:</p>
+</li>
+<li>
+<p>Código HTTP: <code>404 - Not Found</code>;</p>
+</li>
+<li>Body(Resposta):</li>
+</ul>
+<pre><code class="language-json">{
+  "message": "User Not Found!"
+}
+</code></pre>
+
+<p>Ao escrever testes de integração, garantimos que os contratos da nossa API estão sendo respeitados, ou seja, a API está respondendo conforme o acordo estabelecido e as regras definidas.</p></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../06%20-%20Se%C3%A7%C3%A3o%204%20-%20Testes%20da%20Aplica%C3%A7%C3%A3o/03%20-%20Testes%20automatizados.html"><small>← Anterior</small><strong>4.3 - Testes automatizados</strong></a>
+        <a class="next" id="next-link" href="../06%20-%20Se%C3%A7%C3%A3o%204%20-%20Testes%20da%20Aplica%C3%A7%C3%A3o/05%20-%20Definindo%20Cen%C3%A1rios%20de%20Teste.html"><small>Próxima →</small><strong>4.5 - Definindo Cenários de Teste</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

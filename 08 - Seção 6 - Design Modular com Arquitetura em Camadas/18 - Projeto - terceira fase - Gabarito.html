@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6.18 - Projeto - terceira fase | Gabarito · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4499198-6-18-projeto-terceira-fase-gabarito">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 6 - Design Modular com Arquitetura em Camadas</span><span>·</span><span>Lição 18 de 19</span></div>
+      <h1>6.18 - Projeto - terceira fase | Gabarito</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>6 min de leitura</span>
+        
+        
+        
+        
+      </div>
+      
+      
+      <div class="content"><p>
+    <b>Exercício 1</b>
+</p>
+<p>
+    Considere as seguintes afirmativas sobre os testes automatizados da API:<br><br>I. Um teste de integração deve fazer uma requisição à API e verificar se a resposta contém os dados esperados.<br>II. Nos testes unitários da Model, é necessário se conectar a um banco de dados real.<br>III. Um teste unitário da Service pode simular a Model para evitar dependências diretas do banco de dados.<br>IV. Um teste deve garantir que a API retorna um status 201 ao criar um novo recurso, como um produto ou pedido.<br>V. Se um teste de integração falhar, é sempre um problema no banco de dados.
+</p>
+<p>
+    A) Apenas I, IV e V são verdadeiras. ✅<br>
+    B) Apenas II, III e IV são verdadeiras.<br>
+    C) Apenas I, II e V são verdadeiras.<br>
+    D) Apenas III e IV são verdadeiras.<br>
+    E) Todas as afirmações são verdadeiras.<br>
+</p>
+<p>
+    <b>Justificativa:</b>
+</p>
+<p>
+    <b>I. Verdadeiro</b>&nbsp;→ Um teste de integração verifica a resposta da API.<br><b>III. Verdadeiro</b>&nbsp;→ Testes unitários da Service podem simular a Model.<br><b>IV. Verdadeiro</b>&nbsp;→ A API deve retornar&nbsp;201&nbsp;ao criar um novo recurso.
+</p>
+<p>
+    Por que as outras estão erradas?
+</p>
+<p>
+    <b>II. Falso</b>&nbsp;→ Testes da Model&nbsp;<b>podem usar um banco simulado</b>, sem necessidade de um banco real.<br><b>V. Falso</b>&nbsp;→ Falha no teste&nbsp;<b>não significa necessariamente</b>&nbsp;um erro no banco, pode ser um erro na lógica da aplicação.
+</p>
+<p>
+    <b>Exercício 2</b>
+</p>
+<p>
+    Considere as seguintes afirmações sobre a camada Service e suas regras de negócio:<br><br>I. A camada Service é responsável por validar o estoque antes de criar um pedido.<br>II. A camada Controller deve aplicar a lógica de negócio antes de chamar a camada Service.<br>III. A camada Service deve chamar diretamente o banco de dados, sem passar pela Model.<br>IV. A camada Service pode lançar erros e a Controller deve capturá-los para retornar respostas adequadas.<br>V. Se um pedido for criado com sucesso, a Service deve retornar um objeto contendo as informações do pedido.
+</p>
+<p>
+    A) Apenas I, II e V são verdadeiras.<br>B) Apenas II, III e IV são verdadeiras.<br>C) Apenas I, IV e V são verdadeiras. ✅<br>D) Apenas III e IV são verdadeiras.<br>E) Todas as afirmações são verdadeiras.
+</p>
+<p>
+    <b>
+    Justificativa:</b>
+</p>
+<p>
+    <b>I. Verdadeiro</b> → A Service valida o estoque antes de criar o pedido.<br><b>	IV. Verdadeiro</b> → A Service pode lançar erros, e a Controller deve tratá-los.<br><b>	V. Verdadeiro</b> → A Service retorna um objeto com as informações do pedido criado.
+</p>
+<p>
+    Por que as outras estão erradas?<br><b>	II. Falso</b> → A Controller não deve aplicar regras de negócio, isso é responsabilidade da Service.<br><b>	III. Falso</b> → A Service deve chamar a Model, não o banco de dados diretamente.
+</p>
+<p>
+    <b>Exercício 3</b>
+</p>
+<p>
+    Na API, a criação de um produto (POST /products) deve validar os dados antes de inseri-los no banco. Qual das seguintes regras foi exigida no projeto?
+</p>
+<p>
+    A) O campo&nbsp;price&nbsp;pode ser qualquer número, inclusive negativo.<br>B) O&nbsp;name&nbsp;pode ser nulo, pois o banco gerará um nome padrão.<br>C) O&nbsp;quantity&nbsp;deve ser um número inteiro positivo. ✅<br>D) Nenhuma validação foi exigida para os produtos.<br>E) O&nbsp;name&nbsp;pode ter qualquer tamanho, incluindo uma string vazia.
+</p>
+<p>
+    <b>Justificativa:</b>
+</p>
+<p>
+    A validação correta exige que quantity seja um número inteiro positivo, pois um produto não pode ter quantidade negativa ou fracionada no estoque.
+</p>
+<p>
+    Por que as outras estão erradas?
+</p>
+<p>A) O campo price pode ser qualquer número, inclusive negativo. ❌<br>🚫 Errado! O preço não pode ser negativo, pois um produto não pode custar menos que zero.<br>B) O name pode ser nulo, pois o banco gerará um nome padrão. ❌<br>🚫 Errado! O nome do produto é obrigatório, e não há nenhum mecanismo no projeto que gere um nome padrão automaticamente.<br>D) Nenhuma validação foi exigida para os produtos. ❌<br>🚫 Errado! O projeto exige validações com Joi na camada Controller.<br>E) O name pode ter qualquer tamanho, incluindo uma string vazia. ❌<br>🚫 Errado! O nome do produto deve ter um tamanho mínimo para evitar registros inválidos.
+</p>
+<p>
+    <b>Exercício 4</b>
+</p>
+<p>
+    A camada Service de pedidos (orders) possui uma regra de negócio que impede a criação de um pedido em determinada situação. Qual é essa situação?
+</p>
+<p>
+    A) Quando o usuário já tem um pedido pendente.<br>B) Quando um pedido contém produtos de categorias diferentes.<br>C) Quando não há estoque suficiente para todos os produtos do pedido. ✅<br>D) Quando o total do pedido é valor negativo.<br>E) Quando o usuário não tem pelo menos três produtos no pedido.
+</p>
+<p>
+    <b>Justificativa:</b>
+</p>
+<p>
+    A camada Service deve garantir que haja estoque suficiente antes de criar um pedido. Se um produto estiver esgotado, o pedido não pode ser finalizado.
+</p>
+<p>
+    Por que as outras estão erradas?
+</p>
+<p>A) Quando o usuário já tem um pedido pendente. ❌<br>🚫 Errado! O sistema não impede que um usuário faça mais de um pedido ao mesmo tempo.
+    <br>B) Quando um pedido contém produtos de categorias diferentes. ❌<br>🚫 Errado! O projeto não possui restrição de categorias no pedido.
+    <br>D) Quando o total do pedido ultrapassa R$ 500,00. ❌<br>🚫 Errado! Não há limite de valor para um pedido.<br>E) Quando o usuário não tem pelo menos três produtos no pedido. ❌<br>🚫 Errado! O pedido pode ter qualquer quantidade de produtos, desde que tenha estoque disponível.
+</p>
+<p>
+    <b>Exercício 4</b>
+</p>
+<p>
+    Após cadastrar um novo produto (POST /products), qual é o formato mais adequado da resposta esperada da API<br>
+</p>
+<p>
+    A)&nbsp;{ "message": "Produto cadastrado com sucesso!" }<br>B)&nbsp;{ "id": 1, "name": "Notebook", "price": 2500.00, "quantity": 10 }&nbsp;✅<br>C)&nbsp;{ "success": true, "product": { "id": 1, "name": "Notebook" } }<br>D)&nbsp;{ "productId": 1, "status": "created" }<br>E)&nbsp;{ "error": "Produto criado com erro!" }
+</p>
+<p>
+    <b>Justificativa:</b>
+</p>
+<p>
+    A API deve retornar os dados completos do produto cadastrado, incluindo&nbsp;<b>id, nome, preço e quantidade</b>.
+</p>
+<p>
+    Por que as outras estão erradas?
+</p>
+<p>A) { "message": "Produto cadastrado com sucesso!" }&nbsp;❌
+<br>
+    🚫 Errado! A resposta deve conter os dados do produto, não apenas uma mensagem.
+    <br>C) { "success": true, "product": { "id": 1, "name": "Notebook" } }&nbsp;❌
+    <br>
+    🚫 Errado! A resposta deve incluir&nbsp;<b>todos os detalhes do produto</b>, incluindo preço e quantidade.
+    <br>D) { "productId": 1, "status": "created" }&nbsp;❌
+    <br>
+    🚫 Errado! A chave correta do ID do produto na resposta não deveria ser&nbsp;productId, mas sim&nbsp;id.
+    <br>E) { "error": "Produto criado com erro!" }&nbsp;❌
+    <br>
+    🚫 Errado! Se a criação foi bem-sucedida, não deve haver uma mensagem de erro.
+</p></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../08%20-%20Se%C3%A7%C3%A3o%206%20-%20Design%20Modular%20com%20Arquitetura%20em%20Camadas/17%20-%20Projeto%20-%20terceira%20fase%20-%20Quiz.html"><small>← Anterior</small><strong>6.17 - Projeto - terceira fase | Quiz</strong></a>
+        <a class="next" id="next-link" href="../08%20-%20Se%C3%A7%C3%A3o%206%20-%20Design%20Modular%20com%20Arquitetura%20em%20Camadas/19%20-%20Refer%C3%AAncias%20e%20recursos%20adicionais%20(opcional).html"><small>Próxima →</small><strong>6.19 - Referências e recursos adicionais (opcional)</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

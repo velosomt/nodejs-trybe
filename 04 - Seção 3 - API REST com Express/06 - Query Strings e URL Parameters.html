@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.6 - Query Strings e URL Parameters · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476473-3-6-query-strings-e-url-parameters">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 3 - API REST com Express</span><span>·</span><span>Lição 6 de 20</span></div>
+      <h1>3.6 - Query Strings e URL Parameters</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>7 blocos de código</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>1 vídeo</span>
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Quando trabalhamos com requisições GET em APIs, pode ser necessário enviar informações adicionais. No Express, isso é possível através de <em>query strings</em> e <em>URL parameters</em>, duas formas de passar dados na URL.</p>
+<h2 id="url-parameters">URL Parameters</h2>
+<p>Os <code>URL Parameters</code> são partes variáveis da URL que identificam recursos específicos. Eles são definidos usando <code>:param</code> na rota e são úteis quando queremos acessar um recurso específico, como um item por seu ID.</p>
+<p>Confira o exemplo abaixo:</p>
+<pre><code class="language-javascript">// src/app.js
+
+// ...
+
+app.get('/teams/:id', async (req, res) =&gt; {
+  const { id } = req.params;
+
+  const readTeamsFile = await fs.readFile(path.resolve(__dirname, 'data', 'teams.json'), 'utf8');
+  const teams = JSON.parse(readTeamsFile);
+
+  const findTeam = teams.find((team) =&gt; team.id === Number(id));
+
+  return res.status(200).json(findTeam);
+});
+
+// module.exports = app;
+</code></pre>
+
+<p>Neste exemplo, criamos uma rota <code>/teams/:id</code>, onde <code>:id</code> é um parâmetro dinâmico. Se acessarmos a rota com <code>http://localhost:3001/teams/1</code>, o valor de <code>id</code> será <code>'1'</code>. Como esse valor é passado como <strong>string</strong>, fazemos a conversão para número com <code>Number(id)</code> para encontrar o time correspondente. O resultado deste endpoint será:</p>
+<pre><code class="language-json">{
+  "id": 1,
+  "name": "Avaí/Kindermann",
+  "initials": "AVA"
+}
+</code></pre>
+
+<p>O formato <code>:id</code> é comum quando buscamos informações por uma propriedade única, como o ID. Contudo, você pode utilizar outro nome para o parâmetro, como <code>:teamId</code>, e a lógica continuaria a mesma.</p>
+<pre><code class="language-javascript">// src/app.js
+
+// ...
+
+app.get('/teams/:teamId', async (req, res) =&gt; {
+  const { teamId } = req.params;
+
+  // const readTeamsFile = await fs.readFile(path.resolve(__dirname, 'data', 'teams.json'), 'utf8');
+  // const teams = JSON.parse(readTeamsFile);
+
+  const findTeam = teams.find((team) =&gt; team.id === Number(teamId));
+
+//   return res.status(200).json(findTeam);
+// });
+
+// module.exports = app;
+</code></pre>
+
+<p>Perceba que só alteramos as referências de <code>id</code> para <code>teamId</code>, mantendo o restante do código intacto.</p>
+<h2 id="query-string">Query String</h2>
+<p>As <em>query strings</em> são parâmetros que passamos diretamente na URL, após o símbolo <code>?</code>, em formato de pares chave-valor. Elas são úteis para buscar ou filtrar dados.</p>
+<p>Veja o exemplo abaixo, onde filtramos os times pelas suas iniciais:</p>
+<pre><code class="language-javascript">// src/app.js
+
+// ...
+
+app.get('/teams/search', async (req, res) =&gt; {
+  const { filterTeamByInitial } = req.query;
+
+  const readTeamsFile = await fs.readFile(path.resolve(__dirname, 'data', 'teams.json'), 'utf8');
+  const teams = JSON.parse(readTeamsFile);
+
+  const filterTeams = teams.filter((team) =&gt; team.initials.includes(filterTeamByInitial));
+
+  return res.status(200).json(filterTeams);
+});
+
+// module.exports = app;
+</code></pre>
+
+<p>Aqui, podemos acessar a rota <code>http://localhost:3001/teams/search?filterTeamByInitial=A</code>. O resultado será uma lista de times cuja chave <code>initials</code> contenha a letra 'A':</p>
+<blockquote>
+<p><strong>Atenção ⚠️:</strong> Caso não retorne nenhuma informação, continue a leitura do conteúdo.</p>
+</blockquote>
+<pre><code class="language-json">[
+  {
+    "id": 1,
+    "name": "Avaí/Kindermann",
+    "initials": "AVA"
+  },
+  {
+    "id": 3,
+    "name": "Napoli-SC",
+    "initials": "NAP"
+  }
+]
+</code></pre>
+
+<p>Vamos entender o que temos nessa rota:</p>
+<ol>
+<li>
+<code>http://localhost:3001/teams/search</code>: Esse é o caminho do nosso endpoint;</li>
+<li>
+<code>?</code>: Indica o início da <em>query string</em>;</li>
+<li>
+<code>filterTeamByInitial=A</code>: Nome da <em>query string</em> e seu valor.</li>
+</ol>
+<p>Essa abordagem permite filtrar os times com base nas iniciais e que tenham pelo menos uma letra <code>A</code>.</p>
+<h2 id="cuidado-com-a-ordem-das-rotas">Cuidado com a ordem das rotas</h2>
+<p>Ao adicionar a rota <code>/teams/search</code>, é importante prestar atenção à <strong>ordem</strong> das rotas. Se a rota <code>/teams/:teamId</code> estiver acima da rota <code>/teams/search</code>, pode ocorrer um problema, pois o Express tratará search como se fosse um <code>teamId</code>. Isso acontece porque a rota <code>/teams/:teamId</code> captura qualquer valor após <code>/teams/</code>.</p>
+<p>Se tivermos o seguinte código:</p>
+<pre><code class="language-javascript">app.get('/teams/:teamId', async (req, res) =&gt; {
+  // código da rota
+});
+
+app.get('/teams/search', async (req, res) =&gt; {
+  // código da rota
+});
+</code></pre>
+
+<p>Ao tentar acessar a rota <code>http://localhost:3001/teams/search</code>, o Express entenderá search como o valor de <code>:teamId</code>, resultando em um erro. Para evitar isso, a rota <code>/teams/search</code> deve vir antes de <code>/teams/:teamId</code>, igual abaixo:</p>
+<pre><code class="language-javascript">app.get('/teams/search', async (req, res) =&gt; {
+  // código da rota
+});
+
+app.get('/teams/:teamId', async (req, res) =&gt; {
+  // código da rota
+});
+</code></pre>
+
+<p>Dessa forma, o Express verificará primeiro a rota <code>/teams/search</code> e só buscará a rota dinâmica <code>/teams/:teamId</code> se nenhuma outra rota combinar.</p>
+<details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>No Express 5 a sintaxe de rota mudou: parâmetro opcional é <code>/teams{/:id}</code> e curinga precisa de nome (<code>/*splat</code>). Rotas simples como <code>/teams/:teamId</code> não mudam. A regra de ordem das rotas continua valendo.</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>No CAP (OData V4) os equivalentes são padronizados: chave na URL <code>/Teams(1)</code> e filtros com opções de consulta como <code>?$filter=contains(initials,'A')</code>, <code>$select</code>, <code>$orderby</code>, <code>$top</code>, <code>$skip</code>, <code>$expand</code> — sem escrever código para cada filtro.</li></ul></div></details><h2 id="quando-usar-query-strings-ou-url-parameters">Quando usar Query Strings ou URL Parameters?</h2>
+<ul>
+<li>
+<p><strong>URL Parameters:</strong> São usados para identificar recursos específicos (como IDs de usuários, produtos, ou artigos).</p>
+</li>
+<li>
+<p><strong>Query Strings:</strong> São ideais para enviar dados opcionais ou filtros em uma busca (como paginação, ordenação, e palavras-chave).</p>
+</li>
+</ul>
+<p>Para consolidar o conhecimento, assista ao vídeo a seguir:</p>
+<a class="video-card" href="https://player.vimeo.com/video/1022283667" target="_blank" rel="noopener noreferrer"><span class="video-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span><strong>Vídeo da aula</strong><small>Abrir no Vimeo (requer internet)</small></span></a></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/05%20-%20Opera%C3%A7%C3%B5es%20de%20leitura%20(GET).html"><small>← Anterior</small><strong>3.5 - Operações de leitura (GET)</strong></a>
+        <a class="next" id="next-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/07%20-%20Opera%C3%A7%C3%B5es%20de%20cria%C3%A7%C3%A3o%20(POST).html"><small>Próxima →</small><strong>3.7 - Operações de criação (POST)</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

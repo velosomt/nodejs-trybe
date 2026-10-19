@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.2 - Express · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476469-3-2-express">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 3 - API REST com Express</span><span>·</span><span>Lição 2 de 20</span></div>
+      <h1>3.2 - Express</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>6 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>10 blocos de código</span>
+        
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>2 OBSs da IA</a>
+      </div>
+      
+      
+      <div class="content"><h2 id="como-vamos-construir-uma-api-no-node-js">
+    Como vamos construir uma API no Node.js?
+</h2>
+<p>
+    Para criar uma API no Node.js, precisamos de uma forma eficiente de receber, processar e responder a requisições. E é aí que o <a href="https://expressjs.com/" target="_blank" rel="noopener noreferrer" class="external">Express</a> entra em cena.
+</p>
+<h3 id="o-que-e-o-express">
+    O que é o Express?
+</h3>
+<p>
+    O <code>Express</code> é um <em>framework</em> minimalista e flexível para Node.js, que nos fornece as ferramentas necessárias para construir APIs robustas e organizadas com poucas linhas de código. Ele é amplamente utilizado devido à sua simplicidade e eficiência, permitindo que desenvolvedores se concentrem na lógica da aplicação, sem se preocupar com detalhes complexos de infraestrutura.
+</p>
+<h3 id="o-que-e-um-framework">
+    O que é um framework?
+</h3>
+<p>
+    Um <em>framework</em> é como um conjunto de ferramentas pré-construídas que ajudam a estruturar e organizar sua aplicação. Pense nele como um "molde" que guia o desenvolvimento de uma aplicação, fornecendo padrões e funcionalidades prontas para uso.
+</p>
+<p>
+    Imagine que você precisa fazer uma sopa em grande escala, como em um restaurante. Em vez de fazer tudo do zero cada vez, você segue um processo organizado, com ferramentas e etapas pré-definidas para garantir eficiência e consistência. O Express faz algo semelhante no desenvolvimento de APIs: ele sugere uma forma eficaz de construir sua aplicação, oferecendo as ferramentas necessárias para isso.
+</p>
+<h3 id="instalando-o-express">
+    Instalando o Express
+</h3>
+<p>
+    Vamos colocar a mão na massa e instalar o Express na sua aplicação. Para isso, execute os seguintes comandos no seu terminal:
+</p>
+<ol>
+    <li>Para criar os diretórios no qual iremos trabalhar e abrir o <code>VS Code</code>:</li>
+</ol>
+<pre><code class="language-bash">mkdir soccer-team-manager soccer-team-manager/src &amp;&amp; cd soccer-team-manager &amp;&amp; code .
+</code></pre>
+<ol>
+    <li>Para iniciar um pacote Node.js:</li>
+</ol>
+<pre><code class="language-bash">npm init -y
+</code></pre>
+<ol>
+    <li>Para instalar o Express no nosso projeto:</li>
+</ol>
+<pre><code class="language-bash">npm i express@4.17.1 --save-exact
+</code></pre>
+<blockquote>
+    <p>
+        <strong>Atenção ⚠️:</strong> Usaremos a versão <code>4.17.1</code> para garantir que todos os exemplos e práticas deste bloco funcionem corretamente. Fixar a versão evita que tenhamos comportamentos inesperados na nossa aplicação.
+    </p>
+</blockquote>
+<p>
+    Após a instalação, dois itens importantes serão criados automaticamente:
+</p>
+<ul>
+    <li><code>package-lock.json</code>: Gerencia as versões exatas das dependências, garantindo que todos no projeto utilizem as mesmas versões.</li>
+    <li><code>node_modules</code>: Diretório onde todas as dependências (e as dependências das dependências) serão instaladas.</li>
+</ul>
+<p>
+    <img alt="Ilustração de uma arvore de pacotes node" src="../assets/img/086c42839aa0f5.png" loading="lazy">
+
+ Ilustração sobre funcionamento de uma instalação de dependências através do npm. 
+</p>
+<details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>O curso fixa <strong>Express 4.17.1</strong>. A versão estável atual é o <strong>Express 5</strong> (<code>npm i express</code> já instala a 5.x). Principais mudanças: erros de handlers <code>async</code> vão sozinhos para o middleware de erro, sintaxe de rotas mais rígida (<code>*</code> precisa de nome, <code>?</code> opcional mudou para <code>{/:id}</code>), <code>req.body</code> fica <code>undefined</code> sem parser e <code>req.query</code> passa a ser somente leitura.</li><li>O código básico do curso (<code>express()</code>, <code>app.get</code>, <code>app.listen</code>, <code>express.Router</code>) funciona igual no Express 5.</li></ul></div></details><h3 id="como-as-dependencias-funcionam">
+    Como as dependências funcionam?
+</h3>
+<p>
+    Pense no Express como um pacote que sua aplicação precisa para funcionar. Esse pacote, por sua vez, depende de outros pacotes, que dependem de outros pacotes, e assim por diante. O Node.js cuida de instalar e gerenciar todas essas dependências de forma automática e inteligente, evitando duplicações e garantindo que tudo funcione perfeitamente.
+</p>
+<p>
+    O resultado? Uma instalação eficiente e organizada, que facilita o desenvolvimento e a manutenção da sua aplicação.
+</p>
+<h3 id="utilizando-git-e-gitignore">
+    Utilizando Git e `.gitignore``
+</h3>
+<p>
+    Agora que instalamos o Express e o diretório <code>node_modules</code> foi criado, é importante seguir boas práticas ao usar o Git para versionar seu projeto. Uma dessas práticas é não versionar a pasta <code>node_modules</code> (enviar para o GitHub), pois ela contém todas as dependências instaladas e pode ficar muito grande, ocupando espaço desnecessário no repositório.
+</p>
+<p>
+    Para evitar isso, adicione um arquivo <code>.gitignore</code> na raiz do seu projeto e inclua a pasta <code>node_modules</code> nele:
+</p>
+<pre><code class="language-bash"># .gitignore
+node_modules/
+</code></pre>
+<p>
+    Isso garante que a pasta <code>node_modules</code> não seja enviada ao repositório. Quem clonar seu projeto poderá baixar todas as dependências facilmente, executando o comando <code>npm install</code>, que lerá o arquivo <code>package.json</code> e instalará todas as dependências necessárias.
+</p>
+<p>
+    Essa prática mantém seu repositório mais limpo e evita problemas com arquivos desnecessários ocupando espaço.
+</p>
+<h3 id="criando-o-servidor">
+    Criando o Servidor
+</h3>
+<p>
+    Configurar seu projeto é um passo crucial! Quando você começa a trabalhar em um projeto, precisa entender como ele está configurado para poder continuar o desenvolvimento. Em um teste técnico, por exemplo, é comum ter que configurar uma aplicação do zero. Portanto, saber lidar com as configurações iniciais de um projeto é fundamental.
+</p>
+<p>
+    Agora que concluímos as configurações iniciais, vamos criar nosso servidor Node.js com Express.
+</p>
+<p>
+    Primeiro, no diretório <code>src</code>, crie dois arquivos: <code>app.js</code> e <code>server.js</code>. Para o tamanho atual da nossa aplicação, isso é suficiente. Se precisarmos de mais arquivos, refatoramos depois. 🔧
+</p>
+<p>
+    Vamos começar pelo <code>app.js</code>:
+</p>
+<pre><code class="language-javascript">// src/app.js
+const express = require('express');
+const app = express();
+module.exports = app;
+</code></pre>
+<p>
+    Aqui, importamos o Express e inicializamos a aplicação com <code>express()</code>, armazenando na variável <code>app</code>, que é exportada para ser usada em <code>server.js</code>. A variável <code>app</code> contém todas as funcionalidades do Express que utilizaremos em breve.
+</p>
+<p>
+    Agora, crie o <strong>servidor</strong> em <code>server.js</code>:
+</p>
+<pre><code class="language-javascript">// src/server.js
+const app = require('./app');
+app.listen(3001, () =&gt; console.log('Server running on port 3001'));
+</code></pre>
+<p>
+    Neste arquivo, apenas importamos o <code>app</code> e iniciamos o servidor com <code>app.listen</code>. O <code>listen</code> recebe dois parâmetros:
+</p>
+<ul>
+    <li>Primeiro parâmetro é o <code>port</code>: Significa a <code>porta</code> que a sua aplicação ocupará quando estiver ativa, neste caso, será a porta 3001.</li>
+    <li>Segundo parâmetro é uma <code>função</code>: Neste exemplo, exibe apenas uma mensagem no console informando que o servidor está rodando.</li>
+</ul>
+<p>
+    Vamos a pergunta, por que separamos em dois arquivos? Isso mantém o código mais organizado e facilita o crescimento da aplicação. Além disso, será útil quando começarmos a aprender testes de unidade e integração.
+</p>
+<p>
+    Para finalizar o servidor, adicione estes scripts ao <code>package.json</code>:
+</p>
+<pre><code class="language-json">// package.json
+"start": "node src/server.js",
+"dev": "nodemon src/server.js",
+</code></pre>
+<p>
+    Agora, execute a sua aplicação com o seguinte comando:
+</p>
+<pre><code class="language-bash">npm start
+</code></pre>
+<p>
+    Você verá a mensagem <code>Server running on port 3001</code> no console, indicando que o servidor está funcionando corretamente. Para parar a aplicação, digite em seu terminal <code>Ctrl + c</code>.
+</p>
+<blockquote>
+    <p>
+        <strong>Anota aí 🖊:</strong> Em termos simples, o sistema operacional do seu computador gerencia como todos os programas interagem entre si e com a rede. Cada programa que se comunica pela internet ou por uma rede local precisa escolher uma "porta", que é um número específico usado para identificar essa comunicação. O sistema operacional garante que todas as informações enviadas para o computador, direcionadas a uma porta específica, sejam entregues ao programa que está "ouvindo" nessa porta. Quando dizemos que um programa está "ouvindo" uma porta (em inglês, "listen"), significa que ele está preparado para receber todas as mensagens que chegam através daquele número de porta. Em resumo, ao escolher uma porta, o programa garante que todo o tráfego destinado a essa porta será direcionado a ele. Vamos explorar como isso funciona mais adiante.
+    </p>
+</blockquote>
+<p>
+    Agora, sobre os scripts do <code>package.json</code>: O script dev não funcionará ainda porque usamos o comando nodemon, que não está instalado. Vamos resolver isso agora.
+</p>
+<h3 id="ganhando-produtividade-com-nodemon">
+    Ganhando Produtividade com Nodemon
+</h3>
+<p>
+    Após executar o servidor com npm start, qualquer alteração no código requer parar e reiniciar o servidor para que as mudanças tenham efeito. Isso pode ser cansativo e propenso a erros.
+</p>
+<p>
+    Para evitar isso, utilizamos o <code>Nodemon</code>, que reinicia automaticamente o servidor sempre que você salva um arquivo.
+</p>
+<p>
+    Já configuramos o script <code>dev</code> para usar o Nodemon. Agora, vamos instalá-lo:
+</p>
+<pre><code class="language-bash">npm i nodemon@2.0.15 --save-dev --save-exact
+</code></pre>
+<p>
+    Após a instalação, execute:
+</p>
+<pre><code class="language-bash">npm run dev
+</code></pre>
+<p>
+    Agora, sempre que salvar um arquivo, o Nodemon reiniciará automaticamente o servidor, tornando o desenvolvimento mais ágil e eficiente.
+</p>
+<p>
+    Você acabou de aprender a usar o Nodemon para facilitar o desenvolvimento de APIs Node.js com Express. Prepare-se, porque as coisas vão ficar ainda mais interessantes! 🤩
+</p>
+<!-- Um vídeo explicando sobre o nodemon, node_modules no .gitignore, servidores e portas --><details class="obs-ia" id="obs-ia-2"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>O Node tem watch mode nativo (estável no Node 22+): <code>"dev": "node --watch src/server.js"</code> — dispensa o <code>nodemon</code>. Combina com <code>--env-file</code>: <code>node --watch --env-file=.env src/server.js</code>.</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>No CAP você <strong>não cria o servidor Express na mão</strong>: o <code>@sap/cds</code> sobe um Express internamente e expõe os serviços definidos em CDS. <code>cds watch</code> faz o papel do <code>nodemon</code>.</li><li>Se precisar de middlewares próprios, crie um <code>server.js</code> na raiz e use <code>cds.on('bootstrap', (app) =&gt; app.use(...))</code>.</li></ul></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/01%20-%20Introdu%C3%A7%C3%A3o%20da%20se%C3%A7%C3%A3o.html"><small>← Anterior</small><strong>3.1 - Introdução da seção</strong></a>
+        <a class="next" id="next-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/03%20-%20Nossa%20primeira%20API%20-%20Hello%2C%20World!.html"><small>Próxima →</small><strong>3.3 - Nossa primeira API: Hello, World!</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

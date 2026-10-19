@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.11 - Exercício · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476566-5-11-exercicio">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 5 - Persistência de Dados com Node.js</span><span>·</span><span>Lição 11 de 16</span></div>
+      <h1>5.11 - Exercício</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>3 blocos de código</span>
+        
+        
+        
+      </div>
+      
+      
+      <div class="content"><p>
+    Nesse exercício vamos criar uma <b>API REST</b>&nbsp;de Gerenciamento de Tarefas `todo-list-manager` utilizando o <b>Express</b>&nbsp;e o <b>MySQL</b>&nbsp;como banco de dados. Nessa <b>API</b>&nbsp;você vai armazenar e recuperar dados de tarefas por meio de <b>endpoints</b>&nbsp;que realizam o CRUD dos dados.
+</p>
+<h2 id="combinados">
+    Combinados
+</h2>
+<p>
+    Para fazer o exercício, acesse esse repositório ➡️ <a href="https://github.com/learnwithtrybe/flex-node-todo-list-manager" target="_blank" rel="noopener noreferrer" class="external">Exercício - Gerenciador de tarefas</a>.
+</p>
+<p>
+    Nesse repositório a estrutura do código já está disponível, bem como o banco de dados criado e carregado via Docker. Basta você fazer a implementação criando novos arquivos e atualizando o arquivo de rotas.
+</p>
+<p>
+    Leia o arquivo <code>README.md</code> do repositório com ⚠️ atenção ⚠️ para saber como desenvolver e entregar seu exercício.
+</p>
+<p><mark>
+    Nessa fase dos estudos, você deverá fazer apenas os <b>exercícios 1, 2 e 3</b>. Os demais exercícios deverá ser feito em outra fase.</mark>
+</p>
+<details>
+<summary><b>Solução</b></summary>
+<p>
+Exercício 1. Crie um pool de conexões
+</p>
+<pre><code language="js">
+// src/db/connection.js
+const mysql = require('mysql2/promise');
+const connection = mysql.createPool({
+  host: process.env.MYSQL_HOST || 'localhost',
+  port: process.env.MYSQL_PORT || 3306,
+  user: process.env.MYSQL_USER || 'root',
+  password: process.env.MYSQL_PASSWORD || 'root',
+  database: process.env.MYSQL_DATABASE_NAME || 'todo_list_db',
+});
+module.exports = connection;
+</code></pre>
+<p>
+Exercício 2. Criar o CRUD
+</p>
+<pre><code language="js">
+// src/db/tasksDB.js
+const conn = require('./connection');
+
+const tableName = 'tasks';
+
+const findAll = async () =&gt; {
+  const [result] = await conn.execute(`SELECT * FROM ${tableName};`);
+  return result;
+};
+
+const insert = async (task) =&gt; {
+    const { nome, descricao } = task;
+    const [result] = await conn.execute(
+      `INSERT INTO ${tableName} (nome, descricao) VALUES (?, ?)`,
+      [nome, descricao], 
+    );
+  
+    return result.insertId;
+  };
+
+const findById = async (id) =&gt; {
+    const [result] = await conn.execute(`SELECT * FROM ${tableName} WHERE id = ?;`, [id]);
+    return result[0];
+  };
+
+  const update = async (id, updatedData) =&gt; {
+    const { nome, descricao } = updatedData;
+  
+    const [result] = await conn.execute(
+      `UPDATE ${tableName}
+       SET nome = ?, descricao = ?
+       WHERE id = ?`,
+      [nome, descricao, id],
+    );
+  
+    return result;
+  };
+
+  const remove = async (id) =&gt; {
+    const [result] = await conn.execute(`DELETE FROM ${tableName} WHERE id = ?`, [id]);
+    return result;
+  };
+
+module.exports = {
+  findAll,
+  insert,
+  findById,
+  update,
+  remove,
+};
+</code></pre>
+<p>
+Exercício 3. Ajustar as rotas
+</p>
+<pre><code language="js">
+// src/routes/tasksRoutes.js
+
+const express = require('express');
+const tasksDB = require('../db/tasksDB');
+
+const router = express.Router();
+const internalMessage = 'Internal Server Error!';
+
+router.post('/', async (req, res) =&gt; {
+  try {
+    const { nome, descricao } = req.body;
+    const task = { nome, descricao };
+    const resultId = await tasksDB.insert(task);
+    return res.status(201).json({
+      id: resultId,
+      nome,
+      descricao,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({ message: internalMessage });
+  }
+});
+
+router.put('/:id', async (req, res) =&gt; {
+  const { id } = req.params;
+  const updatedData = req.body;
+
+  try {
+    const result = await tasksDB.update(id, updatedData);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Task Not Found!' });
+    }
+
+    return res.status(200).json({ message: 'Task Successfully Updated' });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({ message: internalMessage });
+  }
+});
+
+router.delete('/:id', async (req, res) =&gt; {
+  try {
+    const { id } = req.params;
+    const result = await tasksDB.remove(id);
+
+    if (result.affectedRows === 0) { // Como é igual a zero, sinal que nenhuma linha foi removida.
+      return res.status(404).json({ message: 'Task Not Found!' });
+    }
+
+    return res.status(204).end();
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({ message: 'Internal Server Error!' });
+  }
+});
+
+router.get('/', async (req, res) =&gt; {
+  try {
+    const tasks = await tasksDB.findAll();
+    return res.status(200).json(tasks);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({ message: 'Internal Server Error!' });
+  }
+});
+
+router.get('/:id', async (req, res) =&gt; {
+  try {
+    const { id } = req.params;
+    const tasks = await tasksDB.findById(id);
+    return res.status(200).json(tasks);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({ message: 'Internal Server Error!' });
+  }
+});
+
+module.exports = router;
+
+</code></pre>
+</details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../07%20-%20Se%C3%A7%C3%A3o%205%20-%20Persist%C3%AAncia%20de%20Dados%20com%20Node.js/10%20-%20Opera%C3%A7%C3%B5es%20de%20Atualiza%C3%A7%C3%A3o%20e%20Remo%C3%A7%C3%A3o.html"><small>← Anterior</small><strong>5.10 - Operações de Atualização e Remoção</strong></a>
+        <a class="next" id="next-link" href="../07%20-%20Se%C3%A7%C3%A3o%205%20-%20Persist%C3%AAncia%20de%20Dados%20com%20Node.js/12%20-%20Testes%20de%20Integra%C3%A7%C3%A3o%20com%20Banco%20de%20Dados.html"><small>Próxima →</small><strong>5.12 - Testes de Integração com Banco de Dados</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

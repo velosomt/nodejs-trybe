@@ -1,0 +1,55 @@
+<p>Na <a href="@@LESSON:4505303-9-7-deploy-da-aplicacao-no-railway@@">lição 9.7</a> você ligou o repositório do GitHub ao Railway: a cada <code>git push</code> na branch principal, o Railway faz um novo deploy. Funciona, mas tem um problema sério: <strong>o deploy acontece mesmo que os testes estejam quebrados</strong>. Nada garante que os testes da Seção 4 rodaram antes do código ir para produção.</p>
+<p>É exatamente isso que um pipeline de <strong>CI/CD</strong> resolve. Esta seção cobre o mínimo que você precisa saber para montar um, primeiro para a API Cookmaster do curso e depois para um projeto SAP CAP no BTP.</p>
+
+<h2>CI, CD e CD: três ideias diferentes</h2>
+<table>
+<thead><tr><th>Termo</th><th>O que significa</th><th>Na prática</th></tr></thead>
+<tbody>
+<tr><td><strong>CI</strong> — Continuous Integration (Integração Contínua)</td><td>Todo código enviado ao repositório é <strong>instalado, verificado e testado automaticamente</strong>.</td><td>Abriu um pull request ou fez push → o servidor de CI roda <code>npm ci</code>, lint e <code>npm test</code>. Se algo falha, o time fica sabendo na hora.</td></tr>
+<tr><td><strong>CD</strong> — Continuous Delivery (Entrega Contínua)</td><td>Todo código que passa na CI vira um <strong>artefato pronto para produção</strong>. O deploy é um clique (ou uma aprovação).</td><td>Pipeline gera a imagem Docker/o <code>.mtar</code>, faz deploy em homologação e espera alguém aprovar a produção.</td></tr>
+<tr><td><strong>CD</strong> — Continuous Deployment (Implantação Contínua)</td><td>Igual à anterior, mas <strong>sem aprovação manual</strong>: passou em tudo, vai para produção.</td><td>Merge na <code>main</code> → testes → deploy automático.</td></tr>
+</tbody>
+</table>
+<p>O que o Railway faz hoje na Seção 9 é um "Continuous Deployment" <em>sem a parte de CI</em>. Vamos colocar a CI na frente dele.</p>
+
+<h2>Anatomia de um pipeline</h2>
+<p>Quase todo pipeline, de um projeto pessoal a um projeto SAP corporativo, segue esta sequência:</p>
+<ol>
+<li><strong>Gatilho (trigger):</strong> um evento inicia o pipeline — push, pull request, criação de tag/release, agendamento ou execução manual.</li>
+<li><strong>Checkout + instalação:</strong> uma máquina limpa baixa o código e instala as dependências exatamente como estão no <code>package-lock.json</code> (<code>npm ci</code>).</li>
+<li><strong>Verificação:</strong> lint e testes (unidade e integração). Qualquer comando que termine com código de saída diferente de <code>0</code> <strong>quebra o pipeline</strong>.</li>
+<li><strong>Build / empacotamento:</strong> gera o artefato que vai para o servidor — imagem Docker, pasta <code>gen/</code> do <code>cds build</code> ou arquivo <code>.mtar</code>.</li>
+<li><strong>Deploy:</strong> publica o artefato em um ambiente (homologação, produção), usando credenciais guardadas como <strong>segredos</strong>.</li>
+<li><strong>Verificação pós-deploy:</strong> confirma que a aplicação subiu (health check, smoke test). Se não subiu, volta a versão anterior.</li>
+</ol>
+
+<h2>Ferramentas</h2>
+<ul>
+<li><strong>GitHub Actions</strong> — integrado ao GitHub, gratuito para repositórios públicos e com uma cota mensal de minutos para privados. É o que usaremos nesta seção.</li>
+<li><strong>GitLab CI</strong>, <strong>Azure Pipelines</strong>, <strong>Jenkins</strong> — mesmos conceitos, sintaxes diferentes.</li>
+<li><strong>SAP Continuous Integration and Delivery</strong> e <strong>Project Piper</strong> — as opções da SAP para projetos no BTP (assunto da lição IA.6).</li>
+</ul>
+<p>Aprendendo bem os conceitos em uma ferramenta, a troca para outra é questão de consultar a sintaxe.</p>
+
+<h2>Onde o conteúdo do curso se encaixa</h2>
+<table>
+<thead><tr><th>Etapa do pipeline</th><th>Onde você aprendeu</th></tr></thead>
+<tbody>
+<tr><td>Scripts do <code>package.json</code>, <code>npm install</code></td><td><a href="@@LESSON:4207913-2-7-npm@@">2.7 - NPM</a></td></tr>
+<tr><td>Testes automatizados (Jest, Supertest, mocks)</td><td><a href="@@LESSON:4476415-4-3-testes-automatizados@@">Seção 4</a> e <a href="@@LESSON:4476568-5-13-testes-de-integracao-com-jest-spyon@@">5.13</a></td></tr>
+<tr><td>Configuração por variáveis de ambiente</td><td><a href="@@LESSON:4476560-5-5-variaveis-de-ambiente@@">5.5 - Variáveis de ambiente</a></td></tr>
+<tr><td>Empacotar a aplicação</td><td><a href="@@LESSON:4505300-9-4-criando-um-dockerfile@@">9.4 - Criando um Dockerfile</a></td></tr>
+<tr><td>Publicar</td><td><a href="@@LESSON:4505303-9-7-deploy-da-aplicacao-no-railway@@">9.7 - Deploy no Railway</a></td></tr>
+</tbody>
+</table>
+<p>O que falta é <strong>ligar essas peças</strong> de forma automática e segura. É isso que as próximas lições fazem.</p>
+
+<h2>Roteiro da seção</h2>
+<ol>
+<li><strong>IA.2</strong> — Deixar o projeto pronto para rodar em uma máquina limpa.</li>
+<li><strong>IA.3</strong> — Escrever o primeiro workflow do GitHub Actions (CI).</li>
+<li><strong>IA.4</strong> — Segredos, ambientes e proteção da branch <code>main</code>.</li>
+<li><strong>IA.5</strong> — Deploy contínuo da API Cookmaster no Railway.</li>
+<li><strong>IA.6</strong> — O mesmo raciocínio aplicado a SAP CAP no BTP (Cloud Foundry e Kyma).</li>
+<li><strong>IA.7</strong> — Resumo, exercício e quiz.</li>
+</ol>

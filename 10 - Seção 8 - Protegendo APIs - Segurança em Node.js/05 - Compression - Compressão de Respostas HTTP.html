@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8.5 - Compression: Compressão de Respostas HTTP · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476620-8-5-compression-compressao-de-respostas-http">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 8 - Protegendo APIs: Segurança em Node.js</span><span>·</span><span>Lição 5 de 12</span></div>
+      <h1>8.5 - Compression: Compressão de Respostas HTTP</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>3 blocos de código</span>
+        
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Reduzir o tamanho das respostas HTTP é uma prática importante para melhorar o desempenho de aplicações web. O middleware <a href="https://www.npmjs.com/package/compression" target="_blank" rel="noopener noreferrer" class="external">compression</a> facilita esse processo, aplicando compressão Gzip ou Brotli às respostas do servidor, resultando em transferências de dados mais rápidas e uma melhor experiência para o usuário final.</p>
+<h2 id="o-que-e-o-compression">O que é o Compression?</h2>
+<p>O <strong>Compression</strong> é um middleware para aplicações Express que compacta automaticamente as respostas enviadas pelo servidor. Ao reduzir o tamanho das respostas HTTP, ele diminui a quantidade de dados transmitidos pela rede, acelerando o carregamento de páginas e economizando largura de banda.</p>
+<h2 id="principais-beneficios">Principais Benefícios</h2>
+<ol>
+<li>
+<strong>Redução de uso de largura de banda</strong>: Diminui significativamente o tamanho dos arquivos transferidos para o cliente.<br>
+</li>
+<li>
+<strong>Melhoria de desempenho</strong>: Respostas menores são transferidas mais rapidamente, proporcionando carregamento mais rápido.<br>
+</li>
+<li>
+<strong>Configuração simples</strong>: O Compression é fácil de integrar e personalizar conforme as necessidades da aplicação.<br>
+</li>
+</ol>
+<h2 id="como-funciona-a-compressao">Como funciona a compressão?</h2>
+<p>A compressão funciona ao aplicar algoritmos como Gzip ou Brotli às respostas HTTP. Esses algoritmos analisam o conteúdo, identificam redundâncias e compactam os dados para transmitir um arquivo menor ao cliente. Navegadores modernos conseguem descompactar as respostas automaticamente antes de exibi-las.</p>
+<p><strong>Sem compressão</strong>:</p>
+<ul>
+<li>Resposta em texto simples: 200 KB.</li>
+<li>Tempo de transferência: 400 ms.</li>
+</ul>
+<p><strong>Com compressão</strong>:</p>
+<ul>
+<li>Resposta comprimida: 50 KB.</li>
+<li>Tempo de transferência: 100 ms.</li>
+</ul>
+<h2 id="adicionando-o-compression-a-sua-aplicacao-cookmaster">Adicionando o Compression à sua Aplicação Cookmaster</h2>
+<p>Primeiro, instale o Compression na sua aplicação com o seguinte comando:</p>
+<pre><code class="language-bash">npm install -E compression@1.7.5
+</code></pre>
+<p>No arquivo <code>src/app.js</code>, importe e configure o compression como global:</p>
+<pre><code class="language-javascript">// src/app.js
+
+// const express = require('express');
+// const helmet = require('helmet');
+const compression = require('compression');
+// require('express-async-errors');
+
+// Outras Importações
+
+// const app = express();
+
+app.use(compression());
+
+// Outras Configurações e Rotas
+</code></pre>
+<p>Com essa configuração, todas as respostas da sua aplicação serão compactadas automaticamente.</p>
+<h2 id="teste-antes-e-depois-do-compression">Teste: Antes e depois do Compression</h2>
+<h3 id="teste-sem-compressao">Teste sem compressão</h3>
+<p>Faça uma requisição para qualquer rota da sua aplicação, por exemplo, <code>GET /recipes</code>, usando o <strong>Insomnia</strong>. Você verá que os cabeçalhos da resposta estarão parecidos com a imagem abaixo:</p>
+<p><img alt="Requisição sem Compressao" src="../assets/img/ddc59f58e58311.png" loading="lazy"></p>
+<p><strong>O que analisar</strong>:</p>
+<ul>
+<li><strong>Content-Length</strong>: Indica o tamanho da resposta em bytes. Nesse caso, a resposta ocupa 1743 bytes.</li>
+</ul>
+<h3 id="teste-com-compressao">Teste com compressão</h3>
+<p>Agora, para vermos o compression em ação, é preciso enviar na requisição o cabeçalho com a opção <code>Accept-Encoding: gzip</code>, igual na imagem abaixo:</p>
+<p><img alt="Requisição com Compressao" src="../assets/img/8c8badda8795e6.png" loading="lazy"></p>
+<p><strong>O que analisar</strong>:</p>
+<ul>
+<li><strong>Content-Encoding</strong>: Indica que a resposta foi compactada com <strong>Gzip</strong>.</li>
+<li><strong>Content-Length</strong>: O tamanho da resposta agora é menor, reduzido para 655 bytes.</li>
+</ul>
+<p>Com isso, você consegue verificar a eficácia do Compression diretamente na redução de tamanho das respostas.</p>
+<h2 id="personalizando-o-compression">Personalizando o Compression</h2>
+<p>Embora o Compression funcione bem com a configuração padrão, ele permite ajustes para atender às necessidades específicas da aplicação. Vamos para um exemplo de personalização:</p>
+<pre><code class="language-javascript">// src/app.js
+
+app.use(
+  compression({
+    level: 6, // Nível de compressão (0 a 9)
+    threshold: 1024,
+  })
+);
+</code></pre>
+<h3 id="explicacao-das-configuracoes">Explicação das Configurações:</h3>
+<ol>
+<li>
+<strong>level</strong>: Define o nível de compressão. Valores mais altos proporcionam maior compressão, mas consomem mais CPU. O padrão é 6.<br>
+</li>
+<li>
+<strong>threshold</strong>: Estabelece o tamanho mínimo da resposta para ativar a compressão. No exemplo, somente respostas maiores que 1 KB serão compactadas.<br>
+</li>
+</ol>
+<h2 id="quando-nao-usar-compression">Quando não usar Compression?</h2>
+<p>Embora a compressão seja geralmente vantajosa, existem cenários onde ela não é recomendada:</p>
+<ul>
+<li><strong>Respostas pequenas</strong>: A compressão pode aumentar o tempo de processamento para respostas muito pequenas.</li>
+<li><strong>CPU limitada</strong>: Em servidores com pouca capacidade de processamento, a compressão pode consumir muitos recursos, prejudicando o desempenho geral.</li>
+<li><strong>Conteúdo já comprimido</strong>: Arquivos como imagens ou vídeos geralmente já estão compactados, e tentar comprimi-los novamente é desnecessário.</li>
+</ul><details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>Em produção a compressão geralmente fica no proxy/CDN (nginx, load balancer), que também oferece <strong>Brotli</strong>, mais eficiente que gzip.</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>No BTP o <strong>approuter</strong> tem configuração de compressão (<code>compression</code> no <code>xs-app.json</code>).</li></ul></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../10%20-%20Se%C3%A7%C3%A3o%208%20-%20Protegendo%20APIs%20-%20Seguran%C3%A7a%20em%20Node.js/04%20-%20Prote%C3%A7%C3%A3o%20de%20Cabe%C3%A7alho%20com%20Helmet.html"><small>← Anterior</small><strong>8.4 - Proteção de Cabeçalho com Helmet</strong></a>
+        <a class="next" id="next-link" href="../10%20-%20Se%C3%A7%C3%A3o%208%20-%20Protegendo%20APIs%20-%20Seguran%C3%A7a%20em%20Node.js/06%20-%20Monitorando%20Logs%20de%20Requisi%C3%A7%C3%B5es%20com%20Morgan.html"><small>Próxima →</small><strong>8.6 - Monitorando Logs de Requisições com Morgan</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "slug": "4476482-3-15-interpretando-erros",
+  "title": "3.15 - Interpretando Erros",
+  "html": "\n        <p>Até agora, aprendemos a tratar erros com middlewares, mas como interpretar esses erros quando eles aparecem no terminal? Muitas vezes, os erros trazem informações importantes que nos ajudam a entender o que está dando errado e como corrigir.</p>\n<p>Neste vídeo, vamos explorar técnicas e dicas que irão te ajudar a identificar o tipo de erro, decifrar as mensagens e agir de forma adequada para resolver os problemas no seu código.</p>\n<div class=\"aspect-h-9 aspect-w-16\"><iframe src=\"https://player.vimeo.com/video/1022293675\" width=\"640\" height=\"360\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen=\"\"></iframe></div>\n      ",
+  "videos": [
+    "https://player.vimeo.com/video/1022293675"
+  ],
+  "extras": []
+}

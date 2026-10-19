@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9.4 - Criando um Dockerfile · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4505300-9-4-criando-um-dockerfile">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 9 - Automatização e Deploy de Aplicações</span><span>·</span><span>Lição 4 de 11</span></div>
+      <h1>9.4 - Criando um Dockerfile</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>4 blocos de código</span>
+        
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>2 OBSs da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Nessa etapa, vamos configurar um Dockerfile para a aplicação <strong>Cookmaster</strong>, possibilitando a criação de uma imagem Docker e facilitando o deploy da aplicação.</p>
+<blockquote>
+<p><strong>Relembrando 🧠:</strong> O <strong>Dockerfile</strong> é um arquivo que contém instruções para criar uma imagem Docker. Nele, definimos os passos necessários para configurar o ambiente e executar a aplicação. Ao seguir essas instruções, o Docker automatiza o processo de criação da imagem.</p>
+</blockquote>
+<h2 id="dockefile">Dockefile</h2>
+<p>Na raiz do projeto Cookmaster, crie um arquivo chamado <code>Dockerfile</code> com o seguinte conteúdo:</p>
+<pre><code class="language-dockerfile">FROM node:20.18-alpine3.19
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY src/ ./src/
+
+EXPOSE 3001
+
+ENTRYPOINT [ "npm", "run" ]
+
+CMD [ "start" ]
+</code></pre>
+
+<h3 id="entendendo-o-dockerfile">Entendendo o Dockerfile</h3>
+<ul>
+<li>
+<p><code>FROM node:20.18-alpine3.19</code>: define a imagem base, neste caso, a oficial do Node.js na versão 20.18, utilizando o Alpine Linux 3.19, uma distribuição Linux leve e otimizada para containers.</p>
+</li>
+<li>
+<p><code>WORKDIR /app</code>: define o diretório de trabalho dentro do container onde os comandos subsequentes serão executados.</p>
+</li>
+<li>
+<p><code>COPY package*.json ./</code>: copia os arquivos <code>package.json</code> e <code>package-lock.json</code> para o diretório de trabalho.</p>
+</li>
+<li>
+<p><code>RUN npm install</code>:  instala as dependências listadas no arquivo <code>package.json</code>.</p>
+</li>
+<li>
+<p><code>COPY src/ ./src/</code>: copia o diretório <code>src</code> (que contém o código da aplicação) para o container.</p>
+</li>
+<li>
+<p><code>EXPOSE 3001</code>: informa ao Docker que o container usará a porta 3001.</p>
+</li>
+<li>
+<p><code>ENTRYPOINT [ "npm", "run" ]</code>: define o comando principal que será executado no container.</p>
+</li>
+<li>
+<p><code>CMD [ "start" ]</code>: especifica o argumento para o comando definido no <code>ENTRYPOINT</code>.</p>
+</li>
+</ul>
+<details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>Imagem base: Node 20 tem fim de suporte em 30/04/2026 → use <code>node:22-alpine</code> ou <code>node:24-alpine</code>.</li><li>Em imagem de produção prefira <code>RUN npm ci --omit=dev</code> (reprodutível e sem devDependencies), rode como usuário sem privilégio (<code>USER node</code>) e tenha um <code>.dockerignore</code> (ex.: <code>node_modules</code>, <code>.env</code>).</li><li>Use <code>docker compose</code> (V2) no lugar de <code>docker-compose</code>.</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>No <strong>Cloud Foundry</strong> um app CAP normalmente não precisa de Dockerfile: <code>cds add mta</code> → <code>mbt build</code> → <code>cf deploy</code>. No <strong>Kyma</strong>, <code>cds add helm</code> prepara os charts e a imagem de container.</li></ul></div></details><h2 id="ajustando-o-docker-compose-yml">Ajustando o docker-compose.yml</h2>
+<p>Para integrar o <code>Dockerfile</code> ao <code>docker-compose.yml</code>, precisamos alterar o serviço <code>node</code>. O novo trecho ficará assim:</p>
+<pre><code class="language-yaml">services:
+  node:
+    container_name: cookmaster_api
+    build: # novas configurações
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    ports:
+      - 3001:3001
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_HOST: mysqldb
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE_NAME: cookmaster_db
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    networks:
+      - backend
+
+  mysqldb:
+  # Restante das configurações
+</code></pre>
+
+<h3 id="explicando-as-mudancas">Explicando as mudanças</h3>
+<ul>
+<li>
+<p><code>build</code>: indica ao Docker Compose que o serviço será construído a partir do Dockerfile localizado no diretório atual (context) e utiliza o arquivo Dockerfile.</p>
+</li>
+<li>
+<p><strong>Remoção de <code>volumes</code> e <code>working_dir</code></strong>: como o código já está embutido na imagem Docker, essas configurações não são mais necessárias.</p>
+</li>
+</ul>
+<h2 id="ajustando-o-package-json">Ajustando o package.json</h2>
+<p>A configuração atual do script <code>start</code> no arquivo <code>package.json</code> utiliza a flag <code>--env-file</code>, que busca um arquivo <code>.env</code>. No entanto, como as variáveis de ambiente serão fornecidas diretamente pelo <code>docker-compose.yml</code>, e futuramente pelo serviço que usaremos para fazer o deploy, vamos modificar o script <code>start</code> para:</p>
+<pre><code class="language-json">{
+  // "name": "cookmaster",
+  // "version": "1.0.0",
+  // "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    // "dev": "nodemon --env-file=.env src/server.js",
+    // "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+  }
+}
+</code></pre>
+
+<h2 id="executando-a-aplicacao">Executando a aplicação</h2>
+<p>Agora, podemos construir a imagem e subir os containers com o comando:</p>
+<pre><code class="language-bash">docker-compose up -d --build
+</code></pre>
+
+<p>Se tudo estiver configurado corretamente, a aplicação Cookmaster estará rodando em um container Docker. Acesse a aplicação pelo endereço <code>http://localhost:3001</code> e verifique se tudo está funcionando corretamente.</p>
+<p>Não será mais necessário executar manualmente os comandos <code>npm start</code> ou <code>npm run dev</code>, pois tudo será gerenciado pelo Docker.</p><details class="obs-ia" id="obs-ia-2"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label obs-ia__label--cicd">CI/CD</p><ul><li>Inclua <code>docker build</code> na CI para garantir que o Dockerfile continua compilando a cada PR, e não descobrir o erro só na hora do deploy.</li><li>Veja <a href="../12%20-%20OBS%20da%20IA%20-%20CI-CD%20-%20o%20m%C3%ADnimo%20para%20deploy%20automatizado/03%20-%20GitHub%20Actions%20-%20o%20primeiro%20pipeline%20de%20CI.html">IA.3 - GitHub Actions</a>.</li></ul></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../11%20-%20Se%C3%A7%C3%A3o%209%20-%20Automatiza%C3%A7%C3%A3o%20e%20Deploy%20de%20Aplica%C3%A7%C3%B5es/03%20-%20Computa%C3%A7%C3%A3o%20em%20Nuvem.html"><small>← Anterior</small><strong>9.3 - Computação em Nuvem</strong></a>
+        <a class="next" id="next-link" href="../11%20-%20Se%C3%A7%C3%A3o%209%20-%20Automatiza%C3%A7%C3%A3o%20e%20Deploy%20de%20Aplica%C3%A7%C3%B5es/05%20-%20Railway.html"><small>Próxima →</small><strong>9.5 - Railway</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

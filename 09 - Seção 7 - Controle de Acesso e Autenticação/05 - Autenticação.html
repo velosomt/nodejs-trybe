@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.5 - Autenticação · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476599-7-5-autenticacao">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 7 - Controle de Acesso e Autenticação</span><span>·</span><span>Lição 5 de 12</span></div>
+      <h1>7.5 - Autenticação</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>8 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>8 blocos de código</span>
+        
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>2 OBSs da IA</a>
+      </div>
+      
+      
+      <div class="content"><!-- Explicar diferença entre Autenticação e Autorização (usar exemplo de acesso a um prédio e as salas de cada prédio) -->
+<p><strong>Autenticar</strong> é um verbo comum no universo do desenvolvimento de software e possui um propósito bem definido. Refletindo sobre o significado da palavra, autenticação é a <strong>validação de que algo é autêntico</strong>, ou seja, a confirmação da veracidade de determinado requisito.</p>
+<p>No mundo do desenvolvimento de sistemas, o conceito é o mesmo. A autenticação garante que, por exemplo, uma pessoa usuária de um software demonstre sua identidade, confirmando que pode acessar determinados recursos ou informações.</p>
+<p>Esse processo está diretamente ligado à <strong>segurança da informação</strong>, já que um dos objetivos é reduzir os riscos de acesso indevido ou vazamento de dados de uma aplicação. Um exemplo prático é o processo de <code>login</code>, em que a pessoa usuária é identificada antes de acessar o sistema.</p>
+<p>Um dos métodos mais utilizados para autenticação é o <strong>JSON Web Token (JWT)</strong>, que funciona como um token de comunicação entre duas partes de um sistema. Ele permite que as informações de autenticação sejam transmitidas com segurança em formato JSON.</p>
+<h2 id="passo-a-passo-do-funcionamento-da-autenticacao-com-o-jwt">Passo a passo do funcionamento da autenticação com o JWT</h2>
+<p>Vamos entender o processo de autenticação utilizando o JWT através de um exemplo simples: um sistema de <em>streaming</em> em que o login é necessário para acessar conteúdos exclusivos.</p>
+<h3 id="1-o-envio-de-credenciais">1. O envio de credenciais</h3>
+<p>Quando a pessoa usuária preenche o formulário de login com seu e-mail e senha e clica no botão para acessar o sistema, uma requisição HTTP é enviada para o servidor. Essa requisição ativa um <code>endpoint</code> da API responsável por autenticar o usuário.</p>
+<p><img alt="passo-a-passo-1" src="../assets/img/5150173c607395.png" loading="lazy"></p>
+<h3 id="2-a-geracao-do-token-jwt">2. A geração do token JWT</h3>
+<p>No servidor, a API verifica as credenciais da pessoa usuária. Se estiverem corretas, a autenticação é realizada com sucesso e um token JWT é gerado. Esse token será devolvido para o cliente, permitindo que ações futuras sejam realizadas com base nessa autenticação.</p>
+<p><img alt="passo-a-passo-2" src="../assets/img/52895a215f9eda.png" loading="lazy"></p>
+<h3 id="3-uso-do-token-nas-requisicoes-subsequentes">3. Uso do token nas requisições subsequentes</h3>
+<p>Com o token JWT em mãos, o cliente pode enviá-lo no header de novas requisições HTTP para acessar funcionalidades restritas da aplicação, como comentar em vídeos ou salvar favoritos. O servidor valida o token recebido antes de executar as operações solicitadas.</p>
+<h2 id="instalacao-do-jwt-no-node-js">Instalação do JWT no Node.js</h2>
+<p>Para trabalhar com <code>JWT</code> em aplicações <code>Node.js</code>, é necessário instalar a biblioteca <code>jsonwebtoken</code>. Para isso, execute o seguinte comando no terminal:</p>
+<pre><code class="language-bash">npm install -E jsonwebtoken@9.0.2
+</code></pre>
+<p>Com isso, você estará pronto para implementar autenticação com JWT em seu projeto.</p>
+<details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li><code>jsonwebtoken</code> ainda é muito usado; a alternativa moderna é <strong><code>jose</code></strong> (sem dependências, ESM, Web Crypto, funciona em Node/Deno/edge).</li><li>Ao verificar, fixe o algoritmo: <code>jwt.verify(token, secret, { algorithms: ['HS256'] })</code>.</li></ul><p class="obs-ia__label obs-ia__label--warn">Atenção</p><ul><li><code>process.env.JWT_SECRET || 'secret'</code>: se a variável faltar, a API assina tokens com um segredo público. Em produção, aborte a inicialização quando o segredo não estiver definido.</li></ul></div></details><h2 id="geracao-de-token">Geração de Token</h2>
+<p>Voltando à nossa API Cookmaster, vamos implementar a geração de token JWT. Assumindo que a API já possui a funcionalidade de login implementada, ajustaremos o código para que ele retorne um token JWT sempre que o login for bem-sucedido.</p>
+<p><img alt="esboco-auth" src="../assets/img/5bbf5b8f145c34.png" loading="lazy"></p>
+<h3 id="1-criando-a-funcao-de-geracao-de-tokens">1. Criando a função de geração de tokens</h3>
+<p>Criaremos um arquivo chamado <code>src/utils/manager.JWT.js</code> para centralizar a lógica de geração de tokens:</p>
+<pre><code class="language-javascript">// src/utils/manager.JWT.js
+
+const jwt = require('jsonwebtoken');
+
+const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+
+const jwtConfig = {
+  expiresIn: '1d', // O token expira em 1 dia
+  algorithm: 'HS256', // Algoritmo de assinatura
+};
+
+const createToken = (payload) =&gt; {
+  const token = jwt.sign(payload, JWT_SECRET, jwtConfig);
+  return token;
+};
+
+module.exports = {
+  createToken,
+};
+</code></pre>
+<h4>Explicação do código</h4>
+<ol>
+<li><code>JWT_SECRET</code>: Define uma chave secreta para assinar o token. Essa chave é fundamental para garantir que o token seja validado corretamente.</li>
+<li><code>jwtConfig</code>: Configurações do token, como o tempo de expiração (<code>expiresIn</code>) e o algoritmo de assinatura (<code>HS256</code>).</li>
+<li><code>createToken</code>: Recebe os dados da pessoa usuária (como id e e-mail) e gera um token JWT assinado.</li>
+</ol>
+<h3 id="2-modificando-o-service">2. Modificando o Service</h3>
+<p>No arquivo <code>src/service/user.service.js</code>, faremos alterações para que o serviço de login e cadastro retorne o token JWT:</p>
+<pre><code class="language-javascript">// src/service/user.service.js
+
+// const bcrypt = require('bcryptjs');
+
+// const userModel = require('../model/user.model');
+const { createToken } = require('../utils/manager.JWT');
+
+// Outras Implementações
+
+// const createUser = async (user) =&gt; {
+//   const salt = bcrypt.genSaltSync(10);
+//   const hashedPassword = bcrypt.hashSync(user.password, salt);
+
+//   const newUserWithBcrypt = { ...user, password: hashedPassword };
+//   const newUser = await userModel.create(newUserWithBcrypt);
+
+  const { password: _, ...userWithoutPassword } = newUser;
+  const token = createToken(userWithoutPassword);
+
+  return token;
+// };
+
+// Outras Implementações
+
+// const findUserByEmail = async ({ email, password }) =&gt; {
+//   const user = await userModel.findByEmail(email);
+
+//   if (!user) return { error: 'Invalid fields' };
+
+//   const isPasswordValid = bcrypt.compareSync(password, user.password);
+
+//   if (!isPasswordValid) return { error: 'Invalid fields' };
+
+  const { id, name, role } = user;
+  const token = createToken({ id, name, email, role });
+
+  return token;
+// };
+
+// Outras Implementações
+</code></pre>
+<p>Em ambas as funções, <code>createUser</code> e <code>findUserByEmail</code>, o token é gerado a partir dos dados da pessoa usuária (exceto a senha) e retornado como resposta da função.</p>
+<h3 id="3-modificando-o-controller">3. Modificando o Controller</h3>
+<p>No arquivo <code>src/controller/user.controller.js</code>, ajustamos o método de cadastro para retornar o token:</p>
+<pre><code class="language-javascript">// src/controller/user.controller.js
+
+// Outras Implementações
+
+// const createUser = async (req, res) =&gt; {
+  const user = req.body;
+  const token = await userService.createUser(user);
+
+  return res.status(201).json({ token });
+// };
+
+// Outras Implementações
+</code></pre>
+<p>e também o arquivo de <code>src/controller/auth.controller.js</code> para que ele consiga retornar o token</p>
+<pre><code class="language-javascript">// src/controller/auth.controller.js
+
+// const login = async (req, res) =&gt; {
+//   const { email, password } = req.body;
+  const token = await userService.findUserByEmail({ email, password });
+
+  if (token.error) {
+    return res.status(400).json({ error: token.error });
+  }
+
+  return res.status(201).json({ token });
+// };
+</code></pre>
+<p>Com essas alterações, ao realizar o <strong>login</strong> ou o <strong>cadastro</strong>, um token JWT será gerado e retornado para o cliente, permitindo acesso a recursos restritos.</p>
+<h2 id="autenticacao-com-jwt">Autenticação com JWT</h2>
+<p>Além de gerar tokens JWT para autenticar usuários, precisamos garantir que o sistema valide esses tokens em cada requisição protegida. Essa validação assegura que apenas usuários autenticados possam acessar determinadas rotas ou recursos.</p>
+<p>A melhor forma de implementar essa validação é utilizando um middleware, que intercepta as requisições protegidas e verifica se o token fornecido é válido. Se for, a requisição continua; caso contrário, ela é bloqueada.</p>
+<h3 id="1-criando-a-funcao-de-verificacao-de-token">1. Criando a função de verificação de token</h3>
+<p>Vamos adicionar a lógica de validação de tokens no arquivo <code>src/utils/manager.JWT.js</code>, centralizando todas as operações relacionadas ao JWT:</p>
+<pre><code class="language-javascript">// src/utils/manager.JWT.js
+
+// const jwt = require('jsonwebtoken');
+
+// const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+
+// const jwtConfig = {
+//   expiresIn: '1d',
+//   algorithm: 'HS256',
+// };
+
+// const createToken = (payload) =&gt; {
+//   const token = jwt.sign(payload, JWT_SECRET, jwtConfig);
+//   return token;
+// };
+
+const verifyToken = (token) =&gt; {
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    return decoded;
+  } catch (error) {
+    return null; // Retorna null caso o token seja inválido ou expirado
+  }
+};
+
+// module.exports = {
+//   createToken,
+  verifyToken,
+// };
+</code></pre>
+<h4>Explicação do código</h4>
+<p><code>verifyToken</code>: Recebe um token JWT e verifica sua validade.
+- Utiliza a função <code>jwt.verify</code> para verificar a validade do token.
+- Retorna os dados decodificados caso o token seja válido.
+- Caso o token seja inválido, será gerado um erro e a função retornará <code>null</code>.</p>
+<h3 id="2-criando-o-middleware-de-autenticacao">2. Criando o middleware de autenticação</h3>
+<p>Agora, criaremos um middleware que utiliza a função <code>verifyToken</code> para autenticar as requisições protegidas. Vamos adicioná-lo em um arquivo chamado <code>src/middleware/auth.middleware.js</code>:</p>
+<pre><code class="language-javascript">// src/middleware/auth.middleware.js
+
+const { verifyToken } = require('../utils/manager.JWT');
+
+const authenticateToken = (req, res, next) =&gt; {
+  const bearerToken = req.headers.authorization; // Token deve ser enviado no cabeçalho da requisição no formato bearer
+
+  if (!token) return res.status(401).json({ error: 'Token Not Found!' });
+
+  const token = bearerToken.split(' ')[1];
+
+  if (!token) return res.status(401).json({ error: 'Token Not Found!' });
+
+  const decoded = verifyToken(token);
+
+  if (!decoded) {
+    return res.status(401).json({ error: 'Invalid or expired token' });
+  }
+
+  req.user = decoded; // Adiciona os dados do usuário decodificados no objeto req
+  return next();
+};
+
+module.exports = authenticateToken;
+</code></pre>
+<h4>Explicação do código</h4>
+<ol>
+<li>O middleware busca o token no cabeçalho <code>Authorization</code>.</li>
+<li>Caso o token não seja encontrado, retorna uma resposta <code>401 - Unauthorized</code>.</li>
+<li>Se o token for inválido ou expirado, retorna uma resposta com mensagem de erro.</li>
+<li>Caso seja válido, adiciona os dados do usuário no objeto <code>req</code> e permite que a requisição continue.</li>
+</ol>
+<details class="obs-ia" id="obs-ia-2"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label obs-ia__label--warn">Atenção</p><ul><li>No middleware mostrado, a linha <code>if (!token)</code> aparece <strong>antes</strong> de <code>const token = ...</code> — isso gera <code>ReferenceError</code>. A primeira verificação deveria ser <code>if (!bearerToken)</code>.</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>No CAP não há middleware de JWT manual. Declare no CDS: <code>@requires: 'authenticated-user'</code> no serviço/entidade. Em desenvolvimento use <code>cds.requires.auth.kind: 'mocked'</code> (usuários de teste no <code>package.json</code>); em produção <code>xsuaa</code> ou <code>ias</code>. O usuário logado fica em <code>req.user</code> (<code>req.user.id</code>, <code>req.user.is('admin')</code>).</li></ul></div></details><h3 id="3-protegendo-rotas-com-o-middleware">3. Protegendo rotas com o middleware</h3>
+<p>Para usar o middleware, basta aplicá-lo nas rotas que exigem autenticação. Vamos proteger uma rota de exemplo no arquivo <code>src/routes/recipes.routes.js</code>:</p>
+<pre><code class="language-javascript">// src/routes/recipes.routes.js
+
+// const express = require('express');
+
+// const recipeController = require('../controller/recipe.controller');
+// const validateRecipe = require('../middlewares/validate.recipe');
+const authenticateToken = require('../middlewares/auth.middleware');
+
+// const router = express.Router();
+
+// router.get('/', recipeController.findAllRecipes);
+// router.get('/:id', recipeController.findRecipeById);
+
+router.post('/',
+  authenticateToken,
+  validateRecipe.validateCreateRecipe,
+  recipeController.createRecipe);
+
+router.put('/:id',
+  authenticateToken,
+  validateRecipe.validateUpdateRecipe,
+  recipeController.updateRecipe);
+
+router.delete('/:id', authenticateToken, recipeController.deleteRecipe);
+
+// module.exports = router;
+</code></pre>
+<h4>Explicação das alterações:</h4>
+<ul>
+<li>As rotas que utilizam os métodos POST, PUT e DELETE exigem autenticação e utilizam o middleware authenticateToken para validar o token antes de acessar o controlador.</li>
+<li>Já as rotas <code>GET</code> permanecem públicas, não exigindo autenticação.</li>
+</ul>
+<p>Com essas modificações, a API agora está equipada para autenticar usuários com JWT, proteger rotas de <code>recipes</code> e validar tokens. Esse fluxo completo garante segurança e praticidade para as requisições autenticadas!</p>
+<p>Agora, vamos fixar os conceitos aprendidos com o vídeo a seguir:</p></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../09%20-%20Se%C3%A7%C3%A3o%207%20-%20Controle%20de%20Acesso%20e%20Autentica%C3%A7%C3%A3o/04%20-%20Introdu%C3%A7%C3%A3o%20ao%20JWT.html"><small>← Anterior</small><strong>7.4 - Introdução ao JWT</strong></a>
+        <a class="next" id="next-link" href="../09%20-%20Se%C3%A7%C3%A3o%207%20-%20Controle%20de%20Acesso%20e%20Autentica%C3%A7%C3%A3o/06%20-%20Autoriza%C3%A7%C3%A3o.html"><small>Próxima →</small><strong>7.6 - Autorização</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

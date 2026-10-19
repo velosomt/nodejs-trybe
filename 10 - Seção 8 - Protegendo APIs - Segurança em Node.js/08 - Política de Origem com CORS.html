@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8.8 - Política de Origem com CORS · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476623-8-8-politica-de-origem-com-cors">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 8 - Protegendo APIs: Segurança em Node.js</span><span>·</span><span>Lição 8 de 12</span></div>
+      <h1>8.8 - Política de Origem com CORS</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>3 blocos de código</span>
+        
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><!-- Vídeo trazendo o problema -->
+
+<p>O <a href="https://developer.mozilla.org/pt-BR/docs/Glossary/CORS" target="_blank" rel="noopener noreferrer" class="external">CORS (Cross-Origin Resource Sharing)</a> é um mecanismo que controla como os recursos de uma aplicação web podem ser acessados por origens diferentes daquela em que o servidor está hospedado. Configurar o CORS corretamente é essencial para garantir a segurança e funcionalidade de APIs modernas, como a Cookmaster API, especialmente quando há consumo de recursos de diferentes domínios.</p>
+<h2 id="o-que-e-o-cors">O que é o CORS?</h2>
+<p>Por padrão, navegadores bloqueiam requisições feitas por uma aplicação que não esteja hospedada no mesmo domínio, protocolo ou porta do servidor. Esse bloqueio é uma medida de segurança conhecida como <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="noopener noreferrer" class="external">Same-Origin Policy</a>.</p>
+<p>O <strong>CORS</strong> permite que o servidor especifique quais origens externas têm permissão para acessar os recursos, flexibilizando a política de mesma origem sem comprometer a segurança.</p>
+<h2 id="principais-beneficios">Principais Benefícios</h2>
+<ol>
+<li>
+<p><strong>Permitir integrações</strong>: APIs frequentemente precisam ser consumidas por diferentes front-ends ou aplicativos, hospedados em domínios distintos.</p>
+</li>
+<li>
+<p><strong>Evitar erros no cliente</strong>: Sem o CORS configurado, navegadores rejeitarão requisições, exibindo erros como "<em>Access to fetch at... has been blocked by CORS policy</em>".</p>
+</li>
+<li>
+<p><strong>Manter controle de acesso</strong>: Configurações de CORS permitem especificar quem pode acessar os recursos e de que maneira.</p>
+</li>
+</ol>
+<h2 id="configurando-o-cors-na-api-cookmaster">Configurando o CORS na API Cookmaster</h2>
+<p>Para configurar o CORS na Cookmaster API, utilizaremos o middleware <a href="https://www.npmjs.com/package/cors" target="_blank" rel="noopener noreferrer" class="external">cors</a>, que simplifica o processo de configuração.</p>
+<p>Primeiro, instale o pacote <code>cors</code> na sua aplicação com o seguinte comando:</p>
+<pre><code class="language-bash">npm install -E cors@2.8.5
+</code></pre>
+
+<p>Em seguida, adicione o middleware ao arquivo <code>src/app.js</code>:</p>
+<pre><code class="language-javascript">// src/app.js
+
+const cors = require('cors');
+// Outras Importações
+
+app.use(cors());
+
+// Outras Configurações e Rotas
+</code></pre>
+
+<p>Essa configuração básica permite que qualquer cliente acesse os recursos da API. É útil para <code>desenvolvimento</code>, mas <code>não é recomendada para produção</code> devido à falta de restrição.</p>
+<h2 id="personalizando-o-cors">Personalizando o CORS</h2>
+<p>Para maior segurança, você pode especificar quais origens têm permissão para acessar os recursos:</p>
+<pre><code class="language-javascript">const corsOptions = {
+  origin: ['https://myfrontend.com', 'https://admin.myfrontend.com'], // Apenas essas origens podem acessar
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
+  credentials: true, // Permite envio de cookies e credenciais
+};
+
+app.use(cors(corsOptions));
+</code></pre>
+
+<p><strong>O que analisar</strong>:</p>
+<ul>
+<li>
+<p><code>origin</code>: Define quais domínios têm permissão para acessar os recursos.</p>
+</li>
+<li>
+<p><code>'*'</code> permite todas as origens (não recomendado em produção).</p>
+</li>
+<li>
+<p>Uma lista específica, como no exemplo, restringe o acesso.</p>
+</li>
+<li>
+<p><code>methods</code>: Limita os métodos HTTP permitidos, como GET, POST, etc.</p>
+</li>
+<li>
+<p><code>allowedHeaders</code>: Especifica quais cabeçalhos são aceitos nas requisições, como Authorization para tokens JWT.</p>
+</li>
+<li>
+<p><code>credentials</code>: Permite que cookies ou credenciais sejam enviados junto às requisições.</p>
+</li>
+</ul>
+<h2 id="boas-praticas-ao-configurar-o-cors">Boas Práticas ao Configurar o CORS</h2>
+<ul>
+<li>
+<p><strong>Restringer origens em produção</strong>: Permita apenas os domínios que realmente precisam acessar a API.</p>
+</li>
+<li>
+<p><strong>Evitar '*' em credenciais</strong>: Ao usar <code>credentials: true</code>, o origin deve ser específico e não um caractere curinga.</p>
+</li>
+<li>
+<p><strong>Documentar as permissões</strong>: Certifique-se de documentar claramente as origens e métodos permitidos para facilitar manutenção.</p>
+</li>
+</ul><details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>Em apps SAP Fiori no BTP o <strong>approuter</strong> serve a UI e encaminha as chamadas para o CAP na mesma origem, então normalmente <strong>não é preciso CORS</strong>. Se precisar (ex.: front separado), adicione o <code>cors</code> via <code>cds.on('bootstrap')</code>.</li></ul></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../10%20-%20Se%C3%A7%C3%A3o%208%20-%20Protegendo%20APIs%20-%20Seguran%C3%A7a%20em%20Node.js/07%20-%20Limitando%20o%20Tamanho%20do%20Corpo%20das%20Requisi%C3%A7%C3%B5es.html"><small>← Anterior</small><strong>8.7 - Limitando o Tamanho do Corpo das Requisições</strong></a>
+        <a class="next" id="next-link" href="../10%20-%20Se%C3%A7%C3%A3o%208%20-%20Protegendo%20APIs%20-%20Seguran%C3%A7a%20em%20Node.js/09%20-%20Documenta%C3%A7%C3%A3o%20com%20Swagger.html"><small>Próxima →</small><strong>8.9 - Documentação com Swagger</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+{
+  "slug": "4499407-proximos-passos",
+  "href": "/200838-back-end-em-node-js/4499407-proximos-passos/quiz_attempts/3518317/review",
+  "title": "[Banco de Dados] Próximos passos - Quiz",
+  "intro": "",
+  "questions": [
+    {
+      "prompt": "\n          <p>Considerando uma tabela Funcionarios com as colunas ID, Nome, Salario e ID_Departamento, e uma tabela Departamentos com as colunas ID_Departamento e Nome_Departamento, qual das seguintes consultas retorna todos os funcionários junto com o nome de seu departamento, incluindo os funcionários que não estão associados a nenhum departamento?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>SELECT * FROM Funcionarios LEFT JOIN Departamentos ON Funcionarios.ID = Departamentos.ID_Departamento</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>SELECT * FROM Funcionarios RIGHT JOIN Departamentos ON Funcionarios.ID = Departamentos.ID_Departamento</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>SELECT * FROM Funcionarios INNER JOIN Departamentos ON Funcionarios.ID_Departamento = Departamentos.ID_Departamento</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>SELECT * FROM Funcionarios LEFT JOIN Departamentos ON Funcionarios.ID_Departamento = Departamentos.ID_Departamento</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "E",
+          "html": "<p>SELECT * FROM Funcionarios FULL JOIN Departamentos ON Funcionarios.ID_Departamento = Departamentos.ID_Departamento</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Considerando uma tabela Funcionarios com as colunas ID, Nome, Salario e ID_Departamento, e uma tabela Departamentos com as colunas ID_Departamento e Nome_Departamento, qual das seguintes consultas retorna todos os funcionários junto com o nome de seu departamento, incluindo os funcionários que não estão associados a nenhum departamento?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>SELECT * FROM Funcionarios LEFT JOIN Departamentos ON Funcionarios.ID = Departamentos.ID_Departamento</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>SELECT * FROM Funcionarios RIGHT JOIN Departamentos ON Funcionarios.ID = Departamentos.ID_Departamento</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>SELECT * FROM Funcionarios INNER JOIN Departamentos ON Funcionarios.ID_Departamento = Departamentos.ID_Departamento</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>SELECT * FROM Funcionarios LEFT JOIN Departamentos ON Funcionarios.ID_Departamento = Departamentos.ID_Departamento</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>SELECT * FROM Funcionarios FULL JOIN Departamentos ON Funcionarios.ID_Departamento = Departamentos.ID_Departamento</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Você tem duas tabelas, Clientes e Pedidos, onde Pedidos.ClienteID é uma chave estrangeira que referencia Clientes.ClienteID. Qual seria o resultado de uma consulta SQL que usa INNER JOIN entre essas tabelas, mas não possui nenhum registro correspondente em Pedidos para um cliente específico?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>O cliente aparecerá com valores nulos para os campos de Pedidos.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>O cliente será exibido sem nenhuma informação dos pedidos.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Todos os pedidos serão exibidos, mesmo sem cliente correspondente.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>A consulta falhará devido à falta de correspondência.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>O cliente não será exibido na consulta.</p>\n",
+          "cls": "question-response question-response--correct"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Você tem duas tabelas, Clientes e Pedidos, onde Pedidos.ClienteID é uma chave estrangeira que referencia Clientes.ClienteID. Qual seria o resultado de uma consulta SQL que usa INNER JOIN entre essas tabelas, mas não possui nenhum registro correspondente em Pedidos para um cliente específico?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>O cliente aparecerá com valores nulos para os campos de Pedidos.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>O cliente será exibido sem nenhuma informação dos pedidos.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Todos os pedidos serão exibidos, mesmo sem cliente correspondente.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>A consulta falhará devido à falta de correspondência.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>O cliente não será exibido na consulta.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual consulta SQL corretamente retorna os três maiores salários de uma tabela Funcionarios, ordenados em ordem decrescente, excluindo empates de salário?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>SELECT DISTINCT Salario FROM Funcionarios ORDER BY Salario DESC LIMIT 3</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "B",
+          "html": "<p>SELECT Salario FROM Funcionarios ORDER BY Salario DESC LIMIT 3</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>SELECT TOP 3 Salario FROM Funcionarios WHERE DISTINCT ORDER BY Salario DESC</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>SELECT TOP 3 Salario FROM Funcionarios WHERE DISTINCT ORDER BY Salario ASC</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>SELECT Salario FROM Funcionarios GROUP BY Salario LIMIT 3</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual consulta SQL corretamente retorna os três maiores salários de uma tabela Funcionarios, ordenados em ordem decrescente, excluindo empates de salário?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>SELECT DISTINCT Salario FROM Funcionarios ORDER BY Salario DESC LIMIT 3</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>SELECT Salario FROM Funcionarios ORDER BY Salario DESC LIMIT 3</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>SELECT TOP 3 Salario FROM Funcionarios WHERE DISTINCT ORDER BY Salario DESC</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>SELECT TOP 3 Salario FROM Funcionarios WHERE DISTINCT ORDER BY Salario ASC</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>SELECT Salario FROM Funcionarios GROUP BY Salario LIMIT 3</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual das alternativas descreve corretamente o uso da cláusula LIKE em uma consulta SQL?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>A cláusula LIKE é usada para realizar comparações exatas de texto em colunas de uma tabela.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>A cláusula LIKE é usada para verificar se um valor está dentro de um intervalo de valores numéricos.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>A cláusula LIKE só pode ser usada em conjunto com a função COUNT.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>A cláusula LIKE permite filtrar resultados que correspondem a um padrão específico, utilizando curingas como % e _</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "E",
+          "html": "<p>A cláusula LIKE é usada exclusivamente para comparar valores nulos em uma tabela.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual das alternativas descreve corretamente o uso da cláusula LIKE em uma consulta SQL?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>A cláusula LIKE é usada para realizar comparações exatas de texto em colunas de uma tabela.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>A cláusula LIKE é usada para verificar se um valor está dentro de um intervalo de valores numéricos.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>A cláusula LIKE só pode ser usada em conjunto com a função COUNT.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>A cláusula LIKE permite filtrar resultados que correspondem a um padrão específico, utilizando curingas como % e _</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>A cláusula LIKE é usada exclusivamente para comparar valores nulos em uma tabela.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Você deseja selecionar registros de uma tabela Produtos onde o preço está entre R$ 100 e R$ 500. Qual das opções a seguir representa uma possível cláusula WHERE correta?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>WHERE Preco BETWEEN 100 AND 500</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "B",
+          "html": "<p>WHERE Preco LIKE 100 AND 500</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>WHERE Preco &gt;= 100 AND &lt;= 500</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>WHERE Preco IN (100, 500)</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>WHERE Preco IN RANGE (100, 500)</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Você deseja selecionar registros de uma tabela Produtos onde o preço está entre R$ 100 e R$ 500. Qual das opções a seguir representa uma possível cláusula WHERE correta?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Preco BETWEEN 100 AND 500</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Preco LIKE 100 AND 500</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Preco &gt;= 100 AND &lt;= 500</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Preco IN (100, 500)</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Preco IN RANGE (100, 500)</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Você está trabalhando com uma tabela Funcionarios e deseja selecionar todos os funcionários cujo departamento seja 'Vendas', 'Marketing' ou 'RH'. Qual das consultas a seguir representa uma possível cláusula WHERE correta?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>WHERE Departamento BETWEEN 'Vendas' AND 'RH'</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>WHERE Departamento LIKE 'Vendas, Marketing, RH'</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>WHERE Departamento = 'Vendas' OR 'Marketing' OR 'RH'</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>WHERE Departamento EXISTS ('Vendas', 'Marketing', 'RH')</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>WHERE Departamento IN ('Vendas', 'Marketing', 'RH')</p>\n",
+          "cls": "question-response question-response--correct"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Você está trabalhando com uma tabela Funcionarios e deseja selecionar todos os funcionários cujo departamento seja 'Vendas', 'Marketing' ou 'RH'. Qual das consultas a seguir representa uma possível cláusula WHERE correta?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Departamento BETWEEN 'Vendas' AND 'RH'</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Departamento LIKE 'Vendas, Marketing, RH'</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Departamento = 'Vendas' OR 'Marketing' OR 'RH'</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Departamento EXISTS ('Vendas', 'Marketing', 'RH')</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Departamento IN ('Vendas', 'Marketing', 'RH')</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual comando SQL você utilizaria para remover colunas de uma tabela existente?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>DELETE COLUMN</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>ALTER TABLE ... DROP COLUMN</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "C",
+          "html": "<p>REMOVE COLUMN</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>UPDATE TABLE ... REMOVE COLUMN</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>DROP TABLE</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual comando SQL você utilizaria para remover colunas de uma tabela existente?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>DELETE COLUMN</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>ALTER TABLE ... DROP COLUMN</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>REMOVE COLUMN</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>UPDATE TABLE ... REMOVE COLUMN</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>DROP TABLE</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual das seguintes consultas retorna todos os registros onde a terceira letra do nome do cliente é a letra 'b' e termina com qualquer sequência de caracteres?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>WHERE Nome IN ('b%')</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>WHERE Nome LIKE '%b'</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>WHERE Nome LIKE '___b%'</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "D",
+          "html": "<p>WHERE Nome LIKE '___b'</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>WHERE Nome IN ('%b%')</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual das seguintes consultas retorna todos os registros onde a terceira letra do nome do cliente é a letra 'b' e termina com qualquer sequência de caracteres?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Nome IN ('b%')</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Nome LIKE '%b'</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Nome LIKE '___b%'</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Nome LIKE '___b'</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>WHERE Nome IN ('%b%')</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual das alternativas a seguir define corretamente o conceito de uma chave primária em um banco de dados relacional?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>É um campo que pode ter valores duplicados e serve para identificar registros unicamente.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>É um campo ou conjunto de campos que identifica de forma única cada registro em uma tabela e não pode conter valores nulos ou duplicados.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "C",
+          "html": "<p>É um campo usado para estabelecer relações entre diferentes tabelas, sem restrição de valores duplicados.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>É um campo que armazena dados em formato binário e sempre possui um índice associado.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>É um campo obrigatório em todas as tabelas e pode ser compartilhado por várias colunas.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual das alternativas a seguir define corretamente o conceito de uma chave primária em um banco de dados relacional?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>É um campo que pode ter valores duplicados e serve para identificar registros unicamente.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>É um campo ou conjunto de campos que identifica de forma única cada registro em uma tabela e não pode conter valores nulos ou duplicados.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>É um campo usado para estabelecer relações entre diferentes tabelas, sem restrição de valores duplicados.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>É um campo que armazena dados em formato binário e sempre possui um índice associado.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>É um campo obrigatório em todas as tabelas e pode ser compartilhado por várias colunas.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual das seguintes afirmações é verdadeira sobre chaves estrangeiras em bancos de dados relacionais?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Uma chave estrangeira é sempre composta por múltiplas colunas.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>Chaves estrangeiras podem conter valores nulos e não precisam fazer referência a uma chave primária de outra tabela.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>A chave estrangeira é usada para criar relacionamentos entre tabelas, referenciando uma chave primária em outra tabela.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Uma chave estrangeira deve ser única em sua tabela, assim como uma chave primária.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Chaves estrangeiras são usadas apenas para garantir que valores de colunas sejam exclusivos.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual das seguintes afirmações é verdadeira sobre chaves estrangeiras em bancos de dados relacionais?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Uma chave estrangeira é sempre composta por múltiplas colunas.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>Chaves estrangeiras podem conter valores nulos e não precisam fazer referência a uma chave primária de outra tabela.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>A chave estrangeira é usada para criar relacionamentos entre tabelas, referenciando uma chave primária em outra tabela.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Uma chave estrangeira deve ser única em sua tabela, assim como uma chave primária.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Chaves estrangeiras são usadas apenas para garantir que valores de colunas sejam exclusivos.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    }
+  ]
+}

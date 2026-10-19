@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.8 - Utilizando Módulos externos · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4207914-2-8-utilizando-modulos-externos">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 2 - Introdução ao Node.js</span><span>·</span><span>Lição 8 de 11</span></div>
+      <h1>2.8 - Utilizando Módulos externos</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>4 blocos de código</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>1 vídeo</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"/></svg>Quiz com 8 questões</span>
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p dir="auto">
+    Para utilizarmos um módulo externo no&nbsp;<code>Node.js</code>, você deverá instalá-lo na sua aplicação. Hoje, vamos usar como exemplo o pacote&nbsp;<a href="https://www.npmjs.com/package/readline-sync" target="_blank" rel="noopener noreferrer" class="external">readline-sync</a>, que nos permitirá interagir com nossa aplicação diretamente pelo terminal.
+</p>
+<p dir="auto">
+    Primeiro, crie uma pasta e inicie um novo projeto Node nessa pasta com o comando&nbsp;<code>npm init -y</code>. Em seguida, para instalar o pacote&nbsp;<code>readline-sync</code>, execute o comando:
+</p>
+<pre><code>npm i --save-exact readline-sync@1.4.10</code></pre>
+<p dir="auto">
+    Este comando irá instalar o pacote e adicionar a dependência&nbsp;<code>readline-sync</code>&nbsp;ao seu arquivo&nbsp;<code>package.json</code>.
+</p>
+<blockquote>
+    <p dir="auto">
+        <strong>De olho na dica 👀:</strong>&nbsp;A letra&nbsp;<code>i</code>&nbsp;no comando acima é um atalho para&nbsp;<code>install</code>.
+    </p>
+</blockquote>
+<p dir="auto">
+    Agora, crie um arquivo&nbsp;<code>index.js</code>&nbsp;e configure o comando&nbsp;<code>start</code>&nbsp;nos scripts do&nbsp;<code>package.json</code>&nbsp;para executar o comando&nbsp;<code>node index.js</code>. Pronto! Agora podemos usar o pacote&nbsp;<code>readline-sync</code>&nbsp;em nossa aplicação.
+</p>
+<h2 dir="auto" id="lendo-input-no-terminal">
+    Lendo input no terminal
+</h2>
+<p dir="auto">
+    Para começar a usar o pacote, precisamos importá-lo, conforme o exemplo abaixo:
+</p>
+<pre><code>const readline = require('readline-sync');</code></pre>
+<p dir="auto">
+    Perceba que, apesar do pacote chamar-se&nbsp;<code>readline-sync</code>, podemos dar qualquer nome para a&nbsp;<code>const</code>&nbsp;que usamos para importá-lo.
+</p>
+<p dir="auto">
+    Agora que temos o pacote disponível, podemos usar as funções&nbsp;<code>question</code>&nbsp;e&nbsp;<code>questionInt</code>&nbsp;para solicitar à pessoa usuária seu nome e idade:
+</p>
+<pre><code>// const readline = require('readline-sync');
+const name = readline.question('Qual seu nome? ');
+const age = readline.questionInt('Qual sua idade? ');</code></pre>
+<p dir="auto">
+    A função&nbsp;<code>question</code>&nbsp;interpreta a resposta como uma string comum, enquanto a função&nbsp;<code>questionInt</code>&nbsp;converte a resposta para número utilizando o&nbsp;<code>parseInt</code>&nbsp;e gera um erro caso a pessoa tente inserir algo que não seja um número válido.
+</p>
+<p dir="auto">
+    Agora o último passo é utilizarmos essas novas variáveis para compor nossa mensagem de olá. Vamos lá:
+</p>
+<pre><code>// const readline = require('readline-sync');
+// const name = readline.question('Qual seu nome? ');
+// const age = readline.questionInt('Qual sua idade? ');
+console.log(`Olá, ${name}! Você tem ${age} anos!`);</code></pre>
+<p dir="auto">
+    Se executarmos o script&nbsp;<code>npm start</code>&nbsp;poderemos ver o resultado da ação!
+</p>
+<p dir="auto">
+    Caso tenha curiosidade, explore outros recursos do&nbsp;<a href="https://www.npmjs.com/package/readline-sync" target="_blank" rel="noopener noreferrer" class="external">readline-sync</a>.
+</p>
+<figure><div class="embed-content"><a class="video-card" href="https://player.vimeo.com/video/1022269540" target="_blank" rel="noopener noreferrer"><span class="video-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span><strong>Vídeo da aula</strong><small>Abrir no Vimeo (requer internet)</small></span></a></div></figure>
+<p dir="auto">
+    Agora é hora de praticar! Siga para o quiz e valide o seu conhecimento sobre o conteúdo aprendido durante a seção.
+</p><details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li><code>readline-sync</code> está sem atualizações há anos. O Node tem nativamente <code>node:readline/promises</code>: <code>const rl = readline.createInterface({ input: process.stdin, output: process.stdout }); const nome = await rl.question('Qual seu nome? ');</code> — sem dependência externa.</li><li>O conceito de dependências (<code>dependencies</code> x <code>devDependencies</code>, <code>--save-exact</code>) continua igual e é essencial para o CAP.</li></ul></div></details></div>
+      <section class="quiz" data-known="true">
+    <div class="quiz__head"><h2><svg width="22" height="22" style="vertical-align:-4px;margin-right:6px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"/></svg>Quiz</h2><div><span class="quiz__score"></span> <button type="button" class="btn quiz__reset" style="margin-left:8px;padding:6px 12px">Refazer</button></div></div>
+    <p class="quiz__hint">Clique em uma alternativa para conferir. O gabarito e as explicações aparecem na hora.</p>
+    <ol class="quiz__list"><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Qual das opções abaixo descreve corretamente o NPM (Node Package Manager)?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>O NPM realiza o gerenciamento de módulos e também de processos do sistema.</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">B</span><span><p>O NPM é o gerenciador de pacotes padrão para projetos Node.js.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>O NPM é uma ferramenta para compilar aplicativos Node.js em binários executáveis.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>O NPM gerencia pacotes e também controla o desempenho de aplicações Node.js em produção.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>O NPM permite gerenciar apenas pacotes relacionados a frontend no Node.js.</p></span></button></div>
+      <div class="quiz-q__explanation" hidden><ul>
+        <li><strong>A)</strong>Alternativa incorreta. O NPM não gerencia processos, apenas pacotes.</li>
+<li><strong>B)</strong>Alternativa correta! </li>
+<li><strong>C)</strong>Alternativa incorreta. O NPM gerencia pacotes, não compila binários.</li>
+<li><strong>D)</strong>Alternativa incorreta. O NPM gerencia pacotes, mas o controle de desempenho requer outras ferramentas.</li>
+<li><strong>E)</strong>Alternativa incorreta. O NPM pode gerenciar pacotes tanto para frontend quanto para backend.</li>
+  </ul></div>
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Node.js é ___________________.</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>uma linguagem de programação para desenvolver aplicações back-end.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>um banco de dados para JavaScript.</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">C</span><span><p>um ambiente de execução de JavaScript no lado do servidor.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>um framework para criar interfaces gráficas.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>um sistema de controle de versão.</p></span></button></div>
+      <div class="quiz-q__explanation" hidden><ul>
+        <li><strong>A)</strong>Alternativa incorreta. Node.js não é uma linguagem de programação, é um runtime.</li>
+<li><strong>B)</strong>Alternativa incorreta. Node.js não é um banco de dados, ele é utilizado para executar JavaScript no servidor.</li>
+<li><strong>C)</strong>Alternativa correta! Node.js é um runtime que permite executar JavaScript fora do navegador.</li>
+<li><strong>D)</strong>Alternativa incorreta. Node.js não é usado para criar interfaces gráficas, mas sim para construir aplicações server-side.</li>
+<li><strong>E)</strong>Alternativa incorreta. Node.js não tem relação com controle de versão, isso é feito por ferramentas como Git.</li>
+  </ul></div>
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Sobre o sistema de módulos no Node.js, leia as afirmações abaixo:</p>
+<p>I - O sistema de módulos no Node.js permite a reutilização de código em diferentes partes da aplicação.</p>
+<p>II - O método require é utilizado para importar módulos em um arquivo Node.js.</p>
+<p>III - O sistema de módulos do Node.js segue o padrão utilizado pelo navegador para carregar scripts de forma automática.</p>
+<p>Quais dessas afirmativas estão corretas?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>I, III.</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">B</span><span><p>I, II.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>II, III.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>I, II, III.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>Apenas II.</p></span></button></div>
+      <div class="quiz-q__explanation" hidden><ul>
+        <li><strong>A)</strong>Alternativa incorreta. O Node.js não segue o padrão de carregamento automático de scripts utilizado no navegador.</li>
+<li><strong>B)</strong>Alternativa correta!</li>
+<li><strong>C)</strong>Alternativa incorreta. A afirmativa III está incorreta, já que o Node.js utiliza um sistema de módulos próprio e não o do navegador.</li>
+<li><strong>D)</strong>Alternativa incorreta. Apenas as afirmativas I e II estão corretas.</li>
+<li><strong>E)</strong>Alternativa incorreta. Embora a afirmativa II esteja correta, a afirmativa I também está.</li>
+  </ul></div>
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Como um módulo local pode ser exportado e importado em Node.js, por padrão?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>Usando import e export.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>Usando define e include.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>Usando global.exports e global.import.</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">D</span><span><p>Usando module.exports para exportar e require() para importar.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>Usando o objeto exports diretamente, sem precisar de require.</p></span></button></div>
+      <div class="quiz-q__explanation" hidden><ul>
+        <li><strong>A)</strong>Alternativa incorreta. Essas sintaxes são do padrão ESModules e requerem configuração especial no Node.js.</li>
+<li><strong>B)</strong>Alternativa incorreta. Esses métodos não são o padrão do Node.js.</li>
+<li><strong>C)</strong>Alternativa incorreta. Não existe global.exports ou global.import no Node.js.</li>
+<li><strong>D)</strong>Alternativa correta! </li>
+<li><strong>E)</strong>Alternativa incorreta. O objeto exports pode ser utilizado para exportar, mas require ainda é necessário para importar.</li>
+  </ul></div>
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Observe o código abaixo:</p>
+<p>const fs = require('fs');</p>
+<p>const nomeDoArquivo = 'meu-arquivo.txt';</p>
+<p>const data = fs.readFileSync(nomeDoArquivo, 'utf8');<br>
+console.log(data);</p>
+<p>Qual é a funcionalidade do módulo fs utilizado no código acima?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>O módulo fs é responsável por gerenciar processos no sistema operacional.</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">B</span><span><p>O módulo fs permite interagir com o sistema de arquivos, realizando operações como leitura e escrita de arquivos.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>O módulo fs é responsável pela comunicação em rede no Node.js.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>O módulo fs pode ser utilizado para manipular a memória do sistema.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>O módulo fs permite interagir com APIs externas.</p></span></button></div>
+      <div class="quiz-q__explanation" hidden><ul>
+        <li><strong>A)</strong>Alternativa incorreta. A responsabilidade do fs é manipular arquivos, e não processos.</li>
+<li><strong>B)</strong>Alternativa correta! </li>
+<li><strong>C)</strong>Alternativa incorreta. A comunicação em rede é tratada por módulos como http e net.</li>
+<li><strong>D)</strong>Alternativa incorreta. O fs manipula arquivos no disco, não a memória diretamente.</li>
+<li><strong>E)</strong>Alternativa incorreta. O fs não interage com APIs externas; ele trabalha com o sistema de arquivos local.</li>
+  </ul></div>
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>O que acontece ao combinar os módulos fs e path para manipular arquivos no Node.js?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>O módulo fs lida com banco de dados e o módulo path realiza autenticação de usuários.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>O módulo path é responsável por mover arquivos, enquanto o fs apenas realiza cópias.</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">C</span><span><p>O módulo fs pode ser usado para ler e escrever arquivos, enquanto o módulo path auxilia na manipulação de caminhos de arquivo.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>O módulo fs é usado para criar e excluir diretórios, enquanto o path manipula URLs.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>O módulo path substitui o fs em operações de leitura de arquivos quando combinado.</p></span></button></div>
+      <div class="quiz-q__explanation" hidden><ul>
+        <li><strong>A)</strong>Alternativa incorreta. O fs não interage com bancos de dados, e o path manipula caminhos, não usuários.</li>
+<li><strong>B)</strong>Alternativa incorreta. O fs manipula arquivos, enquanto o path apenas lida com caminhos.</li>
+<li><strong>C)</strong>Alternativa correta! </li>
+<li><strong>D)</strong>Alternativa incorreta. Embora o fs crie diretórios, o path não manipula URLs diretamente, mas caminhos de arquivo.</li>
+<li><strong>E)</strong>Alternativa incorreta. O path não substitui o fs; ambos têm funções diferentes.</li>
+  </ul></div>
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Qual das opções a seguir descreve corretamente a utilização de módulos externos no Node.js?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">A</span><span><p>Módulos externos podem ser instalados usando o NPM e são listados no arquivo package.json do projeto.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>Módulos externos são sempre carregados automaticamente pelo Node.js sem precisar de instalação.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>Todos os módulos externos são instalados diretamente no núcleo do Node.js sem necessidade de configuração adicional.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>Módulos externos no Node.js devem ser sempre importados usando import ao invés de require.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>Módulos externos precisam ser carregados manualmente no terminal sempre que o servidor é iniciado.</p></span></button></div>
+      <div class="quiz-q__explanation" hidden><ul>
+        <li><strong>A)</strong>Alternativa correta!</li>
+<li><strong>B)</strong>Alternativa incorreta. Módulos externos precisam ser instalados via NPM.</li>
+<li><strong>C)</strong>Alternativa incorreta. Os módulos são instalados no diretório do projeto, não no núcleo do Node.js.</li>
+<li><strong>D)</strong>Alternativa incorreta. Embora o import seja possível, o require é amplamente utilizado no CommonJS.</li>
+<li><strong>E)</strong>Alternativa incorreta. Os módulos instalados via NPM são carregados automaticamente pelo código.</li>
+  </ul></div>
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>O que acontece quando o código abaixo é executado no Node.js?</p>
+<p>const fs = require('fs').promises;</p>
+<p>async function main() {<br>
+try {<br>
+await fs.writeFile('./meu-arquivo.txt', 'Meu textão');<br>
+console.log('Arquivo escrito com sucesso!');<br>
+} catch (err) {<br>
+console.error(<code>Erro ao escrever o arquivo: ${err.message}</code>);<br>
+}<br>
+}</p>
+<p>Assinale a alternativa correta.</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>Um erro é gerado porque a função writeFile não suporta async/await.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>O código falha porque require('fs').promises não é uma sintaxe válida.</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">C</span><span><p>O arquivo "meu-arquivo.txt" é criado ou sobrescrito com o texto "Meu textão".</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>Um erro será lançado porque o caminho do arquivo precisa ser absoluto.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>A função writeFile sempre cria um novo arquivo e nunca sobrescreve um existente.</p></span></button></div>
+      <div class="quiz-q__explanation" hidden><ul>
+        <li><strong>A)</strong>Alternativa incorreta. fs.promises.writeFile é compatível com async/await.</li>
+<li><strong>B)</strong>Alternativa incorreta. Essa é uma sintaxe válida para trabalhar com o sistema de arquivos de forma assíncrona.</li>
+<li><strong>C)</strong>Alternativa correta! A função writeFile cria ou sobrescreve o arquivo especificado com o conteúdo fornecido.</li>
+<li><strong>D)</strong>Alternativa incorreta. O Node.js suporta caminhos relativos como o especificado.</li>
+<li><strong>E)</strong>Alternativa incorreta. A função sobrescreve arquivos, se já existirem.</li>
+  </ul></div>
+    </li></ol>
+  </section>
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../03%20-%20Se%C3%A7%C3%A3o%202%20-%20Introdu%C3%A7%C3%A3o%20ao%20Node.js/07%20-%20NPM.html"><small>← Anterior</small><strong>2.7 - NPM</strong></a>
+        <a class="next" id="next-link" href="../03%20-%20Se%C3%A7%C3%A3o%202%20-%20Introdu%C3%A7%C3%A3o%20ao%20Node.js/09%20-%20Para%20n%C3%A3o%20esquecer%20mais.html"><small>Próxima →</small><strong>2.9 - Para não esquecer mais</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+{
+  "slug": "4476589-6-17-projeto-terceira-fase-quiz",
+  "href": "/200838-back-end-em-node-js/4476589-6-17-projeto-terceira-fase-quiz/quiz_attempts/3518318/review",
+  "title": "🚧 6.17 - Projeto - terceira fase - Quiz",
+  "intro": "",
+  "questions": [
+    {
+      "prompt": "\n          <p>Considere as seguintes afirmativas sobre os testes automatizados da API:</p>\n<p>I. Um teste de integração deve fazer uma requisição à API e verificar se a resposta contém os dados esperados.<br>\nII. Nos testes unitários da Model, é necessário se conectar a um banco de dados real.<br>\nIII. Um teste unitário da Service pode simular a Model para evitar dependências diretas do banco de dados.<br>\nIV. Um teste deve garantir que a API retorna um status 201 ao criar um novo recurso, como um produto ou pedido.<br>\nV. Se um teste de integração falhar, é sempre um problema no banco de dados.</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Apenas I, III e IV são verdadeiras</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "B",
+          "html": "<p>Apenas II e V são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Apenas I, II e V são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Apenas III, IV e V são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Todas as afirmativas são verdadeiras.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Considere as seguintes afirmativas sobre os testes automatizados da API:</p>\n<p>I. Um teste de integração deve fazer uma requisição à API e verificar se a resposta contém os dados esperados.<br>\nII. Nos testes unitários da Model, é necessário se conectar a um banco de dados real.<br>\nIII. Um teste unitário da Service pode simular a Model para evitar dependências diretas do banco de dados.<br>\nIV. Um teste deve garantir que a API retorna um status 201 ao criar um novo recurso, como um produto ou pedido.<br>\nV. Se um teste de integração falhar, é sempre um problema no banco de dados.</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas I, III e IV são verdadeiras</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas II e V são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas I, II e V são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas III, IV e V são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Todas as afirmativas são verdadeiras.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Na API, a criação de um produto (POST /products) deve validar os dados antes de inseri-los no banco. Qual das seguintes regras foi exigida no projeto?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>O campo price pode ser qualquer número, inclusive negativo.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>O name pode ser nulo, pois o banco gerará um nome padrão.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Nenhuma validação foi exigida para os produtos.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>O quantity deve ser um número inteiro positivo.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "E",
+          "html": "<p>O name pode ter qualquer tamanho, incluindo uma string vazia.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Na API, a criação de um produto (POST /products) deve validar os dados antes de inseri-los no banco. Qual das seguintes regras foi exigida no projeto?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>O campo price pode ser qualquer número, inclusive negativo.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>O name pode ser nulo, pois o banco gerará um nome padrão.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Nenhuma validação foi exigida para os produtos.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>O quantity deve ser um número inteiro positivo.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>O name pode ter qualquer tamanho, incluindo uma string vazia.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>A camada Service de pedidos (orders) possui uma regra de negócio que impede a criação de um pedido em determinada situação. Qual é essa situação?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Quando o usuário já tem um pedido pendente.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>Quando um pedido contém produtos de categorias diferentes.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Quando não há estoque suficiente para todos os produtos do pedido.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Quando o total do pedido é valor negativo.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Quando o usuário não tem pelo menos três produtos no pedido.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>A camada Service de pedidos (orders) possui uma regra de negócio que impede a criação de um pedido em determinada situação. Qual é essa situação?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Quando o usuário já tem um pedido pendente.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>Quando um pedido contém produtos de categorias diferentes.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Quando não há estoque suficiente para todos os produtos do pedido.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Quando o total do pedido é valor negativo.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Quando o usuário não tem pelo menos três produtos no pedido.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Considere as seguintes afirmações sobre a camada Service e suas regras de negócio:</p>\n<p>I. A camada Service é responsável por validar o estoque antes de criar um pedido.<br>\nII. A camada Controller deve aplicar a lógica de negócio antes de chamar a camada Service.<br>\nIII. A camada Service deve chamar diretamente o banco de dados, sem passar pela Model.<br>\nIV. A camada Service pode lançar erros e a Controller deve capturá-los para retornar respostas adequadas.<br>\nV. Se um pedido for criado com sucesso, a Service deve retornar um objeto contendo as informações do pedido.</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Apenas II, III e IV são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>Apenas I, II e V são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Apenas I, IV e V são verdadeiras.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Apenas III e IV são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Todas as afirmações são verdadeiras.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Considere as seguintes afirmações sobre a camada Service e suas regras de negócio:</p>\n<p>I. A camada Service é responsável por validar o estoque antes de criar um pedido.<br>\nII. A camada Controller deve aplicar a lógica de negócio antes de chamar a camada Service.<br>\nIII. A camada Service deve chamar diretamente o banco de dados, sem passar pela Model.<br>\nIV. A camada Service pode lançar erros e a Controller deve capturá-los para retornar respostas adequadas.<br>\nV. Se um pedido for criado com sucesso, a Service deve retornar um objeto contendo as informações do pedido.</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas II, III e IV são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas I, II e V são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas I, IV e V são verdadeiras.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas III e IV são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Todas as afirmações são verdadeiras.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Após cadastrar um novo produto (POST /products), qual é o formato mais adequado da resposta esperada da API?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>{ \"message\": \"Produto cadastrado com sucesso!\" }</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>{ \"id\": 1, \"name\": \"Notebook\", \"price\": 2500.00, \"quantity\": 10 }</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "C",
+          "html": "<p>{ \"success\": true, \"product\": { \"id\": 1, \"name\": \"Notebook\" } }</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>{ \"productId\": 1, \"status\": \"created\" }</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>{ \"error\": \"Produto criado com erro!\" }</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Após cadastrar um novo produto (POST /products), qual é o formato mais adequado da resposta esperada da API?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>{ \"message\": \"Produto cadastrado com sucesso!\" }</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>{ \"id\": 1, \"name\": \"Notebook\", \"price\": 2500.00, \"quantity\": 10 }</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>{ \"success\": true, \"product\": { \"id\": 1, \"name\": \"Notebook\" } }</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>{ \"productId\": 1, \"status\": \"created\" }</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>{ \"error\": \"Produto criado com erro!\" }</p>\n</span>\n</div>        </div>\n\n      </div>"
+    }
+  ]
+}

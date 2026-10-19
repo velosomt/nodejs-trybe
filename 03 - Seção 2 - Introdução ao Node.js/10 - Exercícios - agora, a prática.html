@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.10 - Exercícios - agora, a prática · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4207922-2-10-exercicios-agora-a-pratica">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 2 - Introdução ao Node.js</span><span>·</span><span>Lição 10 de 11</span></div>
+      <h1>2.10 - Exercícios - agora, a prática</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>7 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>10 blocos de código</span>
+        
+        
+        
+      </div>
+      
+      
+      <div class="content"><h2 dir="auto" id="exercicio-1">
+    Exercício 1
+</h2>
+<p dir="auto">
+    Crie um código para calcular o índice de massa corporal(IMC) de uma pessoa.
+</p>
+<blockquote>
+    <p dir="auto">
+        OBS: a sigla IMC, traduzida para o inglês, equivale a BMI(Body Mass Index). Vamos adotar este padrão nos códigos para começarmos a nos acostumar com o formato que aparecerá no mercado de trabalho!
+    </p>
+</blockquote>
+<ul dir="auto">
+    <li>A fórmula para calcular o IMC é:<img src="../assets/img/7e404ba6cc1121.png" alt="Fórmula do IMC" loading="lazy">
+        <ul dir="auto">
+            <li><strong>Obs:</strong>&nbsp;Lembre-se que a altura é em metros, caso deseje usar em centímetros a conversão para metros será necessária.</li>
+        </ul></li>
+    <li>Comece criando um novo pacote Node com&nbsp;<code>npm init</code>&nbsp;e respondendo às perguntas do&nbsp;<code>npm</code>.
+        <ul dir="auto">
+            <li>Escolha um nome para o seu pacote e adicione o seu nome na opção&nbsp;<code>author</code>.</li>
+        </ul></li>
+    <li>Armazene o código no arquivo&nbsp;<code>bmi.js</code>.</li>
+    <li>Adicione duas constantes com valores fixos para&nbsp;<code>weight</code>&nbsp;e&nbsp;<code>height</code>.</li>
+    <li>Agora, crie o restante da lógica para fazer o cálculo do IMC. Pode criar o cálculo dentro ou fora do escopo de funções.</li>
+</ul>
+<p>
+    <b>Solução</b>
+</p>
+<ul dir="auto">
+    <li>Criar uma nova pasta para conter os scripts do dia. Escolha o nome que preferir.</li>
+    <li>Dentro da nova pasta, criar um novo pacote Node.js com o seguinte comando:</li>
+</ul>
+<pre><code>npm init</code></pre>
+<ul dir="auto">
+    <li>Quando aparecer o campo para digitar&nbsp;<code>package name</code>, digite&nbsp;<code>my-scripts</code>.</li>
+    <li>Pressione&nbsp;<code>enter</code>&nbsp;até a pergunta&nbsp;<code>author</code>&nbsp;e digite seu nome neste campo.</li>
+    <li>Pressione&nbsp;<code>enter</code>&nbsp;para todas as demais perguntas.</li>
+    <li>Crie o arquivo&nbsp;<code>bmi.js</code>&nbsp;e implemente uma lógica:</li>
+</ul>
+<pre><code>const weightInKg = 80; // Você pode utilizar o valor que desejar aqui
+const heightInCm = 178; // Você pode utilizar o valor que desejar aqui
+function handleBMI(weight, height) {
+  console.log(`Weight: ${weight}, Height: ${height}`);
+  const heightInMeters = height / 100; // conversão para metros
+  const heightSquared = heightInMeters ** 2;
+  const bmi = weight / heightSquared;
+  return bmi;
+}
+// A função main é o ponto de partida do nosso programa
+function main() {
+  const bmi = handleBMI(weightInKg, heightInCm);
+  console.log(`BMI: ${bmi.toFixed(2)}`);
+}
+main();</code></pre>
+<ul dir="auto">
+    <li>Execute o script utilizando&nbsp;<code>node bmi.js</code>&nbsp;e certifique-se de que os valores retornados estão corretos. Você pode utilizar&nbsp;<a href="https://www.programasaudefacil.com.br/calculadora-de-imc" target="_blank" rel="noopener noreferrer" class="external">esta calculadora</a>&nbsp;para validar o resultado.</li>
+</ul>
+<h2 dir="auto" id="exercicio-2">
+    Exercício 2
+</h2>
+<p dir="auto">
+    Agora, permita que o código seja executado através do comando&nbsp;<code>npm run bmi</code>.
+</p>
+<ul dir="auto">
+    <li>O novo código criado deve conter o comando que chama o&nbsp;<code>node</code>&nbsp;para executar o arquivo&nbsp;<code>bmi.js</code>.</li>
+</ul>
+<p>
+    <b>Solução</b>
+</p>
+<ul dir="auto">
+    <li>Edite o arquivo&nbsp;<code>package.json</code>&nbsp;para adicionar o novo script com a chave&nbsp;<code>bmi</code>&nbsp;e valor&nbsp;<code>node bmi.js</code>:</li>
+</ul>
+<pre><code>{
+  // ...
+  "scripts": {
+    // ...
+    "bmi": "node bmi.js"
+  }
+  // ...
+}</code></pre>
+<ul dir="auto">
+    <li>Execute o script através do comando&nbsp;<code>npm run bmi</code>&nbsp;e confira se o código é executado.</li>
+</ul>
+<h2 dir="auto" id="exercicio-3">
+    Exercício 3
+</h2>
+<p dir="auto">
+    Chegou a hora de tornar nosso código mais interativo! Vamos adicionar inputs de entrada para quem usar.
+</p>
+<ul dir="auto">
+    <li>Edite o código para que os valores de&nbsp;<code>weight</code>&nbsp;e&nbsp;<code>height</code>&nbsp;sejam informados pela pessoa ao responder as perguntas: "What's your weight?" e "What's your height?", deve-se utilizar o pacote&nbsp;<code>readline-sync</code>.</li>
+</ul>
+<p>
+    <b>Solução</b>
+</p>
+<ul dir="auto">
+    <li>Instale o pacote&nbsp;<code>readline-sync</code>:</li>
+</ul>
+<pre><code>npm i --save-exact readline-sync@1.4.10</code></pre>
+<ul dir="auto">
+    <li>Importe o&nbsp;<code>readline-sync</code>&nbsp;no arquivo&nbsp;<code>bmi.js</code>&nbsp;e substitua os valores das variáveis&nbsp;<code>weight</code>&nbsp;e&nbsp;<code>height</code>&nbsp;por perguntas à pessoa que executou o script. Utilizaremos o método&nbsp;<code>questionInt</code>&nbsp;do pacote&nbsp;<code>readline-sync</code>:</li>
+</ul>
+<pre><code>const readline = require('readline-sync');
+// function handleBMI(weight, height) {
+//   console.log(`Weight: ${weight}, Height: ${height}`);
+//   const heightInMeters = height / 100;
+//   const heightSquared = heightInMeters ** 2;
+//   const bmi = (weight / heightSquared);
+//   return bmi;
+// }
+// function main() {
+   const weight = readline.questionInt('What\'s your weight? (kg) ');
+   const height = readline.questionInt('What\'s your height? (cm) ');
+   const bmi = handleBMI(weight, height);
+//   console.log(`BMI: ${bmi.toFixed(2)}`);
+// }
+// main();</code></pre>
+<ul dir="auto">
+    <li>Após a implementação do código, execute o comando&nbsp;<code>npm run bmi</code>&nbsp;e insira os valores de peso e altura. É esperado que a aplicação retorne o IMC.</li>
+</ul>
+<h2 dir="auto" id="exercicio-4">
+    Exercício 4
+</h2>
+<p dir="auto">
+    Agora temos um problema, o&nbsp;<code>peso</code>&nbsp;não é um número inteiro! Isso quer dizer que precisamos mudar um pouco a forma como solicitamos o input deste dado.
+</p>
+<ul dir="auto">
+    <li>O pacote&nbsp;<code>readline-sync</code>&nbsp;possui uma função específica para tratar esses casos. Consulte a&nbsp;<a href="https://www.npmjs.com/package/readline-sync#utility-methods" target="_blank" rel="noopener noreferrer" class="external">documentação</a>&nbsp;do pacote e encontre a função adequada para realizar input de valores&nbsp;<strong>float</strong>.</li>
+    <li>Encontrou a função? Show! Agora utilize-a para solicitar o input de&nbsp;<code>weight</code>.</li>
+    <li>Lembre-se de passar o valor de&nbsp;<code>weight</code>&nbsp;utilizando o formato com ponto, ao invés de vírgula para casas decimais. Ex:&nbsp;<code>78.5</code>;</li>
+</ul>
+<p>
+    <b>Solução</b>
+</p>
+<ul dir="auto">
+    <li>Encontre, na documentação do&nbsp;<code>readline-sync</code>, a função&nbsp;<code>questionFloat</code>;</li>
+    <li>Altere o código da função&nbsp;<code>main</code>&nbsp;para que em vez de&nbsp;<code>questionInt</code>, passe a utilizar a função&nbsp;<code>questionFloat</code>&nbsp;ao solicitar o peso da pessoa:</li>
+</ul>
+<pre><code>// const readline = require('readline-sync');
+// function handleBMI(weight, height) {
+//   console.log(`Weight: ${weight}, Height: ${height}`);
+//   const heightInMeters = height / 100;
+//   const heightSquared = heightInMeters ** 2;
+//   const bmi = (weight / heightSquared);
+//   return bmi;
+// }
+// function main() {
+  const weight = readline.questionFloat('What\'s your weight? (kg) ');
+//   const height = readline.questionInt('What\'s your height? (cm) ');
+//   const bmi = handleBMI(weight, height);
+//   console.log(`BMI: ${imc.toFixed(2)}`);
+// }
+// main();</code></pre>
+<ul dir="auto">
+    <li>Após a implementação do código, execute o comando&nbsp;<code>npm run bmi</code>&nbsp;e insira os mesmos valores anteriores, só que agora adicione números decimais para o peso. É esperado que a aplicação retorne um IMC diferente do exercício anterior.</li>
+</ul>
+<h2 dir="auto" id="exercicio-5">
+    Exercício 5
+</h2>
+<p dir="auto">
+    Vamos sofisticar um pouco mais nosso exercício. Além de imprimir o IMC na tela, imprima também em qual categoria da tabela abaixo aquele IMC se enquadra:
+</p>
+<ul dir="auto">
+    <li>Considere a seguinte tabela para classificar a situação do IMC:IMC<br>Situação<br><br><br>Abaixo de 18,5<br>Abaixo do peso (magreza)<br><br>Entre 18,5 e 24,9<br>Peso normal<br><br>Entre 25,0 e 29,9<br>Acima do peso (sobrepeso)<br><br>Entre 30,0 e 34,9<br>Obesidade grau I<br><br>Entre 35,0 e 39,9<br>Obesidade grau II<br><br>40,0 e acima<br>Obesidade graus III e IV</li>
+</ul>
+<p>
+    <b>Solução</b>
+</p>
+<ul dir="auto">
+    <li>Aqui nós temos a opção de fazer uma série de verificações com&nbsp;<code>if</code>, para saber em que situação se encontra o IMC calculado. Porém, a utilização de muitos&nbsp;<code>if</code>s pode aumentar bastante a complexidade ciclomática do código. Sendo assim, resolveremos de outra maneira. Mas, a título de exemplo, a solução com&nbsp;<code>if</code>&nbsp;seria a inclusão de um código como esse:</li>
+</ul>
+<pre><code>// ...
+// Considerando que nesse trecho temos o valor do IMC na variável "imc"
+    if (bmi &lt; 18.5) {
+      console.log('Status: Underweight (thin)');
+      return;
+    }
+    if (bmi &gt;= 18.5 &amp;&amp; bmi &lt; 25) {
+      console.log('Status: Normal weight');
+      return;
+    }
+    if (bmi &gt;= 25 &amp;&amp; bmi &lt; 30) {
+      console.log('Status: Overweight');
+      return;
+    }
+    if (bmi &gt;= 30 &amp;&amp; bmi &lt; 35) {
+      console.log('Status: Grade I obesity');
+      return;
+    }
+    if (bmi &gt;= 35 &amp;&amp; bmi &lt; 40) {
+      console.log('Status: Grade II obesity');
+      return;
+    }
+    console.log('Status: Obesity grades III and IV');
+// ...</code></pre>
+<ul dir="auto">
+    <li>Para evitarmos essa quantidade de verificações, podemos primeiramente mapear, em um objeto, os IMCs máximos e mínimos de cada situação.</li>
+</ul>
+<pre><code>// ...
+// function handleBMI(weight, height) {
+//   ...
+// }
+const BMI_MAX_AND_MIN = {
+  'Underweight': {
+    minBMI: 0,
+    maxBMI: 18.4,
+  },
+  'Normal Weight': {
+    minBMI: 18.5,
+    maxBMI: 24.9,
+  },
+  'Overweight': {
+    minBMI: 25,
+    maxBMI: 29.9,
+  },
+  'Obese Class I': {
+    minBMI: 30.0,
+    maxBMI: 34.9,
+  },
+  'Obese Class II': {
+    minBMI: 35,
+    maxBMI: 39.9,
+  },
+  'Obese Class III': {
+    minBMI: 40,
+    maxBMI: 100, // Um valor default máximo qualquer, impossível de alcançar no imc.
+  },
+};
+// function main() {
+//   ...
+// }</code></pre>
+<ul dir="auto">
+    <li>Agora que temos as relações entre as situações e os IMCs máximos/mínimos mapeadas, podemos verificar para cada chave (situação) do objeto&nbsp;<code>BMI_MAX_AND_MIN</code>, onde o IMC calculado se encontra. Para isto, vamos criar uma função chamada&nbsp;<code>handleBMIResult</code>, na qual primeiramente extrairemos as chaves do objeto&nbsp;<code>BMI_MAX_AND_MIN</code>. Em seguida, iremos iterar no array em que as as chaves são listadas e utilizar o&nbsp;<code>find</code>&nbsp;para encontrar a situação cujo intervalo compreenda o IMC Calculado.</li>
+</ul>
+<pre><code>// const BMI_MAX_AND_MIN = {
+// ...
+// }
+function handleBMIResult(bmi) {
+  const statuses = Object.keys(BMI_MAX_AND_MIN); // ['Underweight', 'Normal Weight', 'Overweight'...]
+  const resultFind = statuses.find((status) =&gt; {
+    const { maxBMI, minBMI } = BMI_MAX_AND_MIN[status]; // acessamos as informações do intervalo da situação iterada
+    // caso esteja dentro do intervalo, significa que encontramos a situação apropriada
+    return bmi &gt;= minBMI &amp;&amp; bmi &lt;= maxBMI;
+  });
+  return resultFind;
+}
+// function main() {
+// ...
+// }</code></pre>
+<ul dir="auto">
+    <li>Para finalizar, executaremos a&nbsp;<code>handleBMIResult</code>&nbsp;e mostraremos o seu resultado na função&nbsp;<code>main</code>, no console.</li>
+</ul>
+<pre><code>// ...
+// function main() {
+//   const weight = readline.questionFloat('What\'s your weight? (kg) ');
+//   const height = readline.questionInt('What\'s your height? (cm) ');
+//   const bmi = handleBMI(weight, height);
+   const bmiResult = handleBMIResult(bmi);
+//   console.log(`BMI: ${bmi.toFixed(2)}`);
+  console.log(bmiResult);
+// }
+// main();</code></pre></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../03%20-%20Se%C3%A7%C3%A3o%202%20-%20Introdu%C3%A7%C3%A3o%20ao%20Node.js/09%20-%20Para%20n%C3%A3o%20esquecer%20mais.html"><small>← Anterior</small><strong>2.9 - Para não esquecer mais</strong></a>
+        <a class="next" id="next-link" href="../03%20-%20Se%C3%A7%C3%A3o%202%20-%20Introdu%C3%A7%C3%A3o%20ao%20Node.js/11%20-%20Refer%C3%AAncias%20e%20recursos%20adicionais%20(opcional).html"><small>Próxima →</small><strong>2.11 - Referências e recursos adicionais (opcional)</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

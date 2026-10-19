@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.11 - Para não esquecer mais · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476423-4-11-para-nao-esquecer-mais">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 4 - Testes da Aplicação</span><span>·</span><span>Lição 11 de 13</span></div>
+      <h1>4.11 - Para não esquecer mais</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min de leitura</span>
+        
+        
+        
+        
+      </div>
+      
+      
+      <div class="content"><h2 id="testes-automatizados">Testes automatizados</h2>
+<p>Nos testes automatizados, criamos um script que define as funções, pré-condições, casos de teste e os resultados esperados. Ao ser executado, esse script faz todo o trabalho de rodar os testes, comparar os resultados obtidos com os esperados, e gerar um relatório.</p>
+<p>O maior benefício dos testes automatizados é a eficiência: tarefas repetitivas e demoradas podem ser automatizadas, liberando o tempo das pessoas para se concentrarem em atividades de maior valor, como o <a href="https://www.atlassian.com/br/continuous-delivery/software-testing/exploratory-testing#:~:text=Testes%20explorat%C3%B3rios%20%C3%A9%20a%20abordagem,no%20escopo%20de%20outros%20testes" target="_blank" rel="noopener noreferrer" class="external">teste exploratório</a>, que requer interpretação e julgamento humanos.</p>
+<h2 id="tipos-de-teste">Tipos de teste</h2>
+<p>Os testes podem ser classificados de acordo com o <strong>escopo</strong> e o nível de <strong>interação</strong>:</p>
+<ol>
+<li>
+<p><code>Testes Unitários</code>: Testam uma unidade isolada do código, geralmente uma função ou método, sem interações externas. São rápidos e precisos, ajudando a garantir que cada parte do código funcione conforme o esperado de forma individual.</p>
+</li>
+<li>
+<p><code>Testes de Integração</code>: Verificam se várias unidades ou componentes do sistema funcionam juntos corretamente. Aqui, o foco está nas interações entre diferentes partes da aplicação, como módulos, APIs ou banco de dados.</p>
+</li>
+<li>
+<p><code>Testes de Ponta-a-ponta (End-to-End; E2E)</code>: Simulam o fluxo completo de uso de uma aplicação, cobrindo desde a interface do usuário até o banco de dados e tudo o que acontece entre eles. São os mais abrangentes, porém mais lentos, pois dependem da integração de todos os sistemas envolvidos.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Relembrando 🧠:</strong> Nenhum teste é mais importante que o outro: uma boa combinação de testes unitários, de integração e E2E é o que vai garantir a qualidade e confiabilidade do seu código.</p>
+</blockquote>
+<h2 id="assertion-assercao">Assertion (Asserção)</h2>
+<p>Para testar corretamente uma função, precisamos executar a função com os inputs desejados e, em seguida, verificar se a saída é a esperada. Essa validação é chamada de assertion, ou "asserção" em português, e base dos testes automatizados, pois garante que o código esteja funcionando como previsto.</p>
+<h2 id="contratos-de-apis">Contratos de APIs</h2>
+<p>Os contratos de APIs definem como uma API deve se comportar em diferentes cenários. Eles especificam:</p>
+<ul>
+<li>Estrutura de Requisição: Quais dados devem ser enviados, o formato e as validações necessárias.</li>
+<li>Método HTTP: Determina se a requisição será feita via GET, POST, PUT, DELETE, etc.</li>
+<li>Status Code: Define os códigos de status que indicam o sucesso ou falha da requisição (ex.: 200, 404, 500).</li>
+<li>Estrutura de Resposta: Define o formato e os dados esperados na resposta da API.</li>
+</ul>
+<p>Testar contratos de API é crucial para garantir que a comunicação entre serviços esteja de acordo com o que foi definido e que mudanças no código não quebrem essa integração.</p>
+<h2 id="cenarios-de-teste">Cenários de Teste</h2>
+<p>Os cenários de teste descrevem as situações em que o código será testado. Um bom cenário de teste cobre tanto os casos positivos (quando tudo funciona como esperado) quanto os casos negativos (quando algo dá errado ou parâmetros inválidos são fornecidos). A ideia é antecipar diferentes comportamentos e garantir que o código lide bem com todos eles.</p>
+<p>Exemplos de Cenários de Teste:</p>
+<ul>
+<li>Testar uma função com inputs válidos e verificar a resposta correta.</li>
+<li>Testar uma função com inputs inválidos e garantir que ela retorna um erro ou trata a situação de forma adequada.</li>
+<li>Verificar se uma API retorna o status code esperado em uma situação de sucesso ou erro.</li>
+</ul>
+<h2 id="jest">Jest</h2>
+<p>O Jest é uma das ferramentas de testes automatizados mais populares para JavaScript e Node.js. Ele oferece um ambiente completo para criar e rodar testes de unidade, integração e até mesmo de ponta a ponta. Entre suas principais funcionalidades estão:</p>
+<ul>
+<li><em><code>Matchers</code></em>: Ferramentas que permitem comparar resultados e validar asserções.</li>
+<li><code>Cobertura de Código (Coverage)</code>: Gera relatórios que mostram quais partes do código foram cobertas pelos testes.</li>
+</ul>
+<h2 id="supertest">Supertest</h2>
+<p>O Supertest é uma biblioteca que permite testar APIs de forma eficiente, simulando requisições HTTP e verificando as respostas. É ideal para escrever testes de integração, garantindo que os endpoints da API funcionem conforme o esperado.</p>
+<h2 id="para-onde-vamos">Para onde vamos?</h2>
+<p>Na próxima lição, você terá a oportunidade de colocar em prática tudo o que aprendeu até agora, desenvolvendo um projeto real. Siga para a próxima lição e descubra todos os detalhes sobre o projeto!</p></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../06%20-%20Se%C3%A7%C3%A3o%204%20-%20Testes%20da%20Aplica%C3%A7%C3%A3o/10%20-%20Configura%C3%A7%C3%B5es%20do%20Jest.html"><small>← Anterior</small><strong>4.10 - Configurações do Jest</strong></a>
+        <a class="next" id="next-link" href="../06%20-%20Se%C3%A7%C3%A3o%204%20-%20Testes%20da%20Aplica%C3%A7%C3%A3o/12%20-%20Projeto%20-%20Talker%20Manager.html"><small>Próxima →</small><strong>4.12 - Projeto - Talker Manager</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

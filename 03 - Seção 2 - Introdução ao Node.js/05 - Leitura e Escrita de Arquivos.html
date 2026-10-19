@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.5 - Leitura e Escrita de Arquivos · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4207905-2-5-leitura-e-escrita-de-arquivos">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 2 - Introdução ao Node.js</span><span>·</span><span>Lição 5 de 11</span></div>
+      <h1>2.5 - Leitura e Escrita de Arquivos</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>4 blocos de código</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>1 vídeo</span>
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p dir="auto">
+    A leitura e escrita de arquivos são operações comuns em back-end, sendo úteis para:
+</p>
+<ul dir="auto">
+    <li>Armazenar logs da sua aplicação;</li>
+    <li>Ler arquivos de configuração para ações específicas;</li>
+    <li>Exportar dados em um arquivo&nbsp;<a href="https://support.google.com/google-ads/answer/9004364?hl=pt-BR" target="_blank" rel="noopener noreferrer" class="external">CSV</a>.</li>
+</ul>
+<p dir="auto">
+    Sendo assim, é importante que você saiba como fazer a leitura e escrita de arquivos.
+</p>
+<h2 dir="auto" id="lendo-arquivos-com-metodos-sincronos">
+    Lendo arquivos com métodos síncronos
+</h2>
+<p dir="auto">
+    Vamos nos aprofundar no módulo&nbsp;<code>fs</code>&nbsp;do Node que permite a leitura e escrita de arquivos, assim como mostra a figura a seguir:
+</p>
+<p dir="auto">
+    <span class="img-missing">Imagem indisponível offline: mind_map2</span>
+</p>
+<p dir="auto">
+    O módulo&nbsp;<code>fs</code>&nbsp;fornece o método&nbsp;<code>fs.readFileSync</code>&nbsp;para leitura síncrona de arquivos. Vamos utilizá-lo no exemplo a seguir, mas antes devemos realizar os seguintes passos:
+</p>
+<ol dir="auto">
+    <li>Criar uma pasta chamada&nbsp;<code>my-node-project</code>;</li>
+    <li>Dentro dessa pasta, crie um arquivo chamado&nbsp;<code>readFileSync.js</code>;</li>
+    <li>Insira o seguinte código no arquivo:</li>
+</ol>
+<pre><code>// my-node-project/readFileSync.js
+const fs = require('fs');
+const nomeDoArquivo = 'meu-arquivo.txt';
+try {
+  const data = fs.readFileSync(nomeDoArquivo, 'utf8');
+  console.log(data);
+} catch (err) {
+  console.error(`Erro ao ler o arquivo: ${err.path}`);
+  console.log(err);
+}</code></pre>
+<p dir="auto">
+    Aqui estão os principais pontos do código:
+</p>
+<ol dir="auto">
+    <li>O módulo&nbsp;<code>fs</code>&nbsp;foi importado e a variável&nbsp;<code>nomeDoArquivo</code>&nbsp;armazena o nome do arquivo a ser lido;</li>
+    <li>O bloco&nbsp;<code>try...catch</code>&nbsp;é usado para capturar quaisquer erros que possam acontecer durante a leitura do arquivo;</li>
+    <li>O método&nbsp;<code>readFileSync</code>&nbsp;lê o arquivo de forma síncrona, ou seja, ele espera a conclusão da leitura antes de prosseguir com a execução do código. Ele recebe dois parâmetros: o nome do arquivo e um parâmetro opcional para definir o encoding (neste caso,&nbsp;<code>utf8</code>).</li>
+</ol>
+<p dir="auto">
+    Execute o script no terminal com&nbsp;<code>node readFileSync.js</code>&nbsp;e analise o resultado. Se ocorrer um erro, é porque o arquivo&nbsp;<code>meu-arquivo.txt</code>&nbsp;não existe.
+</p>
+<p dir="auto">
+    Para resolver o problema, basta criarmos um arquivo com o nome&nbsp;<code>meu-arquivo.txt</code>&nbsp;com algum conteúdo dentro!
+</p>
+<p dir="auto">
+    Agora, ao executar o script&nbsp;<code>readFileSync.js</code>&nbsp;com o comando&nbsp;<code>node readFileSync.js</code>, o conteúdo do arquivo será exibido no terminal.
+</p>
+<blockquote>
+    <p dir="auto">
+        E se tivéssemos que ler vários arquivos ao mesmo tempo?
+    </p>
+    <p dir="auto">
+        <em>Resposta</em>: Para isso, utilizamos métodos&nbsp;<strong>assíncronos</strong>.
+    </p>
+</blockquote>
+<h2 dir="auto" id="lendo-arquivos-com-metodos-assincronos">
+    Lendo arquivos com métodos assíncronos
+</h2>
+<p dir="auto">
+    Através do módulo&nbsp;<code>fs</code>&nbsp;temos acesso ao método&nbsp;<code>fs.readFile</code>&nbsp;que permite a leitura assíncrona de arquivos.
+</p>
+<blockquote>
+    <p dir="auto">
+        Observação: Para utilizar as operações assíncronas do&nbsp;<code>fs</code>, precisamos alterar a importação do módulo&nbsp;<code>fs</code>&nbsp;para&nbsp;<code>require('fs').promises</code>. Dessa forma, poderemos chamar as funções assíncronas para leitura e escrita de arquivos que retornarão Promises.
+    </p>
+</blockquote>
+<p dir="auto">
+    Vamos ver como ficaria o código do exemplo anterior, usando Promises e&nbsp;<code>async/await</code>:
+</p>
+<pre><code>// my-node-project/readFileSync.js
+const fs = require('fs').promises;
+async function main() {
+  try {
+    const data = await fs.readFile('./meu-arquivo.txt', 'utf-8');
+    console.log(data);
+  } catch (err) {
+    console.error(`Erro ao ler o arquivo: ${err.message}`);
+  }
+}
+main();</code></pre>
+<p dir="auto">
+    Neste código, a função&nbsp;<code>main</code>&nbsp;foi criada para utilizar&nbsp;<code>async/await</code>, já que o&nbsp;<code>await</code>&nbsp;só pode ser usado dentro de funções assíncronas.
+</p>
+<h2 dir="auto" id="escrevendo-dados-em-arquivos">
+    Escrevendo dados em arquivos
+</h2>
+<p dir="auto">
+    Escrever dados em arquivos é um processo bem parecido com a leitura de dados! Assim como o módulo&nbsp;<code>('fs').promises</code>&nbsp;disponibiliza o método&nbsp;<code>readFile</code>&nbsp;para a leitura, há também o método&nbsp;<code>writeFile</code>&nbsp;para a escrita.
+</p>
+<pre><code>// my-node-project/writeFile.js
+const fs = require('fs').promises;
+async function main() {
+  try {
+    await fs.writeFile('./meu-arquivo.txt', 'Meu textão');
+    console.log('Arquivo escrito com sucesso!');
+  } catch (err) {
+    console.error(`Erro ao escrever o arquivo: ${err.message}`);
+  }
+}
+main();</code></pre>
+<p dir="auto">
+    Execute o script com&nbsp;<code>node writeFile.js</code>&nbsp;e repare que o conteúdo do&nbsp;<code>meu-arquivo.txt</code>&nbsp;foi alterado para "Meu textão".
+</p>
+<p dir="auto">
+    Anota aí 🖊: No&nbsp;<code>writeFile</code>, assim como ocorre no&nbsp;<code>readFile</code>, você pode especificar algumas opções adicionais passando um terceiro parâmetro opcional (<code>flag</code>).
+</p>
+<ul dir="auto">
+    <li>A opção&nbsp;<code>flag</code>&nbsp;especifica como o arquivo deve ser aberto e manipulado. No&nbsp;<code>WriteFile</code>&nbsp;o padrão é&nbsp;<code>'w'</code>, que especifica que o arquivo deve ser aberto para escrita. Dessa forma se o arquivo não existir, ele é criado. Caso contrário, é reescrito, ou seja, tem seu conteúdo apagado antes do novo conteúdo ser escrito. A flag&nbsp;<code>'wx'</code>, por exemplo, funciona como&nbsp;<code>'w'</code>, mas lança um erro caso o arquivo já exista.</li>
+</ul>
+<p dir="auto">
+    Vamos modificar nosso exemplo anterior para utilizar as&nbsp;<code>flags</code>:
+</p>
+<pre><code>// my-node-project/writeFile.js
+const fs = require('fs').promises;
+async function main() {
+  try {
+    await fs.writeFile('./novo.txt', 'Meu textão', { flag: 'wx' });
+    console.log('Arquivo escrito com sucesso!');
+  } catch (err) {
+    console.error(`Erro ao escrever o arquivo: ${err.message}`);
+  }
+}
+main();</code></pre>
+<p dir="auto">
+    Execute o script com&nbsp;<code>node writeFile.js</code>&nbsp;<strong>duas vezes</strong>&nbsp;e repare que na primeira execução foi criado o arquivo&nbsp;<code>novo.txt</code>&nbsp;com o conteúdo "Meu textão". Na segunda execução será lançado um erro indicando que o arquivo&nbsp;<code>novo.txt</code>&nbsp;já existe.
+</p>
+<p dir="auto">
+    Para consolidar o conhecimento, assista ao vídeo a seguir:
+</p>
+<figure><div class="embed-content"><a class="video-card" href="https://player.vimeo.com/video/1022269223" target="_blank" rel="noopener noreferrer"><span class="video-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span><strong>Vídeo da aula</strong><small>Abrir no Vimeo (requer internet)</small></span></a></div></figure><details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>O curso já usa a API de Promises (bom). A forma mais atual de importar é <code>require('node:fs/promises')</code> (ou <code>import { readFile } from 'node:fs/promises'</code>).</li><li>Evite <code>readFileSync</code>/<code>writeFileSync</code> em servidor: bloqueiam o event loop e travam todas as requisições enquanto o disco responde.</li><li>Em ESM dá para usar <code>await</code> direto no topo do arquivo, sem a função <code>main()</code>.</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>No CAP você praticamente não lê/escreve JSON em disco para dados: os dados ficam em entidades CDS e os dados iniciais em arquivos CSV em <code>db/data/</code>.</li></ul></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../03%20-%20Se%C3%A7%C3%A3o%202%20-%20Introdu%C3%A7%C3%A3o%20ao%20Node.js/04%20-%20Utilizando%20M%C3%B3dulos%20internos.html"><small>← Anterior</small><strong>2.4 - Utilizando Módulos internos</strong></a>
+        <a class="next" id="next-link" href="../03%20-%20Se%C3%A7%C3%A3o%202%20-%20Introdu%C3%A7%C3%A3o%20ao%20Node.js/06%20-%20Combinando%20m%C3%B3dulos%20internos.html"><small>Próxima →</small><strong>2.6 - Combinando módulos internos</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

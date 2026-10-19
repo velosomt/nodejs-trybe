@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6.2 - Arquitetura de Software · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476574-6-2-arquitetura-de-software">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 6 - Design Modular com Arquitetura em Camadas</span><span>·</span><span>Lição 2 de 19</span></div>
+      <h1>6.2 - Arquitetura de Software</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>1 min de leitura</span>
+        
+        
+        
+        
+      </div>
+      
+      
+      <div class="content"><p>Imagine que você tem uma mesa cheia de ferramentas, papéis e objetos variados, e decide organizá-los em gavetas. Para facilitar o acesso e a utilização, cada item é colocado em uma gaveta específica, certo? Essa mesma ideia de organização pode ser aplicada ao desenvolvimento de uma aplicação.</p>
+<p>A organização do código em diferentes "gavetas", ou seja, em seções específicas e bem definidas, facilita muito a manutenção e o crescimento do projeto. No desenvolvimento de software, isso significa agrupar partes do código de acordo com suas responsabilidades. Dessa forma, você consegue encontrar rapidamente onde cada funcionalidade está alocada, o que facilita a manutenção, a adição de novos recursos e o entendimento do sistema por outros desenvolvedores.</p>
+<h2 id="o-papel-da-arquitetura-de-software">O Papel da Arquitetura de Software</h2>
+<p>Em uma aplicação que tende a crescer, ter uma arquitetura bem planejada ajuda a manter o código organizado, seguro e escalável. Uma boa arquitetura de software atua como um mapa, orientando onde cada "peça" do sistema se encaixa e como essas peças interagem entre si. Além de garantir a robustez, ela reduz o tempo e os custos de manutenção, facilitando correções de bugs ou a adição de novas funcionalidades.</p>
+<p>Existem diferentes tipos de arquiteturas, como a Arquitetura em Camadas e a Arquitetura Hexagonal, cada uma com suas características. Dependendo das necessidades do projeto, uma arquitetura pode ser mais apropriada do que outra. Ao longo deste conteúdo, vamos nos concentrar na Arquitetura em Camadas, uma das mais comuns e ideais para aplicações que precisam de uma separação clara de responsabilidades.</p></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../08%20-%20Se%C3%A7%C3%A3o%206%20-%20Design%20Modular%20com%20Arquitetura%20em%20Camadas/01%20-%20Introdu%C3%A7%C3%A3o%20da%20se%C3%A7%C3%A3o.html"><small>← Anterior</small><strong>6.1 - Introdução da seção</strong></a>
+        <a class="next" id="next-link" href="../08%20-%20Se%C3%A7%C3%A3o%206%20-%20Design%20Modular%20com%20Arquitetura%20em%20Camadas/03%20-%20Arquitetura%20em%20Camadas%20-%20Model%2C%20Service%20e%20Controller.html"><small>Próxima →</small><strong>6.3 - Arquitetura em Camadas: Model, Service e Controller</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

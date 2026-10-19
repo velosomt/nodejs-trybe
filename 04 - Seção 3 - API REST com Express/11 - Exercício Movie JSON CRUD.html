@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.11 - Exercício Movie JSON CRUD · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476478-3-11-exercicio-movie-json-crud">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 3 - API REST com Express</span><span>·</span><span>Lição 11 de 20</span></div>
+      <h1>3.11 - Exercício Movie JSON CRUD</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>5 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>8 blocos de código</span>
+        
+        
+        
+      </div>
+      
+      
+      <div class="content"><p>
+    Para este exercício, você vai criar uma API de filmes utilizando Node &amp; Express. Você irá desenvolver um servidor express onde seja possível acessar todos os endpoints da aplicação (CRUD).
+</p>
+<h2 id="combinados">
+    Combinados
+</h2>
+<p>
+    Para fazer o exercício, acesse esse repositório ➡️ <a href="https://github.com/learnwithtrybe/flex-node-01-exercise-movie-json-crud" target="_blank" rel="noopener noreferrer" class="external">Exercício Movie JSON CRUD</a>.
+</p>
+<p>
+    Leia o arquivo <code>README.md</code> do repositório com ⚠️ atenção ⚠️ para saber como desenvolver e entregar seu exercício.
+</p>
+<details>
+<summary>
+<b>Solução</b>
+</summary>
+<p>
+    <strong><em>Requisito 1: Crie um servidor Node.js utilizando o framework Express</em></strong>
+</p>
+<ol>
+    <li>Faça a instalação de todas as dependências que já estão no exercício com <code>npm install</code></li>
+    <li>Crie o arquivo <code>src/server.js</code> e adicione o seguinte código:</li>
+</ol>
+<pre><code class="language-javascript">const app = require('./app');
+const PORT = 3001;
+app.listen(PORT, () =&gt; console.log(`Servidor rodando na porta ${PORT}`));
+</code></pre>
+<ol>
+    <li>Faça a instalação do <code>nodemon</code> para facilitar o desenvolvimento do projeto:</li>
+</ol>
+<pre><code class="language-bash">npm i nodemon@2.0.15 --save-dev --save-exact
+</code></pre>
+<ol>
+    <li>Altere o package.json para utilizar o <code>nodemon</code> e o <code>node</code>:</li>
+</ol>
+<pre><code class="language-json">// package.json
+"start": "node src/server.js",
+"dev": "nodemon src/server.js",
+</code></pre>
+<ol>
+    <li>Confira se a sua aplicação fica ativa com o comando <code>npm run dev</code>.</li>
+    <li>Se tudo estiver certo, confira se o teste do requisito 1 está passando com o comando <code>npm test 01</code>.</li>
+</ol>
+<p>
+    <strong><em>Requisito 2: Crie um endpoint para a listagem de um filme pelo seu id</em></strong>
+</p>
+<ol>
+    <li>Adicione o seguinte código no arquivo <code>src/app.js</code>.</li>
+</ol>
+<pre><code class="language-javascript">// src/app.js
+// const express = require('express');
+const fs = require('fs').promises;
+const path = require('path');
+// const app = express();
+const filePath = path.resolve(__dirname, 'movies.json');
+app.get('/movies/:id', async (req, res) =&gt; {
+  const { id } = req.params;
+  const readMoviesFile = await fs.readFile(filePath, 'utf8');
+  const movies = JSON.parse(readMoviesFile);
+  const movieFound = movies.find((movie) =&gt; movie.id === Number(id));
+  if (!movieFound) return res.status(404).json({ message: 'Filme não encontrado' });
+  return res.status(200).json(movieFound);
+});
+// module.exports = app;
+</code></pre>
+<ol>
+    <li>Execute a sua aplicação e faça uma requisição para rota <code>http://localhost:3001/movies/1</code> para retornar o filme de id 1.</li>
+    <li>Execute a sua aplicação e faça uma requisição para rota <code>http://localhost:3001/movies/99</code> para retornar a mensagem 'Filme não encontrado'.</li>
+    <li>Se tudo estiver certo, confira se o teste do requisito 2 está passando com o comando <code>npm test 02</code>.</li>
+</ol>
+<p>
+    <strong><em>Requisito 3: Crie um endpoint que possa listar todos os filmes do JSON</em></strong>
+</p>
+<ol>
+    <li>Adicione o seguinte código no arquivo <code>src/app.js</code></li>
+</ol>
+<pre><code class="language-javascript">// src/app.js
+// ... Restante do código
+app.get('/movies', async (_req, res) =&gt; {
+  const readMoviesFile = await fs.readFile(filePath, 'utf8');
+  const movies = JSON.parse(readMoviesFile);
+  return res.status(200).json(movies);
+});
+// module.exports = app;
+</code></pre>
+<ol>
+    <li>Execute a sua aplicação e faça uma requisição para rota <code>http://localhost:3001/movies</code> para retornar todos os filmes.</li>
+    <li>Se tudo estiver certo, confira se o teste do requisito 3 esta passando com o comando <code>npm test 03</code>.</li>
+</ol>
+<p>
+    <strong><em>Requisito 4: Crie um endpoint para cadastrar um filme</em></strong>
+</p>
+<ol>
+    <li>Adicione o seguinte código no arquivo <code>src/app.js</code></li>
+</ol>
+<pre><code class="language-javascript">// src/app.js
+// ... Importações
+app.use(express.json());
+// ... Restante do código
+app.post('/movies', async (req, res) =&gt; {
+  const { movie, price } = req.body;
+  const readMoviesFile = await fs.readFile(filePath, 'utf8');
+  const movies = JSON.parse(readMoviesFile);
+    // Cria novo Id para o filme
+  const createNewId = movies.at(-1).id + 1;
+  // Adiciona o novo filme ao array
+  movies.push({ id: createNewId, movie, price });
+  // Escreve o array atualizado de volta no arquivo
+  await fs.writeFile(filePath, JSON.stringify(movies, null, 2));
+  return res.status(201).json({ id: createNewId, movie, price });
+});
+// module.exports = app;
+</code></pre>
+<ol>
+    <li>Execute a sua aplicação e faça uma requisição para rota <code>http://localhost:3001/movies</code> utilizando o método POST.</li>
+    <li>Confira se o teste do requisito 4 está passando com o comando <code>npm test 04</code>.</li>
+</ol>
+<p>
+    <strong><em>Requisito 5: Crie um endpoint para a atualização de um filme</em></strong>
+</p>
+<ol>
+    <li>Adicione o seguinte código no arquivo <code>src/app.js</code></li>
+</ol>
+<pre><code class="language-javascript">// src/app.js
+// ... Restante do código
+app.put('/movies/:id', async (req, res) =&gt; {
+  const { id } = req.params;
+  const { movie, price } = req.body;
+  const readMoviesFile = await fs.readFile(filePath, 'utf8');
+  const movies = JSON.parse(readMoviesFile);
+  // Procura pelo índice do filme com base no Id
+  const movieIndex = movies.findIndex((mov) =&gt; mov.id === Number(id));
+  if (movieIndex === -1) {
+    return res.status(404).json({ message: 'Filme não encontrado' });
+  }
+  // Substitui completamente o filme
+  movies[movieIndex] = { id: Number(id), movie, price };
+  await fs.writeFile(filePath, JSON.stringify(movies, null, 2));
+  return res.status(200).json(movies[movieIndex]);
+});
+// module.exports = app;
+</code></pre>
+<ol>
+    <li>Execute a sua aplicação e faça uma requisição para rota <code>http://localhost:3001/movies/2</code> utilizando o método PUT.</li>
+    <li>Confira se o teste do requisito 5 está passando com o comando <code>npm test 05</code>.</li>
+</ol>
+<p>
+    <strong><em>Requisito 6: Crie um endpoint para a exclusão de um filme</em></strong>
+</p>
+<ol>
+    <li>Adicione o seguinte código no arquivo <code>src/app.js</code></li>
+</ol>
+<pre><code class="language-javascript">// src/app.js
+// ... Restante do código
+app.delete('/movies/:id', async (req, res) =&gt; {
+  const { id } = req.params;
+  const readMoviesFile = await fs.readFile(filePath, 'utf8');
+  const movies = JSON.parse(readMoviesFile);
+  const movieIndex = movies.findIndex((mov) =&gt; mov.id === Number(id));
+  if (movieIndex === -1) {
+    return res.status(404).json({ message: 'Filme não encontrado' });
+  }
+  // Remove o filme do array
+  movies.splice(movieIndex, 1);
+  await fs.writeFile(filePath, JSON.stringify(movies, null, 2));
+  return res.status(200).json({ message: 'Filme deletado com sucesso' });
+});
+// module.exports = app;
+</code></pre>
+<ol>
+    <li>Execute a sua aplicação e faça uma requisição para rota <code>http://localhost:3001/movies/1</code> utilizando o método DELETE.</li>
+    <li>Faça uma requisição para rota <code>http://localhost:3001/movies/1</code> utilizando o método GET, para confirmar a remoção do Filme.</li>
+    <li>Confira se o teste do requisito 6 está passando com o comando <code>npm test 06</code>.</li>
+</ol>
+<p>
+    Parabéns pela conclusão do exercício!
+</p>
+</details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/10%20-%20E%20essa%20tal%20de%20arquitetura%20REST-.html"><small>← Anterior</small><strong>3.10 - E essa tal de arquitetura REST?</strong></a>
+        <a class="next" id="next-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/12%20-%20Middlewares%20no%20Express.html"><small>Próxima →</small><strong>3.12 - Middlewares no Express</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

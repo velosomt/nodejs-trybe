@@ -1,0 +1,9 @@
+{
+  "slug": "4476561-5-6-resolucao-de-conflitos-de-configuracao",
+  "title": "5.6 - Resolução de Conflitos de configuração",
+  "html": "\n        <p>Até agora, conseguimos subir nossos containers e a aplicação sem problemas. No entanto, conforme trabalhamos com múltiplos projetos, é comum surgirem conflitos, principalmente quando uma porta específica no sistema operacional já está em uso.</p>\n<p>Neste vídeo, vamos explorar técnicas e dicas práticas para te ajudar a lidar com esses conflitos e os atalhos que facilitam a solução desse tipo de problema.</p>\n<figure><div class=\"embed-content\"><div class=\"aspect-h-9 aspect-w-16\"><iframe src=\"https://player.vimeo.com/video/1039088425\" width=\"640\" height=\"360\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen=\"\"></iframe></div></div></figure>\n<h2>Comandos utilizados no vídeo</h2>\n<p>Para encerrar todos os processos Node que estão sendo executados na sua máquina:</p>\n<pre><code class=\"bash\">killall node\n</code></pre>\n<p>Para parar todos os containers Docker em execução:</p>\n<pre><code class=\"bash\">docker stop $(docker ps -qa)\n</code></pre>\n      ",
+  "videos": [
+    "https://player.vimeo.com/video/1039088425"
+  ],
+  "extras": []
+}

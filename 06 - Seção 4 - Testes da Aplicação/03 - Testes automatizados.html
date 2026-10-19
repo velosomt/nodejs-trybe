@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.3 - Testes automatizados · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476415-4-3-testes-automatizados">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 4 - Testes da Aplicação</span><span>·</span><span>Lição 3 de 13</span></div>
+      <h1>4.3 - Testes automatizados</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>7 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>10 blocos de código</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>1 vídeo</span>
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>2 OBSs da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>
+    Automatizar testes é uma necessidade tão presente no dia a dia dos times de desenvolvimento, que constantemente é tema de discussões e evoluções.
+</p>
+<p>
+    Hoje, testes automatizados são amplamente difundidos, com diversos tipos, técnicas e ferramentas disponíveis. Essa base sólida nos ajuda bastante durante o aprendizado, pois temos ferramentas consolidadas prontas para uso.
+</p>
+<h2 id="introducao-ao-jest">
+    Introdução ao Jest
+</h2>
+<p>
+    O <code>Jest</code> é uma das ferramentas mais populares para testes em JavaScript. Embora tenha sido criado inicialmente para projetos React, o Jest funciona muito bem em diversos tipos de projetos JavaScript, incluindo Node.js. Ele é focado em testes de unidade, mas também oferece suporte a testes de integração e ponta a ponta (E2E).
+</p>
+<p>
+    Uma das principais vantagens do Jest é sua configuração simples, execução rápida e suporte a testes assíncronos. Além disso, ele pode ser configurado para rodar automaticamente quando detecta mudanças no código, tornando o ciclo de desenvolvimento mais ágil.
+</p>
+<details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>O Node tem test runner nativo estável (<code>node:test</code> + <code>node:assert</code>, Node 20+): <code>node --test</code>. <strong>Vitest</strong> é outra alternativa moderna com API compatível com Jest. Jest 29 continua amplamente usado — o conhecimento é transferível.</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>O CAP tem o <code>cds.test</code>, que sobe o servidor do projeto (com SQLite em memória) dentro do teste e funciona com Jest, Mocha ou <code>node --test</code>. Em versões recentes ele é instalado pelo pacote <code>@cap-js/cds-test</code>.</li></ul></div></details><h2 id="estruturando-testes-com-o-jest">
+    Estruturando Testes com o Jest
+</h2>
+<p>
+    Vamos criar uma função simples que verifica se uma pessoa foi aprovada com base em sua média de notas, seguindo a seguinte regra:
+</p>
+<p>
+    <img alt="Cenarios" src="../assets/img/5b2d2a5798ab7c.png" loading="lazy">
+</p>
+<p>
+    Agora, vamos configurar o nosso projeto:
+</p>
+<ol>
+    <li>Crie uma pasta e dentro dessa pasta, execute os comandos:</li>
+</ol>
+<pre><code class="language-bash">mkdir test &amp;&amp; touch isApproved.js &amp;&amp; npm init -y
+</code></pre>
+<ol>
+    <li>Instale o Jest com:</li>
+</ol>
+<pre><code class="language-bash">npm install jest@29.7.0 --save-dev --save-exact
+</code></pre>
+<ol>
+    <li>Para habilitar o auto-complete de métodos do Jest, instale também o pacote de tipos:</li>
+</ol>
+<pre><code class="language-bash">npm install @types/jest@29.5.13 --save-dev --save-exact
+</code></pre>
+<p>
+    Agora, vamos implementar a função <code>isApproved</code>, que recebe a média de notas e retorna se a pessoa foi aprovada ou reprovada:
+</p>
+<pre><code class="language-javascript">// isApproved.js
+function isApproved(gradeAverage) {
+  if (gradeAverage &gt; 7) {
+    return 'aprovação';
+  }
+  return 'reprovação';
+}
+module.exports = isApproved;
+</code></pre>
+<h3 id="cenarios-de-teste">
+    Cenários de Teste
+</h3>
+<p>
+    Precisamos cobrir três cenários principais:
+</p>
+<ul>
+    <li>Quando a média for menor que 7, a resposta deve ser "reprovação".</li>
+    <li>Quando a média for maior que 7, a resposta deve ser "aprovação".</li>
+    <li>Quando a média for igual a 7, a resposta deve ser "aprovação".</li>
+</ul>
+<h3 id="escopo-inicial-dos-testes">
+    Escopo Inicial dos Testes
+</h3>
+<p>
+    Ao iniciar os testes no <code>Jest</code>, uma das primeiras funcionalidades que encontramos é o bloco <code>describe()</code>. Esse bloco desempenha um papel fundamental na organização dos testes, permitindo agrupar casos relacionados em um único escopo. Isso não apenas ajuda a manter o código de testes mais legível, mas também torna mais fácil identificar a área específica do código que está sendo testada.
+</p>
+<p>
+    O <code>describe()</code> aceita dois parâmetros principais:
+</p>
+<ol>
+    <li>
+<strong>Uma string:</strong> Essa string é a descrição do grupo de testes, ou seja, ela deve descrever de forma clara o que aquele conjunto de testes está validando. Pense nela como o "título" do conjunto de testes.</li>
+    <li>
+<strong>Uma função:</strong> Dentro dessa função, são definidos os testes relacionados ao comportamento que estamos validando. É aqui que cada caso de teste será detalhado.</li>
+</ol>
+<p>
+    Por exemplo, para testar um cenário onde a média de notas de um aluno é menor que 7, podemos criar dentro do arquivo <code>test/isApproved.test.js</code> o seguinte esqueleto de teste:
+</p>
+<pre><code class="language-javascript">// test/isApproved.test.js
+describe('Quando a média for menor que 7', function () {
+  //
+});
+</code></pre>
+<p>
+    Essa estrutura de <code>describe()</code> deixa nítido que estamos lidando com um cenário específico: notas que não atingem o valor mínimo de aprovação.
+</p>
+<h3 id="definindo-o-comportamento-com-test">
+    Definindo o Comportamento com <code>test()</code>
+</h3>
+<p>
+    Depois de organizar os cenários de teste com <code>describe()</code>, é hora de especificar o que queremos validar para cada cenário. Isso é feito com o método <code>test()</code>.
+</p>
+<p>
+    O <code>test()</code> também aceita dois parâmetros:
+</p>
+<ul>
+    <li>
+<strong>Uma string:</strong> Similar ao <code>describe()</code>, aqui descrevemos o comportamento que será testado, mas de forma mais detalhada e específica. Essa descrição deve explicar qual é o comportamento esperado da função para o cenário definido.</li>
+    <li>
+<strong>Uma função:</strong> Nessa função, colocamos a lógica do teste propriamente dita, verificando se o código está se comportando conforme o esperado.</li>
+</ul>
+<p>
+    Continuando com o nosso exemplo, podemos agora adicionar um caso de teste que verifica se, quando a média é menor que 7, a função retorna a palavra "reprovação":
+</p>
+<pre><code class="language-javascript">// test/isApproved.test.js
+describe('Quando a média for menor que 7', function () {
+  test('retorna "reprovação"', function () {
+    //
+  });
+});
+</code></pre>
+<p>
+    Aqui, estamos dizendo que, no cenário onde a média é menor que 7, esperamos que o retorno da função seja exatamente a string "<strong>reprovação</strong>".
+</p>
+<h3 id="adicionando-assercao">
+    Adicionando Asserção
+</h3>
+<p>
+    Agora que descrevemos o comportamento esperado, precisamos validar se a função está, de fato, retornando o valor correto. Para isso, utilizamos as <strong>asserções</strong>, que no Jest são fornecidas através do uso de <code>matchers</code>.
+</p>
+<p>
+    A asserção é onde validamos se o resultado gerado pelo código é igual ao que esperamos. No nosso caso, queremos garantir que, quando a média é inferior a 7, a função retorna "reprovação". Veja como isso funciona na prática:
+</p>
+<pre><code class="language-javascript">// test/isApproved.test.js
+const isApproved = require('../isApproved');
+// describe('Quando a média for menor que 7', function () {
+//   test('retorna "reprovação"', function () {
+    const result = isApproved(4);
+    expect(result).toEqual('reprovação');
+//   });
+// });
+</code></pre>
+<p>
+    Aqui estamos utilizando o <em><strong>matcher</strong></em> <code>toEqual()</code> do Jest para afirmar que o valor retornado pela função <code>isApproved()</code> deve ser igual à string "reprovação" quando a média fornecida é <code>4</code>.
+</p>
+<blockquote>
+    <p>
+        <strong>De olho na dica👀:</strong> O <em>matcher</em> <code>toEqual</code> é um dos diversos <em>matchers</em> disponíveis no `Jest. Você pode acessar a lista completa na <a href="https://jestjs.io/docs/expect" target="_blank" rel="noopener noreferrer" class="external">documentação oficial do Jest</a>.
+    </p>
+</blockquote>
+<h3 id="executando-os-testes">
+    Executando os Testes
+</h3>
+<p>
+    Para executarmos os testes, altere o <code>script</code> de <strong>test</strong> no <code>package.json</code> para o seguinte:
+</p>
+<pre><code class="language-json">  "scripts": {
+    "test": "jest"
+  },
+</code></pre>
+<p>
+    Pronto, agora só precisamos executar os testes com o comando <code>npm test</code> para termos a resposta do teste igual à imagem abaixo.
+</p>
+<p>
+    <img alt="Teste para media menor que 7" src="../assets/img/f0a055575c8efe.png" loading="lazy">
+</p>
+<h3 id="testando-os-outros-cenarios">
+    Testando os outros Cenários
+</h3>
+<p>
+    Agora que já configuramos e validamos o cenário em que a média é menor que 7, podemos expandir nossos testes para cobrir os outros dois casos restantes:
+</p>
+<ol>
+    <li>Quando a média é maior que 7, a resposta deve ser "aprovação".</li>
+    <li>Quando a média é exatamente 7, a resposta também deve ser "aprovação".</li>
+</ol>
+<p>
+    Vamos adicionar esses testes no mesmo arquivo para garantir que todas as condições estejam sendo tratadas corretamente. O código a seguir demonstra como testar esses dois cenários:
+</p>
+<pre><code class="language-javascript">// test/isApproved.test.js
+const isApproved = require('../isApproved');
+// describe('Quando a média for menor que 7', function () {
+//   test('retorna "reprovação"', function () {
+//     const result = isApproved(4);
+//     expect(result).toEqual('reprovação');
+//   });
+// });
+describe('Quando a média for maior ou igual a 7', function () {
+  test('retorna "aprovação"', function () {
+    const result = isApproved(9);
+    expect(result).toEqual('aprovação');
+  });
+  test('retorna "aprovação"', function () {
+    const result = isApproved(7);
+    expect(result).toEqual('aprovação');
+  });
+});
+</code></pre>
+<p>
+    Aqui estamos verificando duas situações diferentes, mas que devem resultar no mesmo comportamento: a função <code>isApproved()</code> deve retornar "aprovação" tanto quando a média é maior que 7, quanto quando é exatamente 7.
+</p>
+<h3 id="analisando-resultados">
+    Analisando Resultados
+</h3>
+<p>
+    Com os novos cenários implementados, você pode executar novamente os testes. Após a execução, você verá algo semelhante à imagem abaixo:
+</p>
+<p>
+    <img alt="Teste para media menor que 7" src="../assets/img/d56ff95ccdcbeb.png" loading="lazy">
+</p>
+<p>
+    Note que, na execução dos testes, um deles falhou quando o valor da média passada é <code>7</code>. Nesse caso, o retorno esperado seria "aprovação", mas a função está retornando "reprovação". O Jest fornece uma mensagem indicando a falha, o que facilita a identificação do problema.
+</p>
+<p>
+    Ao receber uma mensagem de erro como essa, podemos revisar a implementação da função <code>isApproved()</code>. Logo, identificamos que ela não está lidando corretamente com a média igual a <code>7</code>. Para corrigir isso, basta ajustar a condição na função, como mostrado abaixo:
+</p>
+<pre><code class="language-javascript">// isApproved.js
+// function isApproved(gradeAverage) {
+  if (gradeAverage &gt;= 7) { // Corrigimos aqui o sinal de igualdade para incluir o 7
+//     return 'aprovação';
+//   }
+//   return 'reprovação';
+// }
+// module.exports = isApproved;
+</code></pre>
+<p>
+    Agora, ao executar os testes novamente, o erro será resolvido, e todos os cenários deverão passar corretamente.
+</p>
+<p>
+    Para consolidar os conceitos sobre testes, assista ao vídeo a seguir:
+</p>
+<figure>
+    <div class="embed-content"><a class="video-card" href="https://player.vimeo.com/video/1022293737" target="_blank" rel="noopener noreferrer"><span class="video-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span><strong>Vídeo da aula</strong><small>Abrir no Vimeo (requer internet)</small></span></a></div>
+</figure><details class="obs-ia" id="obs-ia-2"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label obs-ia__label--cicd">CI/CD</p><ul><li>Testes automatizados rendem mais quando rodam <strong>sozinhos a cada pull request</strong>, antes do merge. Isso é a CI. Sem ela, os testes dependem de alguém lembrar de rodá-los.</li><li>Veja <a href="../12%20-%20OBS%20da%20IA%20-%20CI-CD%20-%20o%20m%C3%ADnimo%20para%20deploy%20automatizado/03%20-%20GitHub%20Actions%20-%20o%20primeiro%20pipeline%20de%20CI.html">IA.3 - GitHub Actions: o primeiro pipeline de CI</a>.</li></ul></div></details></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../06%20-%20Se%C3%A7%C3%A3o%204%20-%20Testes%20da%20Aplica%C3%A7%C3%A3o/02%20-%20Tipos%20de%20Testes.html"><small>← Anterior</small><strong>4.2 - Tipos de Testes</strong></a>
+        <a class="next" id="next-link" href="../06%20-%20Se%C3%A7%C3%A3o%204%20-%20Testes%20da%20Aplica%C3%A7%C3%A3o/04%20-%20Testes%20de%20Integra%C3%A7%C3%A3o.html"><small>Próxima →</small><strong>4.4 - Testes de Integração</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

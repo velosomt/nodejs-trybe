@@ -1,0 +1,255 @@
+{
+  "slug": "4207914-2-8-utilizando-modulos-externos",
+  "href": "/200838-back-end-em-node-js/4207914-2-8-utilizando-modulos-externos/quiz_attempts/2040164/review",
+  "title": "2.8 - Utilizando Módulos externos - Quiz",
+  "questions": [
+    {
+      "prompt": "\n          <p>Qual das opções abaixo descreve corretamente o NPM (Node Package Manager)?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>O NPM realiza o gerenciamento de módulos e também de processos do sistema.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>O NPM é o gerenciador de pacotes padrão para projetos Node.js.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "C",
+          "html": "<p>O NPM é uma ferramenta para compilar aplicativos Node.js em binários executáveis.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>O NPM gerencia pacotes e também controla o desempenho de aplicações Node.js em produção.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>O NPM permite gerenciar apenas pacotes relacionados a frontend no Node.js.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual das opções abaixo descreve corretamente o NPM (Node Package Manager)?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>O NPM realiza o gerenciamento de módulos e também de processos do sistema.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>O NPM é o gerenciador de pacotes padrão para projetos Node.js.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>O NPM é uma ferramenta para compilar aplicativos Node.js em binários executáveis.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>O NPM gerencia pacotes e também controla o desempenho de aplicações Node.js em produção.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>O NPM permite gerenciar apenas pacotes relacionados a frontend no Node.js.</p>\n</span>\n</div>        </div>\n\n          <div class=\"mt-2 flex px-1\">\n            <div class=\"flex h-5 items-center px-2\">\n              <div class=\"icon flex-none pointer-events-none size-5 \"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"></path>\n</svg>\n</div>\n            </div>\n            <div class=\"ml-1 w-full\">\n              \n\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n\n    <ul>\n        <li><strong>A)</strong>Alternativa incorreta. O NPM não gerencia processos, apenas pacotes.</li>\n<li><strong>B)</strong>Alternativa correta! </li>\n<li><strong>C)</strong>Alternativa incorreta. O NPM gerencia pacotes, não compila binários.</li>\n<li><strong>D)</strong>Alternativa incorreta. O NPM gerencia pacotes, mas o controle de desempenho requer outras ferramentas.</li>\n<li><strong>E)</strong>Alternativa incorreta. O NPM pode gerenciar pacotes tanto para frontend quanto para backend.</li>\n  </ul>\n\n\n\n            </div>\n          </div>\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Node.js é ___________________.</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>uma linguagem de programação para desenvolver aplicações back-end.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>um banco de dados para JavaScript.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>um ambiente de execução de JavaScript no lado do servidor.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "D",
+          "html": "<p>um framework para criar interfaces gráficas.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>um sistema de controle de versão.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Node.js é ___________________.</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>uma linguagem de programação para desenvolver aplicações back-end.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>um banco de dados para JavaScript.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>um ambiente de execução de JavaScript no lado do servidor.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>um framework para criar interfaces gráficas.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>um sistema de controle de versão.</p>\n</span>\n</div>        </div>\n\n          <div class=\"mt-2 flex px-1\">\n            <div class=\"flex h-5 items-center px-2\">\n              <div class=\"icon flex-none pointer-events-none size-5 \"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"></path>\n</svg>\n</div>\n            </div>\n            <div class=\"ml-1 w-full\">\n              \n\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n\n    <ul>\n        <li><strong>A)</strong>Alternativa incorreta. Node.js não é uma linguagem de programação, é um runtime.</li>\n<li><strong>B)</strong>Alternativa incorreta. Node.js não é um banco de dados, ele é utilizado para executar JavaScript no servidor.</li>\n<li><strong>C)</strong>Alternativa correta! Node.js é um runtime que permite executar JavaScript fora do navegador.</li>\n<li><strong>D)</strong>Alternativa incorreta. Node.js não é usado para criar interfaces gráficas, mas sim para construir aplicações server-side.</li>\n<li><strong>E)</strong>Alternativa incorreta. Node.js não tem relação com controle de versão, isso é feito por ferramentas como Git.</li>\n  </ul>\n\n\n\n            </div>\n          </div>\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Sobre o sistema de módulos no Node.js, leia as afirmações abaixo:</p>\n<p>I - O sistema de módulos no Node.js permite a reutilização de código em diferentes partes da aplicação.</p>\n<p>II - O método require é utilizado para importar módulos em um arquivo Node.js.</p>\n<p>III - O sistema de módulos do Node.js segue o padrão utilizado pelo navegador para carregar scripts de forma automática.</p>\n<p>Quais dessas afirmativas estão corretas?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>I, III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>I, II.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "C",
+          "html": "<p>II, III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>I, II, III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Apenas II.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Sobre o sistema de módulos no Node.js, leia as afirmações abaixo:</p>\n<p>I - O sistema de módulos no Node.js permite a reutilização de código em diferentes partes da aplicação.</p>\n<p>II - O método require é utilizado para importar módulos em um arquivo Node.js.</p>\n<p>III - O sistema de módulos do Node.js segue o padrão utilizado pelo navegador para carregar scripts de forma automática.</p>\n<p>Quais dessas afirmativas estão corretas?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>I, III.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>I, II.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>II, III.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>I, II, III.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas II.</p>\n</span>\n</div>        </div>\n\n          <div class=\"mt-2 flex px-1\">\n            <div class=\"flex h-5 items-center px-2\">\n              <div class=\"icon flex-none pointer-events-none size-5 \"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"></path>\n</svg>\n</div>\n            </div>\n            <div class=\"ml-1 w-full\">\n              \n\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n\n    <ul>\n        <li><strong>A)</strong>Alternativa incorreta. O Node.js não segue o padrão de carregamento automático de scripts utilizado no navegador.</li>\n<li><strong>B)</strong>Alternativa correta!</li>\n<li><strong>C)</strong>Alternativa incorreta. A afirmativa III está incorreta, já que o Node.js utiliza um sistema de módulos próprio e não o do navegador.</li>\n<li><strong>D)</strong>Alternativa incorreta. Apenas as afirmativas I e II estão corretas.</li>\n<li><strong>E)</strong>Alternativa incorreta. Embora a afirmativa II esteja correta, a afirmativa I também está.</li>\n  </ul>\n\n\n\n            </div>\n          </div>\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Como um módulo local pode ser exportado e importado em Node.js, por padrão?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Usando import e export.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>Usando define e include.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Usando global.exports e global.import.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Usando module.exports para exportar e require() para importar.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Usando o objeto exports diretamente, sem precisar de require.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Como um módulo local pode ser exportado e importado em Node.js, por padrão?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Usando import e export.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>Usando define e include.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Usando global.exports e global.import.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Usando module.exports para exportar e require() para importar.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Usando o objeto exports diretamente, sem precisar de require.</p>\n</span>\n</div>        </div>\n\n          <div class=\"mt-2 flex px-1\">\n            <div class=\"flex h-5 items-center px-2\">\n              <div class=\"icon flex-none pointer-events-none size-5 \"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"></path>\n</svg>\n</div>\n            </div>\n            <div class=\"ml-1 w-full\">\n              \n\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n\n    <ul>\n        <li><strong>A)</strong>Alternativa incorreta. Essas sintaxes são do padrão ESModules e requerem configuração especial no Node.js.</li>\n<li><strong>B)</strong>Alternativa incorreta. Esses métodos não são o padrão do Node.js.</li>\n<li><strong>C)</strong>Alternativa incorreta. Não existe global.exports ou global.import no Node.js.</li>\n<li><strong>D)</strong>Alternativa correta! </li>\n<li><strong>E)</strong>Alternativa incorreta. O objeto exports pode ser utilizado para exportar, mas require ainda é necessário para importar.</li>\n  </ul>\n\n\n\n            </div>\n          </div>\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Observe o código abaixo:</p>\n<p>const fs = require('fs');</p>\n<p>const nomeDoArquivo = 'meu-arquivo.txt';</p>\n<p>const data = fs.readFileSync(nomeDoArquivo, 'utf8');<br>\nconsole.log(data);</p>\n<p>Qual é a funcionalidade do módulo fs utilizado no código acima?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>O módulo fs é responsável por gerenciar processos no sistema operacional.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>O módulo fs permite interagir com o sistema de arquivos, realizando operações como leitura e escrita de arquivos.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "C",
+          "html": "<p>O módulo fs é responsável pela comunicação em rede no Node.js.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>O módulo fs pode ser utilizado para manipular a memória do sistema.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>O módulo fs permite interagir com APIs externas.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Observe o código abaixo:</p>\n<p>const fs = require('fs');</p>\n<p>const nomeDoArquivo = 'meu-arquivo.txt';</p>\n<p>const data = fs.readFileSync(nomeDoArquivo, 'utf8');<br>\nconsole.log(data);</p>\n<p>Qual é a funcionalidade do módulo fs utilizado no código acima?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>O módulo fs é responsável por gerenciar processos no sistema operacional.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>O módulo fs permite interagir com o sistema de arquivos, realizando operações como leitura e escrita de arquivos.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>O módulo fs é responsável pela comunicação em rede no Node.js.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>O módulo fs pode ser utilizado para manipular a memória do sistema.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>O módulo fs permite interagir com APIs externas.</p>\n</span>\n</div>        </div>\n\n          <div class=\"mt-2 flex px-1\">\n            <div class=\"flex h-5 items-center px-2\">\n              <div class=\"icon flex-none pointer-events-none size-5 \"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"></path>\n</svg>\n</div>\n            </div>\n            <div class=\"ml-1 w-full\">\n              \n\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n\n    <ul>\n        <li><strong>A)</strong>Alternativa incorreta. A responsabilidade do fs é manipular arquivos, e não processos.</li>\n<li><strong>B)</strong>Alternativa correta! </li>\n<li><strong>C)</strong>Alternativa incorreta. A comunicação em rede é tratada por módulos como http e net.</li>\n<li><strong>D)</strong>Alternativa incorreta. O fs manipula arquivos no disco, não a memória diretamente.</li>\n<li><strong>E)</strong>Alternativa incorreta. O fs não interage com APIs externas; ele trabalha com o sistema de arquivos local.</li>\n  </ul>\n\n\n\n            </div>\n          </div>\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>O que acontece ao combinar os módulos fs e path para manipular arquivos no Node.js?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>O módulo fs lida com banco de dados e o módulo path realiza autenticação de usuários.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>O módulo path é responsável por mover arquivos, enquanto o fs apenas realiza cópias.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>O módulo fs pode ser usado para ler e escrever arquivos, enquanto o módulo path auxilia na manipulação de caminhos de arquivo.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "D",
+          "html": "<p>O módulo fs é usado para criar e excluir diretórios, enquanto o path manipula URLs.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>O módulo path substitui o fs em operações de leitura de arquivos quando combinado.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>O que acontece ao combinar os módulos fs e path para manipular arquivos no Node.js?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>O módulo fs lida com banco de dados e o módulo path realiza autenticação de usuários.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>O módulo path é responsável por mover arquivos, enquanto o fs apenas realiza cópias.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>O módulo fs pode ser usado para ler e escrever arquivos, enquanto o módulo path auxilia na manipulação de caminhos de arquivo.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>O módulo fs é usado para criar e excluir diretórios, enquanto o path manipula URLs.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>O módulo path substitui o fs em operações de leitura de arquivos quando combinado.</p>\n</span>\n</div>        </div>\n\n          <div class=\"mt-2 flex px-1\">\n            <div class=\"flex h-5 items-center px-2\">\n              <div class=\"icon flex-none pointer-events-none size-5 \"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"></path>\n</svg>\n</div>\n            </div>\n            <div class=\"ml-1 w-full\">\n              \n\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n\n    <ul>\n        <li><strong>A)</strong>Alternativa incorreta. O fs não interage com bancos de dados, e o path manipula caminhos, não usuários.</li>\n<li><strong>B)</strong>Alternativa incorreta. O fs manipula arquivos, enquanto o path apenas lida com caminhos.</li>\n<li><strong>C)</strong>Alternativa correta! </li>\n<li><strong>D)</strong>Alternativa incorreta. Embora o fs crie diretórios, o path não manipula URLs diretamente, mas caminhos de arquivo.</li>\n<li><strong>E)</strong>Alternativa incorreta. O path não substitui o fs; ambos têm funções diferentes.</li>\n  </ul>\n\n\n\n            </div>\n          </div>\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual das opções a seguir descreve corretamente a utilização de módulos externos no Node.js?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Módulos externos podem ser instalados usando o NPM e são listados no arquivo package.json do projeto.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "B",
+          "html": "<p>Módulos externos são sempre carregados automaticamente pelo Node.js sem precisar de instalação.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Todos os módulos externos são instalados diretamente no núcleo do Node.js sem necessidade de configuração adicional.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Módulos externos no Node.js devem ser sempre importados usando import ao invés de require.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Módulos externos precisam ser carregados manualmente no terminal sempre que o servidor é iniciado.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual das opções a seguir descreve corretamente a utilização de módulos externos no Node.js?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Módulos externos podem ser instalados usando o NPM e são listados no arquivo package.json do projeto.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>Módulos externos são sempre carregados automaticamente pelo Node.js sem precisar de instalação.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Todos os módulos externos são instalados diretamente no núcleo do Node.js sem necessidade de configuração adicional.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Módulos externos no Node.js devem ser sempre importados usando import ao invés de require.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Módulos externos precisam ser carregados manualmente no terminal sempre que o servidor é iniciado.</p>\n</span>\n</div>        </div>\n\n          <div class=\"mt-2 flex px-1\">\n            <div class=\"flex h-5 items-center px-2\">\n              <div class=\"icon flex-none pointer-events-none size-5 \"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"></path>\n</svg>\n</div>\n            </div>\n            <div class=\"ml-1 w-full\">\n              \n\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n\n    <ul>\n        <li><strong>A)</strong>Alternativa correta!</li>\n<li><strong>B)</strong>Alternativa incorreta. Módulos externos precisam ser instalados via NPM.</li>\n<li><strong>C)</strong>Alternativa incorreta. Os módulos são instalados no diretório do projeto, não no núcleo do Node.js.</li>\n<li><strong>D)</strong>Alternativa incorreta. Embora o import seja possível, o require é amplamente utilizado no CommonJS.</li>\n<li><strong>E)</strong>Alternativa incorreta. Os módulos instalados via NPM são carregados automaticamente pelo código.</li>\n  </ul>\n\n\n\n            </div>\n          </div>\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>O que acontece quando o código abaixo é executado no Node.js?</p>\n<p>const fs = require('fs').promises;</p>\n<p>async function main() {<br>\ntry {<br>\nawait fs.writeFile('./meu-arquivo.txt', 'Meu textão');<br>\nconsole.log('Arquivo escrito com sucesso!');<br>\n} catch (err) {<br>\nconsole.error(<code>Erro ao escrever o arquivo: ${err.message}</code>);<br>\n}<br>\n}</p>\n<p>Assinale a alternativa correta.</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Um erro é gerado porque a função writeFile não suporta async/await.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>O código falha porque require('fs').promises não é uma sintaxe válida.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>O arquivo \"meu-arquivo.txt\" é criado ou sobrescrito com o texto \"Meu textão\".</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Um erro será lançado porque o caminho do arquivo precisa ser absoluto.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>A função writeFile sempre cria um novo arquivo e nunca sobrescreve um existente.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>O que acontece quando o código abaixo é executado no Node.js?</p>\n<p>const fs = require('fs').promises;</p>\n<p>async function main() {<br>\ntry {<br>\nawait fs.writeFile('./meu-arquivo.txt', 'Meu textão');<br>\nconsole.log('Arquivo escrito com sucesso!');<br>\n} catch (err) {<br>\nconsole.error(<code>Erro ao escrever o arquivo: ${err.message}</code>);<br>\n}<br>\n}</p>\n<p>Assinale a alternativa correta.</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Um erro é gerado porque a função writeFile não suporta async/await.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>O código falha porque require('fs').promises não é uma sintaxe válida.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>O arquivo \"meu-arquivo.txt\" é criado ou sobrescrito com o texto \"Meu textão\".</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Um erro será lançado porque o caminho do arquivo precisa ser absoluto.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>A função writeFile sempre cria um novo arquivo e nunca sobrescreve um existente.</p>\n</span>\n</div>        </div>\n\n          <div class=\"mt-2 flex px-1\">\n            <div class=\"flex h-5 items-center px-2\">\n              <div class=\"icon flex-none pointer-events-none size-5 \"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"></path>\n</svg>\n</div>\n            </div>\n            <div class=\"ml-1 w-full\">\n              \n\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n\n    <ul>\n        <li><strong>A)</strong>Alternativa incorreta. fs.promises.writeFile é compatível com async/await.</li>\n<li><strong>B)</strong>Alternativa incorreta. Essa é uma sintaxe válida para trabalhar com o sistema de arquivos de forma assíncrona.</li>\n<li><strong>C)</strong>Alternativa correta! A função writeFile cria ou sobrescreve o arquivo especificado com o conteúdo fornecido.</li>\n<li><strong>D)</strong>Alternativa incorreta. O Node.js suporta caminhos relativos como o especificado.</li>\n<li><strong>E)</strong>Alternativa incorreta. A função sobrescreve arquivos, se já existirem.</li>\n  </ul>\n\n\n\n            </div>\n          </div>\n      </div>"
+    }
+  ]
+}

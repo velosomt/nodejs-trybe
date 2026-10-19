@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Próximos passos · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4499407-proximos-passos">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>[Conteúdo Complementar] - Banco de Dados</span><span>·</span><span>Lição 1 de 1</span></div>
+      <h1>Próximos passos</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>1 min de leitura</span>
+        
+        
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"/></svg>Quiz com 10 questões</span>
+        
+      </div>
+      
+      
+      <div class="content"><p dir="auto">Nas próximas seções, iremos abordar conteúdos que exigem conhecimento prévio em&nbsp;<strong><a href="https://cursos.betrybe.com/191920" target="_blank" rel="noopener noreferrer" class="external">banco de dados relacional</a></strong>. Se você já tem familiaridade com esse tema, pode seguir diretamente para as próximas lições. Caso contrário, recomendamos que faça nosso curso complementar de banco de dados.</p>
+<p dir="auto">Se você avançar e perceber que está tendo dificuldades por falta de conhecimento em banco de dados, sugerimos que volte e complete o curso complementar antes de continuar.</p>
+<p dir="auto">Para ajudar na decisão, preparamos um quiz com perguntas sobre os tópicos necessários. Se você acertar as questões, pode prosseguir com confiança. Caso contrário, será fundamental fazer o curso complementar para garantir o melhor aproveitamento do conteúdo.</p></div>
+      <section class="quiz" data-known="true">
+    <div class="quiz__head"><h2><svg width="22" height="22" style="vertical-align:-4px;margin-right:6px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"/></svg>Quiz</h2><div><span class="quiz__score"></span> <button type="button" class="btn quiz__reset" style="margin-left:8px;padding:6px 12px">Refazer</button></div></div>
+    <p class="quiz__hint">Clique em uma alternativa para conferir. O gabarito e as explicações aparecem na hora.</p>
+    <ol class="quiz__list"><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Considerando uma tabela Funcionarios com as colunas ID, Nome, Salario e ID_Departamento, e uma tabela Departamentos com as colunas ID_Departamento e Nome_Departamento, qual das seguintes consultas retorna todos os funcionários junto com o nome de seu departamento, incluindo os funcionários que não estão associados a nenhum departamento?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>SELECT * FROM Funcionarios LEFT JOIN Departamentos ON Funcionarios.ID = Departamentos.ID_Departamento</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>SELECT * FROM Funcionarios RIGHT JOIN Departamentos ON Funcionarios.ID = Departamentos.ID_Departamento</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>SELECT * FROM Funcionarios INNER JOIN Departamentos ON Funcionarios.ID_Departamento = Departamentos.ID_Departamento</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">D</span><span><p>SELECT * FROM Funcionarios LEFT JOIN Departamentos ON Funcionarios.ID_Departamento = Departamentos.ID_Departamento</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>SELECT * FROM Funcionarios FULL JOIN Departamentos ON Funcionarios.ID_Departamento = Departamentos.ID_Departamento</p></span></button></div>
+      
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Você tem duas tabelas, Clientes e Pedidos, onde Pedidos.ClienteID é uma chave estrangeira que referencia Clientes.ClienteID. Qual seria o resultado de uma consulta SQL que usa INNER JOIN entre essas tabelas, mas não possui nenhum registro correspondente em Pedidos para um cliente específico?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>O cliente aparecerá com valores nulos para os campos de Pedidos.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>O cliente será exibido sem nenhuma informação dos pedidos.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>Todos os pedidos serão exibidos, mesmo sem cliente correspondente.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>A consulta falhará devido à falta de correspondência.</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">E</span><span><p>O cliente não será exibido na consulta.</p></span></button></div>
+      
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Qual consulta SQL corretamente retorna os três maiores salários de uma tabela Funcionarios, ordenados em ordem decrescente, excluindo empates de salário?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">A</span><span><p>SELECT DISTINCT Salario FROM Funcionarios ORDER BY Salario DESC LIMIT 3</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>SELECT Salario FROM Funcionarios ORDER BY Salario DESC LIMIT 3</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>SELECT TOP 3 Salario FROM Funcionarios WHERE DISTINCT ORDER BY Salario DESC</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>SELECT TOP 3 Salario FROM Funcionarios WHERE DISTINCT ORDER BY Salario ASC</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>SELECT Salario FROM Funcionarios GROUP BY Salario LIMIT 3</p></span></button></div>
+      
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Qual das alternativas descreve corretamente o uso da cláusula LIKE em uma consulta SQL?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>A cláusula LIKE é usada para realizar comparações exatas de texto em colunas de uma tabela.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>A cláusula LIKE é usada para verificar se um valor está dentro de um intervalo de valores numéricos.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>A cláusula LIKE só pode ser usada em conjunto com a função COUNT.</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">D</span><span><p>A cláusula LIKE permite filtrar resultados que correspondem a um padrão específico, utilizando curingas como % e _</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>A cláusula LIKE é usada exclusivamente para comparar valores nulos em uma tabela.</p></span></button></div>
+      
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Você deseja selecionar registros de uma tabela Produtos onde o preço está entre R$ 100 e R$ 500. Qual das opções a seguir representa uma possível cláusula WHERE correta?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">A</span><span><p>WHERE Preco BETWEEN 100 AND 500</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>WHERE Preco LIKE 100 AND 500</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>WHERE Preco &gt;= 100 AND &lt;= 500</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>WHERE Preco IN (100, 500)</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>WHERE Preco IN RANGE (100, 500)</p></span></button></div>
+      
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Você está trabalhando com uma tabela Funcionarios e deseja selecionar todos os funcionários cujo departamento seja 'Vendas', 'Marketing' ou 'RH'. Qual das consultas a seguir representa uma possível cláusula WHERE correta?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>WHERE Departamento BETWEEN 'Vendas' AND 'RH'</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>WHERE Departamento LIKE 'Vendas, Marketing, RH'</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>WHERE Departamento = 'Vendas' OR 'Marketing' OR 'RH'</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>WHERE Departamento EXISTS ('Vendas', 'Marketing', 'RH')</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">E</span><span><p>WHERE Departamento IN ('Vendas', 'Marketing', 'RH')</p></span></button></div>
+      
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Qual comando SQL você utilizaria para remover colunas de uma tabela existente?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>DELETE COLUMN</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">B</span><span><p>ALTER TABLE ... DROP COLUMN</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>REMOVE COLUMN</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>UPDATE TABLE ... REMOVE COLUMN</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>DROP TABLE</p></span></button></div>
+      
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Qual das seguintes consultas retorna todos os registros onde a terceira letra do nome do cliente é a letra 'b' e termina com qualquer sequência de caracteres?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>WHERE Nome IN ('b%')</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>WHERE Nome LIKE '%b'</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">C</span><span><p>WHERE Nome LIKE '___b%'</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>WHERE Nome LIKE '___b'</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>WHERE Nome IN ('%b%')</p></span></button></div>
+      
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Qual das alternativas a seguir define corretamente o conceito de uma chave primária em um banco de dados relacional?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>É um campo que pode ter valores duplicados e serve para identificar registros unicamente.</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">B</span><span><p>É um campo ou conjunto de campos que identifica de forma única cada registro em uma tabela e não pode conter valores nulos ou duplicados.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">C</span><span><p>É um campo usado para estabelecer relações entre diferentes tabelas, sem restrição de valores duplicados.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>É um campo que armazena dados em formato binário e sempre possui um índice associado.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>É um campo obrigatório em todas as tabelas e pode ser compartilhado por várias colunas.</p></span></button></div>
+      
+    </li><li class="quiz-q">
+      <div class="quiz-q__prompt"><p>Qual das seguintes afirmações é verdadeira sobre chaves estrangeiras em bancos de dados relacionais?</p></div>
+      <div class="quiz-q__options"><button type="button" class="quiz-opt"><span class="quiz-opt__letter">A</span><span><p>Uma chave estrangeira é sempre composta por múltiplas colunas.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">B</span><span><p>Chaves estrangeiras podem conter valores nulos e não precisam fazer referência a uma chave primária de outra tabela.</p></span></button><button type="button" class="quiz-opt" data-correct="true"><span class="quiz-opt__letter">C</span><span><p>A chave estrangeira é usada para criar relacionamentos entre tabelas, referenciando uma chave primária em outra tabela.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">D</span><span><p>Uma chave estrangeira deve ser única em sua tabela, assim como uma chave primária.</p></span></button><button type="button" class="quiz-opt"><span class="quiz-opt__letter">E</span><span><p>Chaves estrangeiras são usadas apenas para garantir que valores de colunas sejam exclusivos.</p></span></button></div>
+      
+    </li></ol>
+  </section>
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/20%20-%20Refer%C3%AAncias%20e%20recursos%20adicionais%20(opcional).html"><small>← Anterior</small><strong>3.20 - Referências e recursos adicionais (opcional)</strong></a>
+        <a class="next" id="next-link" href="../06%20-%20Se%C3%A7%C3%A3o%204%20-%20Testes%20da%20Aplica%C3%A7%C3%A3o/01%20-%20Introdu%C3%A7%C3%A3o%20da%20se%C3%A7%C3%A3o.html"><small>Próxima →</small><strong>4.1 - Introdução da seção</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

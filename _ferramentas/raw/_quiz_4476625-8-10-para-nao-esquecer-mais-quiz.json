@@ -1,0 +1,256 @@
+{
+  "slug": "4476625-8-10-para-nao-esquecer-mais-quiz",
+  "href": "/200838-back-end-em-node-js/4476625-8-10-para-nao-esquecer-mais-quiz/quiz_attempts/3518320/review",
+  "title": "8.10 - Para não esquecer mais | Quiz",
+  "intro": "",
+  "questions": [
+    {
+      "prompt": "\n          <p>Leia as afirmações abaixo sobre o uso de Rate Limiting e Throttling em uma API:</p>\n<p>I - O <code>Rate Limiting</code> é uma técnica que define um limite máximo de requisições que podem ser feitas por um cliente em um intervalo de tempo.</p>\n<p>II - O <code>Throttling</code> desacelera as requisições após o limite ser atingido, mas não bloqueia completamente o cliente.</p>\n<p>III - O <code>Rate Limiting</code> é uma funcionalidade padrão do <code>Express.js</code>, não sendo necessário usar bibliotecas externas.</p>\n<p>Quais dessas afirmativas estão corretas?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>I, III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>I, II.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "C",
+          "html": "<p>II, III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>I, II, III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Apenas III.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Leia as afirmações abaixo sobre o uso de Rate Limiting e Throttling em uma API:</p>\n<p>I - O <code>Rate Limiting</code> é uma técnica que define um limite máximo de requisições que podem ser feitas por um cliente em um intervalo de tempo.</p>\n<p>II - O <code>Throttling</code> desacelera as requisições após o limite ser atingido, mas não bloqueia completamente o cliente.</p>\n<p>III - O <code>Rate Limiting</code> é uma funcionalidade padrão do <code>Express.js</code>, não sendo necessário usar bibliotecas externas.</p>\n<p>Quais dessas afirmativas estão corretas?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>I, III.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>I, II.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>II, III.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>I, II, III.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas III.</p>\n</span>\n</div>        </div>\n\n          <div class=\"mt-2 flex px-1\">\n            <div class=\"flex h-5 items-center px-2\">\n              <div class=\"icon flex-none pointer-events-none size-5 \"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\">\n  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"></path>\n</svg>\n</div>\n            </div>\n            <div class=\"ml-1 w-full\">\n              <p>Apenas a afirmativa III está incorreta, pois o Express.js não possui Rate Limiting nativo, sendo necessário utilizar bibliotecas como express-rate-limit. Sendo assim, as afirmativas I e II são corretas.</p>\n<p>Com isso, resposta correta a alternativa B.</p>\n\n            </div>\n          </div>\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Leia as afirmações abaixo sobre SQL Injection e formas de prevenção:</p>\n<p>I - A <code>SQL Injection</code> ocorre quando entradas do usuário são concatenadas diretamente em comandos SQL, permitindo a execução de comandos maliciosos.</p>\n<p>II - Prepared Statements são técnicas não recomendadas para prevenir <code>SQL Injection</code>, pois separam os dados da lógica SQL.</p>\n<p>III - A <code>SQL Injection</code> só é possível em bancos de dados SQL e podem afetar outras partes do sistema.</p>\n<p>Quais dessas afirmativas estão corretas?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>I, III.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "B",
+          "html": "<p>I, II.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>II, III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>I, II, III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Apenas III.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Leia as afirmações abaixo sobre SQL Injection e formas de prevenção:</p>\n<p>I - A <code>SQL Injection</code> ocorre quando entradas do usuário são concatenadas diretamente em comandos SQL, permitindo a execução de comandos maliciosos.</p>\n<p>II - Prepared Statements são técnicas não recomendadas para prevenir <code>SQL Injection</code>, pois separam os dados da lógica SQL.</p>\n<p>III - A <code>SQL Injection</code> só é possível em bancos de dados SQL e podem afetar outras partes do sistema.</p>\n<p>Quais dessas afirmativas estão corretas?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>I, III.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>I, II.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>II, III.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>I, II, III.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas III.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Leia as afirmações abaixo sobre o uso do middleware Helmet para proteção de cabeçalhos HTTP:</p>\n<p>I - O Helmet adiciona proteções como HSTS e CSP automaticamente para todas as respostas HTTP, sem necessidade de configuração adicional.</p>\n<p>II - A funcionalidade Content-Security-Policy (CSP) do Helmet ajuda a prevenir ataques de XSS, controlando as fontes de conteúdo que podem ser carregadas pelo navegador.</p>\n<p>III - O Helmet impede totalmente a possibilidade de ataques de injeção de código, protegendo contra todas as vulnerabilidades existentes.</p>\n<p>Quais dessas afirmativas estão corretas?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>I, III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>I, II.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Apenas III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Apenas II.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Todas as afirmativas estão corretas.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Leia as afirmações abaixo sobre o uso do middleware Helmet para proteção de cabeçalhos HTTP:</p>\n<p>I - O Helmet adiciona proteções como HSTS e CSP automaticamente para todas as respostas HTTP, sem necessidade de configuração adicional.</p>\n<p>II - A funcionalidade Content-Security-Policy (CSP) do Helmet ajuda a prevenir ataques de XSS, controlando as fontes de conteúdo que podem ser carregadas pelo navegador.</p>\n<p>III - O Helmet impede totalmente a possibilidade de ataques de injeção de código, protegendo contra todas as vulnerabilidades existentes.</p>\n<p>Quais dessas afirmativas estão corretas?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>I, III.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>I, II.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas III.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas II.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Todas as afirmativas estão corretas.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual das opções a seguir descreve corretamente a funcionalidade de compressão de respostas HTTP com o middleware Compression?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>A compressão aumenta o tamanho das respostas HTTP para facilitar a leitura pelo navegador.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>A compressão funciona apenas para arquivos estáticos e não pode ser aplicada a respostas dinâmicas.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>A compressão elimina a necessidade de configurar o cabeçalho <code>Content-Encoding</code>.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>A compressão reduz o tamanho das respostas HTTP, melhorando o tempo de carregamento.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "E",
+          "html": "<p>A compressão é configurada automaticamente pelo <code>Express.js</code> e não precisa de um middleware específico.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual das opções a seguir descreve corretamente a funcionalidade de compressão de respostas HTTP com o middleware Compression?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>A compressão aumenta o tamanho das respostas HTTP para facilitar a leitura pelo navegador.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>A compressão funciona apenas para arquivos estáticos e não pode ser aplicada a respostas dinâmicas.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>A compressão elimina a necessidade de configurar o cabeçalho <code>Content-Encoding</code>.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>A compressão reduz o tamanho das respostas HTTP, melhorando o tempo de carregamento.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>A compressão é configurada automaticamente pelo <code>Express.js</code> e não precisa de um middleware específico.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual das opções a seguir descreve corretamente o uso do middleware Morgan para monitorar logs de requisições HTTP em uma API?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>O Morgan impede a exibição de status de erro no log para proteger informações confidenciais.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>O Morgan funciona apenas no ambiente de produção e não pode ser usado em desenvolvimento.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>O Morgan permite registrar logs detalhados de cada requisição HTTP, ajudando a monitorar a aplicação.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "D",
+          "html": "<p>O Morgan registra apenas logs de requisições bem-sucedidas, ignorando erros.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>O Morgan substitui a necessidade de ferramentas externas de monitoramento.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual das opções a seguir descreve corretamente o uso do middleware Morgan para monitorar logs de requisições HTTP em uma API?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>O Morgan impede a exibição de status de erro no log para proteger informações confidenciais.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>O Morgan funciona apenas no ambiente de produção e não pode ser usado em desenvolvimento.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>O Morgan permite registrar logs detalhados de cada requisição HTTP, ajudando a monitorar a aplicação.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>O Morgan registra apenas logs de requisições bem-sucedidas, ignorando erros.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>O Morgan substitui a necessidade de ferramentas externas de monitoramento.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual das opções descreve corretamente a funcionalidade de limitar o tamanho do corpo das requisições HTTP em uma API Express?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Limitar o corpo da requisição impede qualquer tipo de payload maior que o limite, independentemente de seu conteúdo ou origem, sem permitir exceções ou configurações adicionais.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>O limite do corpo da requisição evita que a aplicação processe dados muito grandes, protegendo contra sobrecarga do servidor e ataques como DoS.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "C",
+          "html": "<p>O limite é aplicado apenas para requisições POST, ignorando métodos como PUT e PATCH.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Configurar o limite do corpo remove automaticamente a necessidade de validação manual dos dados enviados.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Limitar o corpo da requisição aumenta o uso de memória no servidor, pois exige buffer adicional para processar os dados antes de rejeitá-los.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual das opções descreve corretamente a funcionalidade de limitar o tamanho do corpo das requisições HTTP em uma API Express?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Limitar o corpo da requisição impede qualquer tipo de payload maior que o limite, independentemente de seu conteúdo ou origem, sem permitir exceções ou configurações adicionais.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>O limite do corpo da requisição evita que a aplicação processe dados muito grandes, protegendo contra sobrecarga do servidor e ataques como DoS.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>O limite é aplicado apenas para requisições POST, ignorando métodos como PUT e PATCH.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Configurar o limite do corpo remove automaticamente a necessidade de validação manual dos dados enviados.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Limitar o corpo da requisição aumenta o uso de memória no servidor, pois exige buffer adicional para processar os dados antes de rejeitá-los.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Qual das opções descreve corretamente a funcionalidade do middleware CORS em uma API?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>O middleware CORS protege contra ataques de XSS (Cross-Site Scripting), impedindo que scripts maliciosos sejam executados no navegador do cliente.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>O middleware CORS valida todas as requisições feitas à API e bloqueia automaticamente aquelas consideradas suspeitas, independentemente de sua origem.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>O middleware CORS é ativado automaticamente em APIs Express e não precisa de nenhuma configuração adicional para funcionar corretamente.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>O middleware CORS controla quais origens podem acessar os recursos da API, configurando permissões específicas para garantir segurança em requisições de diferentes domínios.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "E",
+          "html": "<p>O middleware CORS só é útil em servidores de produção e deve ser desativado no ambiente de desenvolvimento.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Qual das opções descreve corretamente a funcionalidade do middleware CORS em uma API?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>O middleware CORS protege contra ataques de XSS (Cross-Site Scripting), impedindo que scripts maliciosos sejam executados no navegador do cliente.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>O middleware CORS valida todas as requisições feitas à API e bloqueia automaticamente aquelas consideradas suspeitas, independentemente de sua origem.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>O middleware CORS é ativado automaticamente em APIs Express e não precisa de nenhuma configuração adicional para funcionar corretamente.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>O middleware CORS controla quais origens podem acessar os recursos da API, configurando permissões específicas para garantir segurança em requisições de diferentes domínios.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>O middleware CORS só é útil em servidores de produção e deve ser desativado no ambiente de desenvolvimento.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Leia as afirmações abaixo sobre a criação de documentações interativas com Swagger:</p>\n<p>I - O Swagger permite testar endpoints diretamente da documentação gerada, fornecendo uma interface interativa que simula requisições HTTP.</p>\n<p>II - É necessário configurar manualmente o esquema de segurança no Swagger para rotas que exigem autenticação, como as que utilizam Bearer Tokens.</p>\n<p>III - O Swagger gera automaticamente a documentação da API com base nas rotas existentes no arquivo app.js, sem a necessidade de arquivos JSON ou YAML adicionais.</p>\n<p>Quais dessas afirmativas estão corretas?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>I, II.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "B",
+          "html": "<p>I, III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>II, III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Apenas III.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Todas as afirmativas estão corretas.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Leia as afirmações abaixo sobre a criação de documentações interativas com Swagger:</p>\n<p>I - O Swagger permite testar endpoints diretamente da documentação gerada, fornecendo uma interface interativa que simula requisições HTTP.</p>\n<p>II - É necessário configurar manualmente o esquema de segurança no Swagger para rotas que exigem autenticação, como as que utilizam Bearer Tokens.</p>\n<p>III - O Swagger gera automaticamente a documentação da API com base nas rotas existentes no arquivo app.js, sem a necessidade de arquivos JSON ou YAML adicionais.</p>\n<p>Quais dessas afirmativas estão corretas?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>I, II.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>I, III.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>II, III.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas III.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Todas as afirmativas estão corretas.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "slug": "4499412-proximos-passos",
+  "title": "Próximos passos",
+  "html": "\n        <p dir=\"auto\">Nas próximas seções, iremos abordar conteúdos que exigem conhecimento prévio em&nbsp;<strong><a href=\"/191919\">Docker</a></strong>. Se você já tem familiaridade com esse tema, pode seguir diretamente para as próximas lições. Caso contrário, recomendamos que faça nosso curso complementar de Docker.</p>\n<p dir=\"auto\">Se você avançar e perceber que está tendo dificuldades por falta de conhecimento em Docker, sugerimos que volte e complete o curso complementar antes de continuar.</p>\n<p dir=\"auto\">Para ajudar na decisão, preparamos um quiz com perguntas sobre os tópicos necessários. Se você acertar as questões, pode prosseguir com confiança. Caso contrário, será fundamental fazer o curso complementar para garantir o melhor aproveitamento do conteúdo.</p>\n      ",
+  "videos": [],
+  "extras": [
+    {
+      "t": "Responder Quiz",
+      "h": "https://cursos.betrybe.com/200838-back-end-em-node-js/4499412-proximos-passos/quiz_attempts/new"
+    }
+  ]
+}

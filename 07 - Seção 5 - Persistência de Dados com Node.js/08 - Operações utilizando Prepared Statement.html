@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.8 - Operações utilizando Prepared Statement · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476563-5-8-operacoes-utilizando-prepared-statement">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 5 - Persistência de Dados com Node.js</span><span>·</span><span>Lição 8 de 16</span></div>
+      <h1>5.8 - Operações utilizando Prepared Statement</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>2 blocos de código</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>1 vídeo</span>
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Em algumas consultas, precisamos enviar informações adicionais para alterar a query que será executada. Um exemplo disso é buscar um registro específico pelo seu <code>id</code>. No entanto, se não utilizarmos práticas adequadas como o uso de <em>Prepared Statements</em>, a aplicação fica vulnerável a um tipo de ataque chamado <code>SQL Injection</code>.</p>
+<blockquote>
+<p><strong>⚠️ Atenção:</strong> <em>SQL injection</em> é um tipo de ataque que insere comandos maliciosos no código SQL através de entradas que não tratam os dados de maneira adequada, permitindo que o invasor manipule a consulta e acesse ou modifique dados indevidamente.</p>
+</blockquote>
+<h2 id="entendendo-o-conceito-de-prepared-statements">Entendendo o Conceito de Prepared Statements</h2>
+<p>Um <em>Prepared Statement</em> é uma forma de parametrizar consultas SQL, separando a lógica da consulta dos dados a serem passados. Ele define a estrutura da consulta e utiliza <em>placeholders</em> (<code>?</code>) para valores, o que evita que esses valores sejam interpretados como parte do código SQL. Isso é essencial para prevenir ataques de <em>SQL Injection</em>, pois os dados são tratados como dados puros, e não como comandos executáveis.</p>
+<p>Além de aumentar a segurança, <em>Prepared Statements</em> podem melhorar o desempenho em consultas repetidas, pois o banco de dados pode compilar a estrutura da consulta uma única vez e apenas modificar os valores nos <em>placeholders</em>, sem precisar recompilar toda a <em>query</em> a cada execução.</p>
+<details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>O <code>cds.ql</code> gera consultas parametrizadas automaticamente: <code>SELECT.one.from(Students).where({ ID: id })</code>. Até a forma com template string é segura, pois vira parâmetro: <code>SELECT.from(Students).where`ID = ${id}`</code>.</li><li>O que <strong>não</strong> fazer: concatenar strings em <code>cds.run('SELECT ... ' + valor)</code> — volta o risco de SQL injection.</li></ul></div></details><h2 id="criando-a-funcao-findbyid-para-buscar-um-estudante-por-id">Criando a função <code>findById</code> para Buscar um Estudante por ID</h2>
+<p>Para adicionar uma funcionalidade que retorna um estudante específico pelo seu <code>id</code>, vamos criar a função <code>findById</code> no arquivo <code>src/database/studentsDB.js</code>. Essa função usará um Prepared Statement para executar a consulta SQL de forma segura e eficiente.</p>
+<pre><code class="language-javascript">// src/database/studentsDB.js
+// const conn = require('./connection');
+
+// const findAll = async () =&gt; {
+//   const [result] = await conn.execute('SELECT * FROM students;');
+//   return result;
+// };
+
+const findById = async (id) =&gt; {
+  const [result] = await conn.execute('SELECT * FROM students WHERE id = ?;', [id]);
+  return result[0];
+};
+
+// module.exports = {
+//   findAll,
+  findById,
+// };
+</code></pre>
+<h3 id="entendendo-o-codigo">Entendendo o código</h3>
+<ol>
+<li><strong>Uso do <code>?</code> como <em>placeholder</em></strong></li>
+</ol>
+<p>No exemplo acima, usamos o <code>?</code> para marcar onde o <code>id</code> do estudante será inserido na consulta SQL. O <code>[id]</code> passado como segundo argumento para <code>conn.execute</code> é um array que contém o valor que substituirá o <code>?</code>. Esse valor é tratado pelo <code>mysql2</code> como um dado puro, evitando que qualquer conteúdo potencialmente malicioso seja executado como SQL.</p>
+<blockquote>
+<p><strong>Anota aí 🖊:</strong> Usar <em>placeholders</em> é uma prática essencial de segurança. Caso concatenássemos diretamente o <code>id</code> na consulta, estaríamos vulneráveis a ataques de <em>SQL Injection</em>, onde um invasor poderia manipular a consulta SQL e comprometer a segurança do banco de dados. Com os <em>placeholders</em>, os valores são tratados como dados fixos e não podem alterar a estrutura da consulta.</p>
+</blockquote>
+<ol>
+<li><strong>Por que usamos result[0]?</strong></li>
+</ol>
+<p>A função <code>findById</code> retorna apenas um registro, mas o <code>conn.execute</code> sempre devolve os resultados em um array. Como esperamos apenas um item, extraímos o primeiro elemento (<code>result[0]</code>) para simplificar o retorno, que contém o objeto do estudante correspondente ao <code>id</code> passado.</p>
+<h2 id="atualizando-o-arquivo-de-rotas-para-suportar-a-consulta-por-id">Atualizando o arquivo de rotas para suportar a consulta por ID</h2>
+<p>Agora, vamos modificar <code>studentRoutes.js</code> para incluir uma nova rota <code>GET /students/:id</code>, que usará a função <code>findById</code> para retornar os dados de um estudante específico.</p>
+<pre><code class="language-javascript">// src/routes/studentRoutes.js
+
+// const express = require('express');
+// const studentsDB = require('../database/studentsDB');
+
+// Outras implementações
+
+router.get('/:id', async (req, res) =&gt; {
+  const { id } = req.params;
+  try {
+    const student = await studentsDB.findById(id);
+
+    if (!student) {
+      return res.status(404).json({ message: 'Student Not Found!' });
+    }
+
+    return res.status(200).json(student);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({ message: 'Internal Server Error!' });
+  }
+});
+
+// module.exports = router;
+</code></pre>
+<p>Agora, vamos fixar os conceitos aprendidos com o vídeo a seguir:</p>
+<figure><div class="embed-content"><a class="video-card" href="https://player.vimeo.com/video/1039088497" target="_blank" rel="noopener noreferrer"><span class="video-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span><strong>Vídeo da aula</strong><small>Abrir no Vimeo (requer internet)</small></span></a></div></figure></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../07%20-%20Se%C3%A7%C3%A3o%205%20-%20Persist%C3%AAncia%20de%20Dados%20com%20Node.js/07%20-%20Opera%C3%A7%C3%B5es%20de%20Leitura.html"><small>← Anterior</small><strong>5.7 - Operações de Leitura</strong></a>
+        <a class="next" id="next-link" href="../07%20-%20Se%C3%A7%C3%A3o%205%20-%20Persist%C3%AAncia%20de%20Dados%20com%20Node.js/09%20-%20Opera%C3%A7%C3%B5es%20de%20Cria%C3%A7%C3%A3o.html"><small>Próxima →</small><strong>5.9 - Operações de Criação</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

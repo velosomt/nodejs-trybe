@@ -1,0 +1,7 @@
+{
+  "slug": "4207902-2-4-utilizando-modulos-internos",
+  "title": "2.4 - Utilizando Módulos internos",
+  "html": "\n        <p dir=\"auto\">Para utilizarmos um módulo interno no&nbsp;<code>Node.js</code>, você deve passar o nome do pacote como parâmetro para a função&nbsp;<code>require</code>. Por exemplo,&nbsp;<code>require('fs')</code>&nbsp;importa o pacote&nbsp;<code>fs</code>, responsável pelo sistema de arquivos.</p>\n<p dir=\"auto\">Após importar um pacote, você pode utilizá-lo como uma variável em seu código da seguinte forma:</p>\n<pre>const fs = require('fs');\n\nfs.readFileSync('./meuArquivo.txt');</pre>\n<p dir=\"auto\">Note que a forma de importar um módulo interno é semelhante à de importar um módulo local de outro arquivo.</p>\n<p dir=\"auto\">Na próxima lição iremos utilizar alguns módulos internos, além de abordar a Leitura e Escrita de arquivos com o módulo&nbsp;<code>fs</code>. Caso tenha curiosidade, explore outros módulos internos na&nbsp;<a href=\"https://nodejs.org/docs/latest/api/\">Documentação Oficial do Node.js</a>.</p>\n      ",
+  "videos": [],
+  "extras": []
+}

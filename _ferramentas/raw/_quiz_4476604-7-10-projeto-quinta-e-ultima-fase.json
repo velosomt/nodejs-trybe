@@ -1,0 +1,163 @@
+{
+  "slug": "4476604-7-10-projeto-quinta-e-ultima-fase",
+  "href": "/200838-back-end-em-node-js/4476604-7-10-projeto-quinta-e-ultima-fase/quiz_attempts/3518319/review",
+  "title": "🚧 7.10 - Projeto - quinta e última fase - Quiz",
+  "intro": "",
+  "questions": [
+    {
+      "prompt": "\n          <p>O que acontece ao chamar POST /register com um e-mail já cadastrado?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Um novo usuário é criado com um ID diferente, mesmo com o mesmo e-mail.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>A API retorna 500 Internal Server Error.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>A API retorna 400 Bad Request com uma mensagem de erro.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "D",
+          "html": "<p>A senha do usuário antigo é redefinida automaticamente.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>O banco de dados remove o usuário existente e cria um novo.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>O que acontece ao chamar POST /register com um e-mail já cadastrado?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Um novo usuário é criado com um ID diferente, mesmo com o mesmo e-mail.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>A API retorna 500 Internal Server Error.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>A API retorna 400 Bad Request com uma mensagem de erro.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>A senha do usuário antigo é redefinida automaticamente.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>O banco de dados remove o usuário existente e cria um novo.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>O que o middleware de autenticação JWT (validateToken.js) deve fazer ao receber uma requisição com um token inválido?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Continuar o processamento da requisição normalmente.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>Lançar um erro 403 Forbidden e impedir o acesso.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Criar um novo token automaticamente para o usuário.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Retornar 401 Unauthorized e interromper a requisição.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Substituir o token inválido por um token fixo temporário.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>O que o middleware de autenticação JWT (validateToken.js) deve fazer ao receber uma requisição com um token inválido?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Continuar o processamento da requisição normalmente.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>Lançar um erro 403 Forbidden e impedir o acesso.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Criar um novo token automaticamente para o usuário.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Retornar 401 Unauthorized e interromper a requisição.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Substituir o token inválido por um token fixo temporário.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Considere as seguintes afirmações sobre a autenticação JWT:</p>\n<p>I. O middleware de autenticação deve verificar se o token JWT é válido antes de permitir o acesso a rotas protegidas.<br>\nII. O token JWT deve ser enviado no header Authorization da requisição.<br>\nIII. O backend deve armazenar os tokens JWT no banco de dados para garantir segurança.<br>\nIV. Se um token estiver ausente, a API deve retornar 403 Forbidden.<br>\nV. Um usuário autenticado pode acessar todas as rotas protegidas, independentemente do seu papel (role).</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Apenas I e II são verdadeiras.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "B",
+          "html": "<p>Apenas III e IV são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Apenas I, II e IV são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Apenas II, III e V são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Todas as afirmações são verdadeiras.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Considere as seguintes afirmações sobre a autenticação JWT:</p>\n<p>I. O middleware de autenticação deve verificar se o token JWT é válido antes de permitir o acesso a rotas protegidas.<br>\nII. O token JWT deve ser enviado no header Authorization da requisição.<br>\nIII. O backend deve armazenar os tokens JWT no banco de dados para garantir segurança.<br>\nIV. Se um token estiver ausente, a API deve retornar 403 Forbidden.<br>\nV. Um usuário autenticado pode acessar todas as rotas protegidas, independentemente do seu papel (role).</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas I e II são verdadeiras.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas III e IV são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas I, II e IV são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas II, III e V são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Todas as afirmações são verdadeiras.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Considere as seguintes afirmações sobre a autenticação via GitHub OAuth:</p>\n<p>I. O usuário deve ser redirecionado para a página do GitHub para se autenticar.<br>\nII. O GitHub retorna diretamente os dados do usuário, sem necessidade de um token de acesso.<br>\nIII. Após a autenticação, o backend deve criar um usuário no banco, caso ele ainda não exista.<br>\nIV. O token JWT gerado pelo backend após o login via GitHub pode ser usado para acessar rotas protegidas.<br>\nV. O GitHub armazena todas as senhas dos usuários autenticados no banco da aplicação.</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>Apenas I, II e IV são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>Apenas II e V são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "C",
+          "html": "<p>Apenas III, IV e V são verdadeiras.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>Apenas I, III e IV são verdadeiras.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "E",
+          "html": "<p>Todas as afirmações são verdadeiras.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Considere as seguintes afirmações sobre a autenticação via GitHub OAuth:</p>\n<p>I. O usuário deve ser redirecionado para a página do GitHub para se autenticar.<br>\nII. O GitHub retorna diretamente os dados do usuário, sem necessidade de um token de acesso.<br>\nIII. Após a autenticação, o backend deve criar um usuário no banco, caso ele ainda não exista.<br>\nIV. O token JWT gerado pelo backend após o login via GitHub pode ser usado para acessar rotas protegidas.<br>\nV. O GitHub armazena todas as senhas dos usuários autenticados no banco da aplicação.</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas I, II e IV são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas II e V são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas III, IV e V são verdadeiras.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>Apenas I, III e IV são verdadeiras.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>Todas as afirmações são verdadeiras.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    },
+    {
+      "prompt": "\n          <p>Se um usuário tentar acessar uma rota protegida com um token JWT expirado, o que deve acontecer?</p>\n\n        ",
+      "options": [
+        {
+          "letter": "A",
+          "html": "<p>O token deve ser renovado automaticamente.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "B",
+          "html": "<p>A API deve retornar 401 Unauthorized.</p>\n",
+          "cls": "question-response question-response--correct"
+        },
+        {
+          "letter": "C",
+          "html": "<p>O usuário ainda pode acessar a rota, pois a API apenas emite um aviso.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "D",
+          "html": "<p>O servidor deve desconectar automaticamente todos os dispositivos do usuário.</p>\n",
+          "cls": "question-response"
+        },
+        {
+          "letter": "E",
+          "html": "<p>O token pode ser usado indefinidamente até o usuário fazer logout.</p>\n",
+          "cls": "question-response"
+        }
+      ],
+      "raw": "<div class=\"question\">\n        <div class=\"prose prose-base prose-slate break-words dark:prose-invert prose-code:whitespace-pre prose-code:before:content-none prose-code:after:content-none\">\n          <p>Se um usuário tentar acessar uma rota protegida com um token JWT expirado, o que deve acontecer?</p>\n\n        </div>\n        <div class=\"relative mt-4 space-y-2\" data-controller=\"form\">\n            <div class=\"question-response\">\n              <div class=\"question-response__letter\">A</div>\n              <span class=\"ml-2 grow self-center\"><p>O token deve ser renovado automaticamente.</p>\n</span>\n</div>            <div class=\"question-response question-response--correct\">\n              <div class=\"question-response__letter\">B</div>\n              <span class=\"ml-2 grow self-center\"><p>A API deve retornar 401 Unauthorized.</p>\n</span>\n                <div class=\"icon flex-none pointer-events-none size-5 ml-2 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\n  <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n</svg>\n</div>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">C</div>\n              <span class=\"ml-2 grow self-center\"><p>O usuário ainda pode acessar a rota, pois a API apenas emite um aviso.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">D</div>\n              <span class=\"ml-2 grow self-center\"><p>O servidor deve desconectar automaticamente todos os dispositivos do usuário.</p>\n</span>\n</div>            <div class=\"question-response\">\n              <div class=\"question-response__letter\">E</div>\n              <span class=\"ml-2 grow self-center\"><p>O token pode ser usado indefinidamente até o usuário fazer logout.</p>\n</span>\n</div>        </div>\n\n      </div>"
+    }
+  ]
+}

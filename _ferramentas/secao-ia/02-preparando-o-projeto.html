@@ -1,0 +1,66 @@
+<p>O servidor de CI é uma máquina <strong>nova e vazia a cada execução</strong>: não tem o seu <code>node_modules</code>, nem o seu <code>.env</code>, nem o MySQL rodando no seu Docker. Se o projeto só funciona "na minha máquina", o pipeline vai mostrar isso rapidinho. Antes de escrever qualquer YAML, garanta os pontos abaixo.</p>
+
+<h2>1. Os scripts do package.json são o contrato com o pipeline</h2>
+<p>O pipeline não deve saber <em>como</em> seus testes rodam, só <em>qual script</em> chamar. Padronize:</p>
+<pre><code class="language-json">{
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "lint": "eslint .",
+    "test": "jest"
+  }
+}</code></pre>
+<ul>
+<li><strong>Código de saída é tudo.</strong> O pipeline só sabe que algo falhou porque o comando termina com código diferente de <code>0</code>. Jest e ESLint já fazem isso. Nunca "engula" o erro com <code>|| true</code> ou <code>; exit 0</code>.</li>
+<li><strong>Nada interativo ou infinito no <code>test</code>.</strong> Modo watch (<code>jest --watch</code>, <code>nodemon</code>) prende o pipeline até estourar o tempo limite. Deixe o watch em outro script.</li>
+<li>O GitHub Actions define a variável <code>CI=true</code>. O Jest detecta isso e passa a se comportar como se tivesse recebido <code>--ci</code> (por exemplo, não grava snapshots novos).</li>
+</ul>
+
+<h2>2. Instalação reprodutível: package-lock.json + npm ci</h2>
+<ul>
+<li><strong>Faça commit do <code>package-lock.json</code>.</strong> Ele fixa as versões exatas de todas as dependências (inclusive as indiretas).</li>
+<li>No pipeline e no Docker, use <code>npm ci</code> no lugar de <code>npm install</code>: apaga o <code>node_modules</code>, instala exatamente o que está no lock e <strong>falha</strong> se o lock estiver desatualizado em relação ao <code>package.json</code>. É mais rápido e evita a surpresa "ontem funcionava".</li>
+<li><code>node_modules</code> nunca vai para o Git (já está no <code>.gitignore</code> que o curso usa).</li>
+</ul>
+
+<h2>3. Fixe a versão do Node.js</h2>
+<p>Teste na mesma versão que roda em produção. Duas formas simples, que podem ser usadas juntas:</p>
+<pre><code class="language-bash"># .nvmrc (na raiz do projeto) — lido pelo nvm e pelo actions/setup-node
+22</code></pre>
+<pre><code class="language-json">{
+  "engines": { "node": "&gt;=22" }
+}</code></pre>
+<p>Lembre que o Node 20 saiu de suporte em 30/04/2026. Use uma versão LTS ativa (22 ou 24), a mesma da imagem do <a href="@@LESSON:4505300-9-4-criando-um-dockerfile@@">Dockerfile</a>.</p>
+
+<h2>4. Testes que não dependem do seu computador</h2>
+<p>Os testes de unidade e de integração da Seção 4 e da <a href="@@LESSON:4476568-5-13-testes-de-integracao-com-jest-spyon@@">lição 5.13</a> usam <strong>mocks</strong> (<code>jest.spyOn</code>) no lugar do banco. Isso é ótimo para CI: eles rodam em qualquer máquina, sem MySQL.</p>
+<p>Se você tiver testes que precisam de um banco de verdade, há dois caminhos:</p>
+<ul>
+<li>Separá-los em outro script (ex.: <code>"test": "jest tests/unit"</code> e <code>"test:db": "jest tests/db"</code>) e rodar só onde houver banco.</li>
+<li>Subir um MySQL descartável <strong>dentro do pipeline</strong> com um <em>service container</em> (veja a lição IA.3).</li>
+</ul>
+
+<h2>5. Configuração só por variáveis de ambiente</h2>
+<ul>
+<li>Tudo que muda entre ambientes (host do banco, senha, <code>JWT_SECRET</code>, porta) vem de <code>process.env</code>, como na <a href="@@LESSON:4476560-5-5-variaveis-de-ambiente@@">lição 5.5</a>.</li>
+<li><code>.env</code> fica fora do Git. Faça commit de um <code>.env.example</code> com as <strong>chaves</strong> e valores fictícios, para documentar o que precisa ser configurado.</li>
+<li>No pipeline, os valores sensíveis vêm de <strong>segredos</strong> (lição IA.4), nunca do código.</li>
+</ul>
+
+<h2>6. (Opcional) Um portão de cobertura</h2>
+<p>A <a href="@@LESSON:4476422-4-10-configuracoes-do-jest@@">lição 4.10</a> mostra o relatório de cobertura. Com <code>coverageThreshold</code>, o Jest <strong>falha</strong> se a cobertura cair abaixo do mínimo, e o pipeline barra o merge:</p>
+<pre><code class="language-javascript">// jest.config.js
+module.exports = {
+  collectCoverage: true,
+  coverageThreshold: {
+    global: { lines: 80, branches: 70 },
+  },
+};</code></pre>
+
+<h2>Teste rápido: simule a CI na sua máquina</h2>
+<p>Clone o repositório em uma pasta nova e rode o mesmo que o pipeline vai rodar. Se passar aqui, é bem provável que passe lá:</p>
+<pre><code class="language-bash">git clone https://github.com/SEU-USUARIO/cookmaster.git cookmaster-ci
+cd cookmaster-ci
+npm ci
+npm run lint --if-present
+npm test</code></pre>

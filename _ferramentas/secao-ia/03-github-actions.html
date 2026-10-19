@@ -1,0 +1,136 @@
+<p>O <strong>GitHub Actions</strong> executa automações descritas em arquivos YAML dentro da pasta <code>.github/workflows/</code> do repositório. Nesta lição você vai criar a CI da API Cookmaster: a cada push e a cada pull request, instalar, verificar e testar o projeto.</p>
+
+<h2>Vocabulário mínimo</h2>
+<table>
+<thead><tr><th>Conceito</th><th>O que é</th></tr></thead>
+<tbody>
+<tr><td><strong>Workflow</strong></td><td>Um arquivo <code>.yml</code> em <code>.github/workflows/</code>. Um repositório pode ter vários (ex.: <code>ci.yml</code>, <code>deploy.yml</code>).</td></tr>
+<tr><td><strong>Evento</strong> (<code>on</code>)</td><td>O que dispara o workflow: <code>push</code>, <code>pull_request</code>, <code>release</code>, <code>schedule</code>, <code>workflow_dispatch</code> (botão manual).</td></tr>
+<tr><td><strong>Job</strong></td><td>Um conjunto de passos que roda em <strong>uma</strong> máquina. Jobs rodam em paralelo, a menos que você declare dependência com <code>needs</code>.</td></tr>
+<tr><td><strong>Step</strong></td><td>Um passo do job: ou um comando de terminal (<code>run</code>), ou uma action pronta (<code>uses</code>).</td></tr>
+<tr><td><strong>Runner</strong></td><td>A máquina virtual que executa o job (<code>runs-on: ubuntu-latest</code>). Já vem com Node, Docker, Git etc. É descartada no fim.</td></tr>
+<tr><td><strong>Action</strong></td><td>Um passo reutilizável publicado por alguém, como <code>actions/checkout</code> (baixa o código) e <code>actions/setup-node</code> (instala o Node).</td></tr>
+</tbody>
+</table>
+
+<h2>O primeiro workflow</h2>
+<p>Crie o arquivo <code>.github/workflows/ci.yml</code> na raiz do projeto Cookmaster:</p>
+<pre><code class="language-yaml">name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v5
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Testes
+        run: npm test
+
+      - name: Garantir que a imagem Docker compila
+        run: docker build -t cookmaster-backend .</code></pre>
+
+<h3>Linha a linha</h3>
+<ul>
+<li><code>on.push.branches: [main]</code> — roda a cada push na <code>main</code> (é isso que vai liberar o deploy na lição IA.5).</li>
+<li><code>on.pull_request</code> — roda em todo pull request, <strong>antes</strong> do merge. É aqui que a CI te salva.</li>
+<li><code>permissions: contents: read</code> — o token automático do workflow (<code>GITHUB_TOKEN</code>) só pode ler o repositório. Dê apenas a permissão necessária.</li>
+<li><code>actions/checkout</code> — sem ele o runner não tem o seu código.</li>
+<li><code>actions/setup-node</code> com <code>node-version-file: .nvmrc</code> — usa a mesma versão de Node do projeto. <code>cache: npm</code> guarda o cache do npm entre execuções e acelera o <code>npm ci</code>.</li>
+<li><code>npm run lint --if-present</code> — roda o lint se o script existir. Se não existir, segue em frente.</li>
+<li><code>npm test</code> — se algum teste falhar, o job fica vermelho e os passos seguintes não rodam.</li>
+<li><code>docker build</code> — confirma que o <a href="@@LESSON:4505300-9-4-criando-um-dockerfile@@">Dockerfile</a> continua válido. Não publica a imagem em lugar nenhum.</li>
+</ul>
+<p>As versões das actions (<code>@v5</code>) evoluem. Confira a mais recente na página de cada action no GitHub Marketplace. Na lição IA.4 você verá como o <strong>Dependabot</strong> pode atualizá-las para você.</p>
+
+<h2>Vendo o resultado</h2>
+<ol>
+<li>Faça commit e push do arquivo: <code>git add .github &amp;&amp; git commit -m "ci: adiciona workflow" &amp;&amp; git push</code>.</li>
+<li>No GitHub, abra a aba <strong>Actions</strong> do repositório. Clique na execução para ver o log de cada passo.</li>
+<li>O commit e o pull request ganham um ✓ verde ou um ✗ vermelho. Esse status é o que você vai exigir antes do merge (lição IA.4) e antes do deploy (lição IA.5).</li>
+</ol>
+<p>Experimente quebrar um teste de propósito e abrir um pull request: o ✗ aparece no PR, com o link para o log do erro.</p>
+
+<h2>Dois ajustes úteis</h2>
+<h3>Cancelar execuções antigas</h3>
+<p>Se você der vários pushes seguidos no mesmo PR, não faz sentido testar todos. Adicione no nível raiz do workflow:</p>
+<pre><code class="language-yaml">concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}</code></pre>
+<p>A expressão só cancela execuções de pull request. Na <code>main</code>, cada commit é testado até o fim.</p>
+
+<h3>Testar em mais de uma versão do Node (matriz)</h3>
+<pre><code class="language-yaml">jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm test</code></pre>
+<p>Útil para bibliotecas ou para validar uma troca de versão. Para uma API com uma única versão em produção, uma versão basta.</p>
+
+<h2>Indo além: MySQL de verdade dentro do pipeline</h2>
+<p>Se você tiver testes que precisam do banco (como a ideia da <a href="@@LESSON:4476567-5-12-testes-de-integracao-com-banco-de-dados@@">lição 5.12</a>), o job pode subir um MySQL descartável como <strong>service container</strong>, igual ao que você fez com Docker na <a href="@@LESSON:4476558-5-3-utilizando-mysql-no-docker@@">lição 5.3</a>:</p>
+<pre><code class="language-yaml">jobs:
+  test-db:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: cookmaster_test
+        ports:
+          - 3306:3306
+        options: &gt;-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=10
+    env:
+      MYSQLHOST: 127.0.0.1
+      MYSQLPORT: 3306
+      MYSQLUSER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cookmaster_test
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Criar tabelas e dados de teste
+        run: mysql -h 127.0.0.1 -uroot -proot cookmaster_test &lt; database/schema.sql
+      - run: npm run test:db</code></pre>
+<ul>
+<li>O <code>options</code> com <code>--health-cmd</code> faz o job esperar o MySQL ficar pronto antes de começar os passos.</li>
+<li>A senha <code>root</code> aqui não é segredo: o banco nasce e morre com o job e não guarda dado real. Senhas de bancos <strong>reais</strong> vão sempre em segredos (lição IA.4).</li>
+<li>Os nomes das variáveis são os mesmos que o <code>connection.js</code> da <a href="@@LESSON:4505303-9-7-deploy-da-aplicacao-no-railway@@">lição 9.7</a> lê. A mesma aplicação roda local, no CI e em produção, mudando só o ambiente.</li>
+<li>Ajuste o caminho do script SQL (<code>database/schema.sql</code>) para o do seu projeto.</li>
+</ul>

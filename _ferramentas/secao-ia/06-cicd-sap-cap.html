@@ -1,0 +1,118 @@
+<p>Tudo o que você viu nesta seção vale para um projeto SAP CAP. Mudam o <strong>artefato</strong> (um arquivo <code>.mtar</code> no lugar de uma imagem Docker), o <strong>destino</strong> (SAP BTP no lugar do Railway) e algumas ferramentas.</p>
+
+<h2>Do curso para o CAP: o que muda</h2>
+<table>
+<thead><tr><th>Na API Cookmaster</th><th>No CAP (Cloud Foundry)</th></tr></thead>
+<tbody>
+<tr><td><code>npm ci</code> + <code>npm test</code> (Jest)</td><td>Igual. Testes com Jest ou <code>node --test</code> usando <code>cds.test</code>.</td></tr>
+<tr><td><code>Dockerfile</code></td><td><code>mta.yaml</code> (gerado com <code>cds add mta</code>), que descreve os módulos e os serviços do BTP</td></tr>
+<tr><td><code>docker build</code></td><td><code>mbt build</code>, que roda o <code>cds build --production</code> e gera o <code>.mtar</code></td></tr>
+<tr><td>Railway faz o deploy</td><td><code>cf deploy arquivo.mtar</code> (plugin MultiApps da cf CLI)</td></tr>
+<tr><td>Variáveis do MySQL no painel do Railway</td><td>Service bindings (HANA Cloud, XSUAA/IAS, destination), criados e vinculados pelo próprio deploy do MTA</td></tr>
+<tr><td>Migrations do banco</td><td>O módulo <code>db-deployer</code> do MTA aplica o schema CDS no HANA a cada deploy</td></tr>
+<tr><td><code>RAILWAY_TOKEN</code></td><td>Usuário técnico do BTP (usuário + senha) com permissão de <em>Space Developer</em></td></tr>
+</tbody>
+</table>
+<p>No Kyma (Kubernetes), o empacotamento é feito com <code>cds add helm</code> + imagens de container, e a credencial é um <code>kubeconfig</code> de um usuário técnico.</p>
+
+<h2>Opção A: GitHub Actions gerado pelo CAP</h2>
+<p>O <code>cds-dk</code> gera os workflows prontos:</p>
+<pre><code class="language-bash">cds add github-actions   # atalho: cds add gha</code></pre>
+<p>Os workflows gerados fazem deploy em <strong>staging</strong> a cada push na <code>main</code> e em <strong>produção</strong> quando você publica uma <strong>Release</strong> no GitHub (ex.: tag <code>v1.0.0</code>), usando um environment <code>Production</code>. Você só precisa cadastrar em <em>Settings → Secrets and variables → Actions</em>:</p>
+<table>
+<thead><tr><th>Tipo</th><th>Nome</th><th>Exemplo</th></tr></thead>
+<tbody>
+<tr><td>Variable</td><td><code>CF_API</code></td><td><code>https://api.cf.us10-001.hana.ondemand.com</code></td></tr>
+<tr><td>Variable</td><td><code>CF_USERNAME</code></td><td>e-mail do usuário técnico</td></tr>
+<tr><td>Variable</td><td><code>CF_ORG</code> / <code>CF_SPACE</code></td><td>org e space de destino</td></tr>
+<tr><td>Secret</td><td><code>CF_PASSWORD</code></td><td>senha do usuário técnico</td></tr>
+<tr><td>Secret (Kyma)</td><td><code>KUBE_CONFIG</code></td><td>kubeconfig em base64</td></tr>
+</tbody>
+</table>
+<p>No environment <code>Production</code>, sobrescreva <code>CF_ORG</code>/<code>CF_SPACE</code> para apontar para o subaccount de produção. É o mesmo conceito de environments da lição IA.4.</p>
+
+<h3>O que esse workflow faz por baixo (versão simplificada)</h3>
+<p>Para você entender e conseguir ajustar, este é o essencial de um deploy CAP → Cloud Foundry:</p>
+<pre><code class="language-yaml">name: Deploy CAP
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm i -g @sap/cds-dk mbt
+
+      - name: Build do MTA
+        run: mbt build -t gen --mtar app.mtar
+
+      - name: Instalar cf CLI e plugin MultiApps
+        run: |
+          curl -sL "https://packages.cloudfoundry.org/stable?release=linux64-binary&amp;version=v8&amp;source=github" | sudo tar -zx -C /usr/local/bin
+          cf install-plugin multiapps -f
+
+      - name: Deploy no Cloud Foundry
+        env:
+          CF_API: ${{ vars.CF_API }}
+          CF_ORG: ${{ vars.CF_ORG }}
+          CF_SPACE: ${{ vars.CF_SPACE }}
+          CF_USERNAME: ${{ vars.CF_USERNAME }}
+          CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+        run: |
+          cf api "$CF_API"
+          cf auth
+          cf target -o "$CF_ORG" -s "$CF_SPACE"
+          cf deploy gen/app.mtar -f</code></pre>
+<ul>
+<li><code>cf auth</code> sem argumentos lê <code>CF_USERNAME</code> e <code>CF_PASSWORD</code> do ambiente. A senha não aparece na linha de comando nem no log.</li>
+<li><code>mbt build</code> lê o <code>mta.yaml</code>, roda os builds de cada módulo (incluindo <code>cds build --production</code>) e gera <code>gen/app.mtar</code>.</li>
+<li><code>cf deploy</code> cria/atualiza as instâncias de serviço declaradas no <code>mta.yaml</code>, faz o deploy do schema no HANA (módulo <code>-db-deployer</code>) e sobe os apps.</li>
+<li>Prefira o workflow gerado pelo <code>cds add gha</code> e use este exemplo só para entendê-lo. O gerado acompanha as mudanças do CAP.</li>
+</ul>
+
+<h2>Opção B: SAP Continuous Integration and Delivery</h2>
+<p>Serviço do próprio BTP. Você assina no subaccount e configura o pipeline por uma interface gráfica, sem escrever YAML de runner e sem manter Jenkins.</p>
+<ul>
+<li>Tem um pipeline <strong>pronto para CAP</strong> (Node.js, Java e projetos MTA): build, testes, e deploy em Cloud Foundry ou upload para o Cloud Transport Management.</li>
+<li>Conecta a GitHub, GitLab, Bitbucket ou Azure Repos e é disparado por webhook a cada push.</li>
+<li>As credenciais (usuário técnico, token do Git) ficam guardadas no próprio serviço.</li>
+<li>Bom ponto de partida em projetos de cliente SAP, onde o código costuma ficar em repositórios corporativos e o time prefere ferramentas suportadas pela SAP.</li>
+</ul>
+
+<h2>Opção C: Project Piper</h2>
+<p>Biblioteca open source da SAP com "steps" prontos (build MTA, deploy CF, testes, scans), usada em Jenkins, GitHub Actions ou Azure DevOps. Dá mais flexibilidade que o serviço gerenciado, em troca de mais configuração. É comum em clientes grandes.</p>
+
+<h2>Promovendo entre ambientes: Cloud Transport Management</h2>
+<p>Em projetos SAP é comum ter subaccounts de <strong>DEV → QAS → PRD</strong>. Em vez de rodar o build três vezes, o pipeline gera <strong>um</strong> <code>.mtar</code>, faz deploy em DEV e o envia ao <strong>SAP Cloud Transport Management service</strong>. De lá, o mesmo artefato é <em>importado</em> em QAS e PRD, com aprovação e histórico. É o equivalente, no BTP, a "build once, deploy many".</p>
+
+<h2>Cuidados específicos do BTP</h2>
+<ul>
+<li><strong>Usuário técnico:</strong> crie um usuário só para o pipeline, sem MFA (o pipeline não consegue digitar código de autenticação), com o papel <em>Space Developer</em> apenas nos spaces necessários. O recomendado é que ele venha de um Identity Authentication (IAS) próprio. Nesse caso, use <code>cf auth --origin &lt;origin-key&gt;</code>.</li>
+<li><strong>Não coloque credenciais no <code>mta.yaml</code> ou em <code>.cdsrc.json</code>/<code>package.json</code>:</strong> elas chegam pelos service bindings. Valores por ambiente que precisam ir no deploy vão em arquivos de extensão <code>.mtaext</code>, mantidos fora do Git ou gerados no pipeline a partir de segredos.</li>
+<li><strong>Testes sem HANA:</strong> por padrão o <code>cds.test</code> usa SQLite em memória. Os testes rodam no runner sem banco externo, como os mocks da Seção 4.</li>
+<li><strong>Versão do Node:</strong> a mesma no <code>.nvmrc</code>, no <code>engines</code> do <code>package.json</code> (o buildpack Node.js do Cloud Foundry respeita o <code>engines</code>) e no workflow.</li>
+</ul>

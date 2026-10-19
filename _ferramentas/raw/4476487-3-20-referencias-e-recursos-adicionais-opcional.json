@@ -1,0 +1,7 @@
+{
+  "slug": "4476487-3-20-referencias-e-recursos-adicionais-opcional",
+  "title": "3.20 - Referências e recursos adicionais (opcional)",
+  "html": "\n        <h2>Referências</h2>\n<ol>\n<li><a href=\"https://expressjs.com/pt-br/\">Documentação oficial do Express</a></li>\n<li><a href=\"https://docs.github.com/pt/rest\">Documentação da API REST do GitHub</a></li>\n<li><a href=\"https://datatracker.ietf.org/doc/html/rfc2616\">RFC - Request for Comments (protocolo HTTP)</a></li>\n</ol>\n<h2>Recursos adicionais</h2>\n<p>Se você deseja se aprofundar nesses conteúdos, recomendamos os seguintes recursos:</p>\n<ol>\n<li><a href=\"https://expressjs.com/pt-br/guide/using-middleware.html\">Usando Middlewares</a></li>\n<li><a href=\"https://developer.mozilla.org/pt-BR/docs/Web/HTTP\">HTTP - MDN</a></li>\n<li><a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status\">HTTP response status codes - MDN</a></li>\n<li><a href=\"https://www.w3c.br/padroes/\">Padrões de Design com W3C</a></li>\n</ol>\n      ",
+  "videos": [],
+  "extras": []
+}

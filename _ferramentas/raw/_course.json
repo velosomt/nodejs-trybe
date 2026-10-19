@@ -1,0 +1,533 @@
+{
+  "title": "Back-end em Node.JS",
+  "description": "Por aqui você vai começar com os fundamentos e logo estará criando APIs poderosas com Express, além de testar, proteger e escalar suas aplicações. Vamos explorar persistência de dados, arquitetura em camadas e deploys automatizados, tudo para garantir que suas APIs sejam seguras e prontas para o mundo real. No fim dessa jornada, você estará preparado para construir back-ends robustos, prontos para qualquer desafio.",
+  "sections": [
+    {
+      "title": "Seção 1 - Boas-vindas",
+      "lessons": [
+        {
+          "slug": "4207867-1-1-boas-vindas",
+          "title": "1.1 - Boas-vindas!"
+        },
+        {
+          "slug": "4207870-1-2-com-quem-voce-aprendera",
+          "title": "1.2 - Com quem você aprenderá?"
+        }
+      ]
+    },
+    {
+      "title": "[Conteúdo Complementar] - Docker",
+      "lessons": [
+        {
+          "slug": "4499412-proximos-passos",
+          "title": "Próximos passos"
+        }
+      ]
+    },
+    {
+      "title": "Seção 2 - Introdução ao Node.js",
+      "lessons": [
+        {
+          "slug": "4207872-2-1-introducao-da-secao",
+          "title": "2.1 - Introdução da seção"
+        },
+        {
+          "slug": "4207878-2-2-sistema-de-modulos",
+          "title": "2.2 - Sistema de módulos"
+        },
+        {
+          "slug": "4207900-2-3-utilizando-modulos-locais",
+          "title": "2.3 - Utilizando Módulos locais"
+        },
+        {
+          "slug": "4207902-2-4-utilizando-modulos-internos",
+          "title": "2.4 - Utilizando Módulos internos"
+        },
+        {
+          "slug": "4207905-2-5-leitura-e-escrita-de-arquivos",
+          "title": "2.5 - Leitura e Escrita de Arquivos"
+        },
+        {
+          "slug": "4207908-2-6-combinando-modulos-internos",
+          "title": "2.6 - Combinando módulos internos"
+        },
+        {
+          "slug": "4207913-2-7-npm",
+          "title": "2.7 - NPM"
+        },
+        {
+          "slug": "4207914-2-8-utilizando-modulos-externos",
+          "title": "2.8 - Utilizando Módulos externos"
+        },
+        {
+          "slug": "4207919-2-9-para-nao-esquecer-mais",
+          "title": "2.9 - Para não esquecer mais"
+        },
+        {
+          "slug": "4207922-2-10-exercicios-agora-a-pratica",
+          "title": "2.10 - Exercícios - agora, a prática"
+        },
+        {
+          "slug": "4207923-2-11-referencias-e-recursos-adicionais-opcional",
+          "title": "2.11 - Referências e recursos adicionais (opcional)"
+        }
+      ]
+    },
+    {
+      "title": "Seção 3 - API REST com Express",
+      "lessons": [
+        {
+          "slug": "4476468-3-1-introducao-da-secao",
+          "title": "3.1 - Introdução da seção"
+        },
+        {
+          "slug": "4476469-3-2-express",
+          "title": "3.2 - Express"
+        },
+        {
+          "slug": "4476470-3-3-nossa-primeira-api-hello-world",
+          "title": "3.3 - Nossa primeira API: Hello, World!"
+        },
+        {
+          "slug": "4476471-3-4-api-clients",
+          "title": "3.4 - API Clients"
+        },
+        {
+          "slug": "4476472-3-5-operacoes-de-leitura-get",
+          "title": "3.5 - Operações de leitura (GET)"
+        },
+        {
+          "slug": "4476473-3-6-query-strings-e-url-parameters",
+          "title": "3.6 - Query Strings e URL Parameters"
+        },
+        {
+          "slug": "4476474-3-7-operacoes-de-criacao-post",
+          "title": "3.7 - Operações de criação (POST)"
+        },
+        {
+          "slug": "4476475-3-8-operacoes-de-atualizacao-put-e-patch",
+          "title": "3.8 - Operações de atualização (PUT e PATCH)"
+        },
+        {
+          "slug": "4476476-3-9-operacoes-de-remocao-delete",
+          "title": "3.9 - Operações de Remoção (DELETE)"
+        },
+        {
+          "slug": "4476477-3-10-e-essa-tal-de-arquitetura-rest",
+          "title": "3.10 - E essa tal de arquitetura REST?"
+        },
+        {
+          "slug": "4476478-3-11-exercicio-movie-json-crud",
+          "title": "3.11 - Exercício Movie JSON CRUD"
+        },
+        {
+          "slug": "4476479-3-12-middlewares-no-express",
+          "title": "3.12 - Middlewares no Express"
+        },
+        {
+          "slug": "4476480-3-13-evoluindo-aplicacoes-com-middlewares",
+          "title": "3.13 - Evoluindo Aplicações com Middlewares"
+        },
+        {
+          "slug": "4476481-3-14-middlewares-de-erro",
+          "title": "3.14 - Middlewares de Erro"
+        },
+        {
+          "slug": "4476482-3-15-interpretando-erros",
+          "title": "3.15 - Interpretando Erros"
+        },
+        {
+          "slug": "4476483-3-16-roteamento-de-api",
+          "title": "3.16 - Roteamento de API"
+        },
+        {
+          "slug": "4476484-3-17-refatoracao-de-codigo",
+          "title": "3.17 - Refatoração de Código"
+        },
+        {
+          "slug": "4476485-3-18-para-nao-esquecer-mais",
+          "title": "3.18 - Para não esquecer mais"
+        },
+        {
+          "slug": "4476486-3-19-exercicio-ecotourism-api",
+          "title": "3.19 - Exercício Ecotourism API"
+        },
+        {
+          "slug": "4476487-3-20-referencias-e-recursos-adicionais-opcional",
+          "title": "3.20 - Referências e recursos adicionais (opcional)"
+        }
+      ]
+    },
+    {
+      "title": "[Conteúdo Complementar] - Banco de Dados",
+      "lessons": [
+        {
+          "slug": "4499407-proximos-passos",
+          "title": "Próximos passos"
+        }
+      ]
+    },
+    {
+      "title": "Seção 4 - Testes da Aplicação",
+      "lessons": [
+        {
+          "slug": "4476413-4-1-introducao-da-secao",
+          "title": "4.1 - Introdução da seção"
+        },
+        {
+          "slug": "4476414-4-2-tipos-de-testes",
+          "title": "4.2 - Tipos de Testes"
+        },
+        {
+          "slug": "4476415-4-3-testes-automatizados",
+          "title": "4.3 - Testes automatizados"
+        },
+        {
+          "slug": "4476416-4-4-testes-de-integracao",
+          "title": "4.4 - Testes de Integração"
+        },
+        {
+          "slug": "4476417-4-5-definindo-cenarios-de-teste",
+          "title": "4.5 - Definindo Cenários de Teste"
+        },
+        {
+          "slug": "4476418-4-6-construindo-a-nossa-api",
+          "title": "4.6 - Construindo a nossa API"
+        },
+        {
+          "slug": "4476419-4-7-testes-de-integracao-com-supertest",
+          "title": "4.7 - Testes de Integração com Supertest"
+        },
+        {
+          "slug": "4476420-4-8-testando-novos-cenarios",
+          "title": "4.8 - Testando Novos Cenários"
+        },
+        {
+          "slug": "4476421-4-9-testando-rota-com-metodo-post",
+          "title": "4.9 - Testando Rota com Método Post"
+        },
+        {
+          "slug": "4476422-4-10-configuracoes-do-jest",
+          "title": "4.10 - Configurações do Jest"
+        },
+        {
+          "slug": "4476423-4-11-para-nao-esquecer-mais",
+          "title": "4.11 - Para não esquecer mais"
+        },
+        {
+          "slug": "4476424-4-12-projeto-talker-manager",
+          "title": "4.12 - Projeto - Talker Manager"
+        },
+        {
+          "slug": "4476425-4-13-referencias-e-recursos-adicionais-opcional",
+          "title": "4.13 - Referências e recursos adicionais (opcional)"
+        }
+      ]
+    },
+    {
+      "title": "Seção 5 - Persistência de Dados com Node.js",
+      "lessons": [
+        {
+          "slug": "4476555-5-1-introducao-da-secao",
+          "title": "5.1 - Introdução da seção"
+        },
+        {
+          "slug": "4476557-5-2-estudo-de-caso-sistema-de-gestao-escolar",
+          "title": "5.2 - Estudo de caso: Sistema de Gestão Escolar"
+        },
+        {
+          "slug": "4476558-5-3-utilizando-mysql-no-docker",
+          "title": "5.3 - Utilizando MySQL no Docker"
+        },
+        {
+          "slug": "4476559-5-4-configurando-o-mysql-no-node-com-express",
+          "title": "5.4 - Configurando o MySQL no Node com Express"
+        },
+        {
+          "slug": "4476560-5-5-variaveis-de-ambiente",
+          "title": "5.5 - Variáveis de Ambiente"
+        },
+        {
+          "slug": "4476561-5-6-resolucao-de-conflitos-de-configuracao",
+          "title": "5.6 - Resolução de Conflitos de configuração"
+        },
+        {
+          "slug": "4476562-5-7-operacoes-de-leitura",
+          "title": "5.7 - Operações de Leitura"
+        },
+        {
+          "slug": "4476563-5-8-operacoes-utilizando-prepared-statement",
+          "title": "5.8 - Operações utilizando Prepared Statement"
+        },
+        {
+          "slug": "4476564-5-9-operacoes-de-criacao",
+          "title": "5.9 - Operações de Criação"
+        },
+        {
+          "slug": "4476565-5-10-operacoes-de-atualizacao-e-remocao",
+          "title": "5.10 - Operações de Atualização e Remoção"
+        },
+        {
+          "slug": "4476566-5-11-exercicio",
+          "title": "5.11 - Exercício"
+        },
+        {
+          "slug": "4476567-5-12-testes-de-integracao-com-banco-de-dados",
+          "title": "5.12 - Testes de Integração com Banco de Dados"
+        },
+        {
+          "slug": "4476568-5-13-testes-de-integracao-com-jest-spyon",
+          "title": "5.13 - Testes de Integração com jest.spyOn"
+        },
+        {
+          "slug": "4476569-5-14-para-nao-esquecer-mais",
+          "title": "5.14 - Para não esquecer mais"
+        },
+        {
+          "slug": "4484169-5-15-exercicio",
+          "title": "5.15 - Exercício"
+        },
+        {
+          "slug": "4476571-5-16-referencias-e-recursos-adicionais-opcional",
+          "title": "5.16 - Referências e recursos adicionais (opcional)"
+        }
+      ]
+    },
+    {
+      "title": "Seção 6 - Design Modular com Arquitetura em Camadas",
+      "lessons": [
+        {
+          "slug": "4476573-6-1-introducao-da-secao",
+          "title": "6.1 - Introdução da seção"
+        },
+        {
+          "slug": "4476574-6-2-arquitetura-de-software",
+          "title": "6.2 - Arquitetura de Software"
+        },
+        {
+          "slug": "4476575-6-3-arquitetura-em-camadas-model-service-e-controller",
+          "title": "6.3 - Arquitetura em Camadas: Model, Service e Controller"
+        },
+        {
+          "slug": "4476576-6-4-camada-model",
+          "title": "6.4 - Camada Model"
+        },
+        {
+          "slug": "4476577-6-5-camada-controller",
+          "title": "6.5 - Camada Controller"
+        },
+        {
+          "slug": "4476578-6-6-validacao-de-dados-de-entrada-com-middlewares",
+          "title": "6.6 - Validação de Dados de Entrada com Middlewares"
+        },
+        {
+          "slug": "4476579-6-7-projeto-primeira-fase",
+          "title": "6.7 - Projeto - primeira fase"
+        },
+        {
+          "slug": "4476580-6-8-camada-service-e-as-regras-de-negocio",
+          "title": "6.8 - Camada Service e as Regras de Negócio"
+        },
+        {
+          "slug": "4476581-6-9-implementando-a-camada-service",
+          "title": "6.9 - Implementando a Camada Service"
+        },
+        {
+          "slug": "4476582-6-10-adicionando-nova-regra-de-negocio",
+          "title": "6.10 - Adicionando Nova Regra de Negócio"
+        },
+        {
+          "slug": "4476583-6-11-chamadas-externas-como-parte-da-regra-de-negocio",
+          "title": "6.11 - Chamadas Externas como Parte da Regra de Negócio"
+        },
+        {
+          "slug": "4476584-6-12-projeto-segunda-fase",
+          "title": "6.12 - Projeto - segunda fase"
+        },
+        {
+          "slug": "4476585-6-13-testes-de-unidade-camada-model",
+          "title": "6.13 - Testes de Unidade - Camada Model"
+        },
+        {
+          "slug": "4476586-6-14-testes-de-unidade-camada-service",
+          "title": "6.14 - Testes de Unidade - Camada Service"
+        },
+        {
+          "slug": "4476587-6-15-testes-de-unidade-camada-controller",
+          "title": "6.15 - Testes de Unidade - Camada Controller"
+        },
+        {
+          "slug": "4476588-6-16-para-nao-esquecer-mais",
+          "title": "6.16 - Para não esquecer mais"
+        },
+        {
+          "slug": "4476589-6-17-projeto-terceira-fase-quiz",
+          "title": "6.17 - Projeto - terceira fase | Quiz"
+        },
+        {
+          "slug": "4499198-6-18-projeto-terceira-fase-gabarito",
+          "title": "6.18 - Projeto - terceira fase | Gabarito"
+        },
+        {
+          "slug": "4476590-6-19-referencias-e-recursos-adicionais-opcional",
+          "title": "6.19 - Referências e recursos adicionais (opcional)"
+        }
+      ]
+    },
+    {
+      "title": "Seção 7 - Controle de Acesso e Autenticação",
+      "lessons": [
+        {
+          "slug": "4476595-7-1-introducao-da-secao",
+          "title": "7.1 - Introdução da seção"
+        },
+        {
+          "slug": "4476596-7-2-cookmaster-api",
+          "title": "7.2 - Cookmaster API"
+        },
+        {
+          "slug": "4476597-7-3-bcrypt-js-seguranca-das-senhas",
+          "title": "7.3 - Bcrypt.js: Segurança das Senhas"
+        },
+        {
+          "slug": "4476598-7-4-introducao-ao-jwt",
+          "title": "7.4 - Introdução ao JWT"
+        },
+        {
+          "slug": "4476599-7-5-autenticacao",
+          "title": "7.5 - Autenticação"
+        },
+        {
+          "slug": "4476600-7-6-autorizacao",
+          "title": "7.6 - Autorização"
+        },
+        {
+          "slug": "4476601-7-7-projeto-quarta-fase",
+          "title": "7.7 - Projeto - quarta fase"
+        },
+        {
+          "slug": "4476602-7-8-introducao-ao-oauth-2-0",
+          "title": "7.8 - Introdução ao OAuth 2.0"
+        },
+        {
+          "slug": "4476603-7-9-para-nao-esquecer-mais",
+          "title": "7.9 - Para não esquecer mais"
+        },
+        {
+          "slug": "4476604-7-10-projeto-quinta-e-ultima-fase",
+          "title": "7.10 - Projeto - quinta e última fase"
+        },
+        {
+          "slug": "4499292-7-11-projeto-quinta-e-ultima-fase-gabarito",
+          "title": "7.11 - Projeto - quinta e última fase | Gabarito"
+        },
+        {
+          "slug": "4476605-7-11-referencias-e-recursos-adicionais-opcional",
+          "title": "7.11 - Referências e recursos adicionais (opcional)"
+        }
+      ]
+    },
+    {
+      "title": "Seção 8 - Protegendo APIs: Segurança em Node.js",
+      "lessons": [
+        {
+          "slug": "4476616-8-1-introducao-da-secao",
+          "title": "8.1 - Introdução da seção"
+        },
+        {
+          "slug": "4476617-8-2-rate-limiting-e-throttling",
+          "title": "8.2 - Rate Limiting e Throttling"
+        },
+        {
+          "slug": "4476618-8-3-sql-injection",
+          "title": "8.3 - SQL Injection"
+        },
+        {
+          "slug": "4476619-8-4-protecao-de-cabecalho-com-helmet",
+          "title": "8.4 - Proteção de Cabeçalho com Helmet"
+        },
+        {
+          "slug": "4476620-8-5-compression-compressao-de-respostas-http",
+          "title": "8.5 - Compression: Compressão de Respostas HTTP"
+        },
+        {
+          "slug": "4476621-8-6-monitorando-logs-de-requisicoes-com-morgan",
+          "title": "8.6 - Monitorando Logs de Requisições com Morgan"
+        },
+        {
+          "slug": "4476622-8-7-limitando-o-tamanho-do-corpo-das-requisicoes",
+          "title": "8.7 - Limitando o Tamanho do Corpo das Requisições"
+        },
+        {
+          "slug": "4476623-8-8-politica-de-origem-com-cors",
+          "title": "8.8 - Política de Origem com CORS"
+        },
+        {
+          "slug": "4476624-8-9-documentacao-com-swagger",
+          "title": "8.9 - Documentação com Swagger"
+        },
+        {
+          "slug": "4476625-8-10-para-nao-esquecer-mais-quiz",
+          "title": "8.10 - Para não esquecer mais | Quiz"
+        },
+        {
+          "slug": "4479566-8-11-quiz-gabarito",
+          "title": "8.11 - Quiz | Gabarito"
+        },
+        {
+          "slug": "4476626-8-12-referencias-e-recursos-adicionais-opcional",
+          "title": "8.12 - Referências e recursos adicionais (opcional)"
+        }
+      ]
+    },
+    {
+      "title": "Seção 9 - Automatização e Deploy de Aplicações",
+      "lessons": [
+        {
+          "slug": "4505297-9-1-introducao-da-secao",
+          "title": "9.1 - Introdução da seção"
+        },
+        {
+          "slug": "4505298-9-2-deploy",
+          "title": "9.2 - Deploy"
+        },
+        {
+          "slug": "4505299-9-3-computacao-em-nuvem",
+          "title": "9.3 - Computação em Nuvem"
+        },
+        {
+          "slug": "4505300-9-4-criando-um-dockerfile",
+          "title": "9.4 - Criando um Dockerfile"
+        },
+        {
+          "slug": "4505301-9-5-railway",
+          "title": "9.5 - Railway"
+        },
+        {
+          "slug": "4505302-9-6-configurando-servicos-no-railway",
+          "title": "9.6 - Configurando Serviços no Railway"
+        },
+        {
+          "slug": "4505303-9-7-deploy-da-aplicacao-no-railway",
+          "title": "9.7 - Deploy da aplicação no Railway"
+        },
+        {
+          "slug": "4505304-9-8-para-nao-esquecer-mais-quiz",
+          "title": "9.8 - Para não esquecer mais | Quiz"
+        },
+        {
+          "slug": "4505305-9-9-referencias-e-recursos-adicionais-opcional",
+          "title": "9.9 - Referências e recursos adicionais (opcional)"
+        },
+        {
+          "slug": "4505340-9-10-quiz-gabarito",
+          "title": "9.10 Quiz | Gabarito"
+        },
+        {
+          "slug": "4226817-9-11-voce-concluiu-o-curso-parabens",
+          "title": "9.11 Você concluiu o curso, parabéns!"
+        }
+      ]
+    }
+  ]
+}

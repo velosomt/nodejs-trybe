@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6.11 - Chamadas Externas como Parte da Regra de Negócio · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476583-6-11-chamadas-externas-como-parte-da-regra-de-negocio">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 6 - Design Modular com Arquitetura em Camadas</span><span>·</span><span>Lição 11 de 19</span></div>
+      <h1>6.11 - Chamadas Externas como Parte da Regra de Negócio</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>5 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>5 blocos de código</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>1 vídeo</span>
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Ao construir a camada Service, é importante considerar que a lógica de negócio pode incluir integrações com serviços externos. Quando interagimos com APIs externas, estamos adicionando uma camada de validação ou complementando dados que são essenciais para o funcionamento do sistema — como validação de CEP para endereços de estudantes.</p>
+<h2 id="por-que-chamadas-externas-sao-regras-de-negocio">Por que chamadas externas são regras de negócio?</h2>
+<p>Quando uma funcionalidade do sistema depende de uma validação ou processamento realizado por um serviço externo, essa lógica passa a fazer parte das regras de negócio. No caso da validação de CEP, a camada Service incorpora a responsabilidade de verificar se o CEP do estudante é válido antes de permitir o cadastro ou atualização de endereço. Essa verificação é fundamental para garantir dados precisos e endereços válidos, especialmente em aplicações que dependem da localização para outras operações.</p>
+<p>Vamos ver como isso se aplica ao código.</p>
+<h2 id="implementando-a-regra-de-negocio-validacao-de-cep-utilizando-uma-api-externa">Implementando a Regra de Negócio: Validação de CEP utilizando uma API Externa</h2>
+<p><strong>Estrutura do Código</strong>: Vamos utilizar três arquivos principais:</p>
+<ul>
+<li>
+<code>studentModel.js</code> na Model, responsável por armazenar e manipular o endereço do estudante;</li>
+<li>
+<code>studentService.js</code> na Service, que centraliza a lógica de validação de CEP e faz a chamada para a API externa;</li>
+<li>
+<code>studentController.js</code> na Controller, que organiza o fluxo de requisição e resposta.</li>
+</ul>
+<h3 id="arquivo-src-model-studentmodel-js">Arquivo: <code>src/model/studentModel.js</code>
+</h3>
+<p>Na Model, modificaremos o retorno da nossa função,  aqui garantimos que ela insira o endereço validado pela camada Service.</p>
+<pre><code class="language-javascript">// src/model/enrollmentModel.js
+
+// Outras Implementações
+
+// const insert = async (student) =&gt; {
+//   const { name, cpf, birthDate, email, cep, address } = student;
+//   const [result] = await conn.execute(
+//     `INSERT INTO students (name, cpf, birth_date, email, cep, address) VALUES (?, ?, ?, ?, ?, ?)`,
+//     [name, cpf, birthDate, email, cep, address],
+//   );
+
+  return { id: result.insertId, ...student };
+// };
+
+// Outras Implementações
+</code></pre>
+
+<h3 id="arquivo-src-service-studentservice-js">Arquivo: <code>src/service/studentService.js</code>
+</h3>
+<p>O Service centraliza a lógica de negócio, incluindo a chamada para a API externa de validação de CEP. Aqui, usaremos o <code>axios</code> para fazer uma requisição HTTP.</p>
+<blockquote>
+<p><strong><code>axios</code></strong>: é uma biblioteca que facilita fazer requisições HTTP em aplicações Node.js. Ele é amplamente utilizado para consumir APIs externas e facilita o manuseio de dados, simplificando operações de GET, POST, entre outras.</p>
+</blockquote>
+<p>Para instalar o axios, execute o comando:</p>
+<pre><code class="language-bash">npm install axios@1.7.7 -E
+</code></pre>
+
+<p>Agora, continuando com a implementação do código:</p>
+<pre><code class="language-javascript">// src/service/studentService.js
+
+const axios = require('axios');
+
+// const enrollmentModel = require('../model/enrollmentModel');
+const studentModel = require('../model/studentModel');
+
+const createStudent = async (studentData) =&gt; {
+  const { cep } = studentData;
+
+  try {
+    // Chamada para API externa para validar o CEP
+    const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
+    if (data.erro) {
+      return { status: 'error', message: 'Invalid "CEP"' };
+    }
+
+    // Monta o endereço completo com os dados retornados pela API
+    const address = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+    const newStudentData = { ...studentData, address };
+
+    const newStudent = await studentModel.insert(newStudentData);
+
+    return { status: 'success', message: 'Student Created Successfully', student: newStudent };
+  } catch (err) {
+    console.error('API Error:', err.message);
+    return { status: 'error', message: 'Error Validating "CEP"' };
+  }
+};
+
+// module.exports = {
+//   enrollStudentInSubject,
+//   updateEnrollmentGradeStatus,
+  createStudent,
+// }
+</code></pre>
+
+<blockquote>
+<p><strong>Anota aí 📝:</strong> para saber mais sobre o funcionamento da API ViaCEP acesse a <a href="https://viacep.com.br/" target="_blank" rel="noopener noreferrer" class="external">documentação</a></p>
+</blockquote>
+<h4>Lógica da Regra de Negócio:</h4>
+<ul>
+<li>
+<strong>Validação de CEP</strong>: A função <code>createStudent</code> faz uma chamada para a API ViaCEP para validar o CEP fornecido. Caso o CEP seja inválido, retorna um erro.</li>
+<li>
+<strong>Construção do Endereço</strong>: Monta o endereço completo usando <code>logradouro</code>, <code>bairro</code>, <code>localidade</code>, e <code>uf</code> retornados pela API.</li>
+<li>
+<strong>Criação do Estudante</strong>: Caso o CEP seja válido, os dados são enviados para o Model, que salva o novo estudante no banco de dados.</li>
+</ul>
+<details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>O Node 18+ tem <code>fetch</code> nativo (estável no 21+), então o <code>axios</code> deixou de ser obrigatório: <code>const res = await fetch(url); const data = await res.json();</code>. Lembre de definir timeout (<code>AbortSignal.timeout(5000)</code>).</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>No CAP, APIs externas viram <strong>remote services</strong>: configure em <code>cds.requires</code> (ex.: <code>ViaCEP: { kind: 'rest', credentials: { url: 'https://viacep.com.br' } }</code>) e use <code>const viacep = await cds.connect.to('ViaCEP'); await viacep.get('/ws/01001000/json/')</code>. Para APIs SAP, <code>cds import</code> gera o modelo a partir do EDMX/OpenAPI e, no BTP, a URL/credenciais vêm de destinations.</li></ul></div></details><h3 id="arquivo-src-controller-stundentcontroller-js">Arquivo: <code>src/controller/stundentController.js</code>
+</h3>
+<p>No Controller, fazemos modificações na nossa função <code>createStudent</code>:</p>
+<pre><code class="language-javascript">// src/controller/stundentController.js
+
+// Outras Implementações
+
+const createStudent = async (req, res) =&gt; {
+  const { name, cpf, birthDate, email, cep } = req.body;
+
+  try {
+    const result = await studentService.createStudent({ name, cpf, birthDate, email, cep });
+
+    if (result.status === 'error') return res.status(400).json({ message: result.message });
+
+    return res.status(201).json({ message: result.message, student: result.student });
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ message: INTERNAL_SERVER_ERROR });
+  }
+};
+
+// Outras Implementações
+</code></pre>
+
+<ul>
+<li>
+<code>createStudent</code>: Recebe os dados do estudante na requisição (<code>name</code>, <code>cpf</code>, <code>birthDate</code>, <code>email</code>, <code>cep</code>), chama o Service para validar e criar o estudante, e retorna uma resposta adequada conforme o status da operação.</li>
+</ul>
+<h3 id="arquivo-src-middlewares-validatestudentbody-js">Arquivo: <code>src/middlewares/validateStudentBody.js</code>
+</h3>
+<p>Como a validação do campo <code>address</code> agora é feita pela <code>API</code>, removemos o campo <code>address</code> do schema de validação no middleware:</p>
+<pre><code class="language-javascript">// src/middlewares/validateStudentBody.js
+
+const studentSchema = Joi.object({
+  name: Joi.string().min(3).max(30).required(),
+  cpf: Joi.string().length(11).required(),
+  birthDate: Joi.date().iso().required(),
+  email: Joi.string().email().required(),
+  cep: Joi.string().length(8).required(),
+});
+
+// Outras Implementações
+</code></pre>
+
+<p>O fluxo de validação do CEP é um exemplo de como chamadas a serviços externos podem se tornar uma parte integrante das regras de negócio. Isso melhora a precisão dos dados, assegurando que apenas endereços válidos sejam inseridos no sistema.</p>
+<blockquote>
+<p><strong>Relembrando 🧠:</strong> O código apresentado no conteúdo até este momento, pode ser acessado na pasta <code>06-design-modular-com-arquitetura-em-camadas/parte-03-service</code> ou através desse <strong><a href="https://github.com/learnwithtrybe/node-codigos/tree/main/06-design-modular-com-arquitetura-em-camadas/parte-03-service" target="_blank" rel="noopener noreferrer" class="external">link</a></strong>.</p>
+</blockquote>
+<p>Para recapitular sobre o conteúdo, assista ao vídeo a seguir:</p>
+<a class="video-card" href="https://player.vimeo.com/video/1040231250" target="_blank" rel="noopener noreferrer"><span class="video-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span><strong>Vídeo da aula</strong><small>Abrir no Vimeo (requer internet)</small></span></a></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../08%20-%20Se%C3%A7%C3%A3o%206%20-%20Design%20Modular%20com%20Arquitetura%20em%20Camadas/10%20-%20Adicionando%20Nova%20Regra%20de%20Neg%C3%B3cio.html"><small>← Anterior</small><strong>6.10 - Adicionando Nova Regra de Negócio</strong></a>
+        <a class="next" id="next-link" href="../08%20-%20Se%C3%A7%C3%A3o%206%20-%20Design%20Modular%20com%20Arquitetura%20em%20Camadas/12%20-%20Projeto%20-%20segunda%20fase.html"><small>Próxima →</small><strong>6.12 - Projeto - segunda fase</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

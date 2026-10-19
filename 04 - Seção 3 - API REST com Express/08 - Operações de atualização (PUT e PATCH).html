@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.8 - Operações de atualização (PUT e PATCH) · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476475-3-8-operacoes-de-atualizacao-put-e-patch">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 3 - API REST com Express</span><span>·</span><span>Lição 8 de 20</span></div>
+      <h1>3.8 - Operações de atualização (PUT e PATCH)</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>6 blocos de código</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>1 vídeo</span>
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>1 OBS da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Depois de entendermos os métodos GET e POST, vamos aprender sobre os métodos PUT e PATCH, que são utilizados para atualizar recursos no servidor. Embora ambos sirvam para essa finalidade, há diferenças sutis entre eles que abordaremos a seguir.</p>
+<h2 id="diferenca-entre-put-e-patch">Diferença entre PUT e PATCH</h2>
+<ul>
+<li>
+<p><code>PUT</code>: Utilizamos o método PUT para atualizar um recurso por completo. Isso significa que, ao enviar uma requisição PUT, estamos substituindo o recurso original inteiramente pelos novos dados fornecidos.</p>
+</li>
+<li>
+<p><code>PATCH</code>: O método PATCH é utilizado para atualizações parciais. Em vez de substituir o recurso inteiro, o PATCH atualiza apenas os campos que foram modificados, mantendo o restante dos dados inalterados.</p>
+</li>
+</ul>
+<p>Vamos agora ver na prática como isso funciona.</p>
+<details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>O CAP aceita PUT e PATCH automaticamente; ambos disparam o evento <code>UPDATE</code>. Lógica customizada: <code>this.before('UPDATE', 'Teams', ...)</code>.</li><li>Use o aspect <code>managed</code> para preencher <code>createdAt/createdBy/modifiedAt/modifiedBy</code> sem código.</li></ul></div></details><h2 id="criando-o-endpoint-put">Criando o endpoint PUT</h2>
+<p>Vamos começar criando um endpoint que atualiza completamente um time no arquivo <code>teams.json</code>. Suponhamos que queremos substituir todas as informações de um time com base em seu ID. O código ficaria assim:</p>
+<pre><code class="language-javascript">// src/app.js
+
+// ...
+
+app.put('/teams/:id', async (req, res) =&gt; {
+  const { id } = req.params;
+  const { name, initials } = req.body;
+
+  const readTeamsFile = await fs.readFile(path.resolve(__dirname, 'data', 'teams.json'), 'utf8');
+  const teams = JSON.parse(readTeamsFile);
+
+  // Procura pelo índice do time com base no Id
+  const teamIndex = teams.findIndex((team) =&gt; team.id === Number(id));
+
+  if (teamIndex === -1) {
+    return res.status(404).json({ message: 'Team Not Found!' });
+  }
+
+  // Substitui completamente o time
+  teams[teamIndex] = { id: Number(id), name, initials };
+
+  await fs.writeFile(path.resolve(__dirname, 'data', 'teams.json'), JSON.stringify(teams, null, 2));
+
+  return res.status(200).json({ message: 'Team updated successfully!' });
+});
+
+// module.exports = app;
+</code></pre>
+
+<h3 id="entendendo-o-codigo">Entendendo o código</h3>
+<p>Vamos destrinchar o que está acontecendo neste código:</p>
+<ol>
+<li>
+<p><strong>Parâmetro na URL (<code>:id</code>):</strong> A rota utiliza o <code>:id</code> para identificar qual time será atualizado. Esse parâmetro é extraído através de <code>req.params</code>.</p>
+</li>
+<li>
+<p><strong>Body da requisição:</strong> O corpo da requisição (<code>req.body</code>) contém os novos valores para name e initials.</p>
+</li>
+<li>
+<p><strong>Verificação do time:</strong> O código busca o índice do time no array com base no id recebido. Caso o time não seja encontrado, retornamos um status <code>404</code> (Not Found).</p>
+</li>
+<li>
+<p><strong>Substituição completa:</strong> Após localizar o índice do time no array, será substituido completamente o objeto do time pelos novos dados fornecidos.</p>
+</li>
+<li>
+<p><strong>Resposta HTTP:</strong> Retornamos o status 200 (OK) para indicar que a atualização foi concluída com sucesso.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Atenção ⚠️:</strong> Neste exemplo, se algum campo não for enviado (por exemplo, <code>initials</code>), ele será removido do recurso original, pois estamos substituindo o time inteiro.</p>
+</blockquote>
+<h2 id="testando-o-endpoint-put">Testando o endpoint PUT</h2>
+<p>Para testar essa funcionalidade, continue a usar um API Client como Postman, Insomnia ou ThunderClient. Aqui está um exemplo de como enviar uma requisição PUT para modificar um time:</p>
+<ul>
+<li>
+<code>URL</code>: http://localhost:3001/teams/1</li>
+<li>
+<code>Método</code>: PUT</li>
+<li>Body no formato JSON e com os seguintes dados:</li>
+</ul>
+<pre><code class="language-json">{
+  "name": "Grêmio",
+  "initials": "GRE"
+}
+</code></pre>
+
+<p>A resposta que receberemos será algo assim:</p>
+<pre><code class="language-json">{
+  "message": "Team updated successfully!"
+}
+</code></pre>
+
+<p>Verifique o arquivo <code>teams.json</code> para conferir as atualizações.</p>
+<h2 id="criando-o-endpoint-patch">Criando o endpoint PATCH</h2>
+<p>Agora, vamos criar um endpoint que atualiza apenas alguns campos de um time, em vez de substituir todas as suas informações:</p>
+<pre><code class="language-javascript">// src/app.js
+
+// ...
+
+app.patch('/teams/:id', async (req, res) =&gt; {
+  const { id } = req.params;
+  const { name, initials } = req.body;
+
+  const readTeamsFile = await fs.readFile(path.resolve(__dirname, 'data', 'teams.json'), 'utf8');
+  const teams = JSON.parse(readTeamsFile);
+
+  const teamIndex = teams.findIndex((team) =&gt; team.id === Number(id));
+
+  if (teamIndex === -1) {
+    return res.status(404).json({ message: 'Team Not Found!' });
+  }
+
+  // Atualiza apenas os campos que foram enviados
+  if (name) teams[teamIndex].name = name;
+  if (initials) teams[teamIndex].initials = initials;
+
+  await fs.writeFile(path.resolve(__dirname, 'data', 'teams.json'), JSON.stringify(teams, null, 2));
+
+  return res.status(200).json({ message: 'Team partially updated successfully!' });
+});
+
+// module.exports = app;
+</code></pre>
+
+<h3 id="entendendo-o-codigo-2">Entendendo o código</h3>
+<ol>
+<li>
+<p><strong>Parâmetro na URL (<code>:id</code>):</strong> Assim como no PUT, utilizamos o <code>:id</code> para identificar o time.</p>
+</li>
+<li>
+<p><strong>Body da requisição:</strong> O corpo da requisição contém os campos que queremos atualizar. No entanto, no PATCH, apenas os campos enviados serão atualizados. Se enviarmos apenas o <code>name</code>, somente este campo será alterado, enquanto <code>initials</code> permanecerá o mesmo.</p>
+</li>
+<li>
+<p><strong>Atualização parcial:</strong> Utilizamos condicionais (if) para verificar quais campos foram fornecidos no body e atualizá-los individualmente.</p>
+</li>
+</ol>
+<h2 id="testando-o-endpoint-patch">Testando o endpoint PATCH</h2>
+<p>Para testar essa funcionalidade, utilize os seguintes recursos:</p>
+<ul>
+<li>
+<code>URL</code>: http://localhost:3001/teams/2</li>
+<li>
+<code>Método</code>: PATCH</li>
+<li>Body no formato JSON e com os seguintes dados:</li>
+</ul>
+<pre><code class="language-json">{
+  "name": "Grêmio"
+}
+</code></pre>
+
+<p>A resposta que receberemos será algo assim:</p>
+<pre><code class="language-json">{
+  "message": "Team partially updated successfully!"
+}
+</code></pre>
+
+<p>Verifique o arquivo <code>teams.json</code> para conferir as atualizações.</p>
+<h2 id="conclusao">Conclusão</h2>
+<ul>
+<li>
+<p>O <strong>PUT</strong> é ideal quando você deseja substituir completamente um recurso, enquanto o <strong>PATCH</strong> é mais adequado para atualizações parciais.</p>
+</li>
+<li>
+<p>Ambos utilizam o <code>req.body</code> para enviar os dados de atualização, mas diferem no comportamento quanto à substituição de campos.</p>
+</li>
+</ul>
+<p>Com esses métodos, você pode garantir que suas APIs permitam tanto a atualização completa quanto a parcial dos recursos, oferecendo flexibilidade.</p>
+<p>Para consolidar o conhecimento, assista ao vídeo a seguir:</p>
+<a class="video-card" href="https://player.vimeo.com/video/1022283760" target="_blank" rel="noopener noreferrer"><span class="video-card__icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span><span><strong>Vídeo da aula</strong><small>Abrir no Vimeo (requer internet)</small></span></a></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/07%20-%20Opera%C3%A7%C3%B5es%20de%20cria%C3%A7%C3%A3o%20(POST).html"><small>← Anterior</small><strong>3.7 - Operações de criação (POST)</strong></a>
+        <a class="next" id="next-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/09%20-%20Opera%C3%A7%C3%B5es%20de%20Remo%C3%A7%C3%A3o%20(DELETE).html"><small>Próxima →</small><strong>3.9 - Operações de Remoção (DELETE)</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

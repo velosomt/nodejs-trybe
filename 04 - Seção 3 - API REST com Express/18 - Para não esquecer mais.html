@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.18 - Para não esquecer mais · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476485-3-18-para-nao-esquecer-mais">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 3 - API REST com Express</span><span>·</span><span>Lição 18 de 20</span></div>
+      <h1>3.18 - Para não esquecer mais</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min de leitura</span>
+        
+        
+        
+        
+      </div>
+      
+      
+      <div class="content"><p>Ao longo desta seção, vimos diversos conceitos importantes que serão essenciais para continuarmos desenvolvendo aplicações web com Node.js e construindo APIs. Para ajudar você a relembrar esses pontos-chave, preparamos este mini resumo com os principais termos abordados. Ele será uma ótima referência rápida!</p>
+<h2 id="framework-express">Framework Express</h2>
+<p>O Express é um framework que nos ajuda a organizar e construir APIs robustas e flexíveis, nos dando ferramentas que fazem as coisas acontecerem com poucas linhas de código, abstraindo a lógica e códigos por trás de funcionalidades muito comuns nas aplicações.</p>
+<h2 id="c-r-u-d-ou-crud">C.R.U.D. (ou CRUD)</h2>
+<p>Esse é um acrônimo para um conjunto de operações muito comuns no mundo do desenvolvimento, elas são:</p>
+<ul>
+<li><strong>Create:</strong> Criar;</li>
+<li><strong>Read:</strong> Ler;</li>
+<li><strong>Update:</strong> Alterar;</li>
+<li><strong>Delete:</strong> Deletar</li>
+</ul>
+<p>Essas operações são a base para quase toda a manipulação de informações em uma aplicação.</p>
+<h2 id="api-clients">API Clients</h2>
+<p>Ferramentas como o Postman e Insomnia são conhecidas como API clients. Elas permitem que você envie requisições HTTP para testar e interagir com APIs, sem precisar construir uma interface de usuário. Você pode configurar requisições com diferentes métodos, parâmetros, headers e visualizar as respostas, facilitando o teste e depuração da sua API.</p>
+<h2 id="metodos-de-envio-de-dados">Métodos de Envio de Dados</h2>
+<p>Existem três principais formas de enviar dados para uma API:</p>
+<ol>
+<li>
+<p><strong>Query params (parâmetros de consulta):</strong> São anexados à URL após um <code>?</code>. Por exemplo, <code>/teams?filterTeamByInitial=A</code>. São comumente usados para enviar filtros ou informações adicionais.</p>
+</li>
+<li>
+<p><strong>Route params (parâmetros de rota):</strong> São parte da própria URL e geralmente representam um recurso específico. Exemplo: <code>/teams/:id</code>, onde <code>:id</code> seria substituído pelo identificador de um time.</p>
+</li>
+<li>
+<p><strong>Body:</strong> O corpo da requisição é utilizado especialmente em métodos como POST e PUT, para enviar dados mais complexos, geralmente no formato JSON.</p>
+</li>
+</ol>
+<h2 id="http">HTTP</h2>
+<p>O protocolo HTTP é a base da comunicação na web. Aqui estão os principais métodos utilizados em APIs:</p>
+<ul>
+<li><strong>GET:</strong> Utilizado para recuperar dados.</li>
+<li><strong>POST:</strong> Utilizado para enviar dados e criar novos recursos no servidor.</li>
+<li><strong>PUT:</strong> Utilizado para atualizar um recurso de forma completa.</li>
+<li><strong>PATCH:</strong> Utilizado para atualizar parte de um recurso.</li>
+<li><strong>DELETE:</strong> Utilizado para remover um recurso do servidor.</li>
+</ul>
+<h2 id="middlewares">Middlewares</h2>
+<p>Middlewares no Express são funções que interceptam as requisições antes de chegarem às rotas finais. Eles podem realizar diversas tarefas, como validações, autenticação, ou até mesmo alterar o conteúdo da requisição e resposta. São extremamente úteis para modularizar o código e reutilizar funcionalidades comuns em diferentes rotas.</p>
+<h2 id="express-json">Express.json</h2>
+<p>O <code>express.json()</code> é um middleware embutido no Express que é responsável por processar o corpo de requisições que contenham JSON. Ele converte automaticamente o conteúdo do <code>req.body</code> em um objeto JavaScript, facilitando o trabalho com dados enviados em requisições POST, PUT ou PATCH.</p>
+<h2 id="middlewares-globais">Middlewares Globais</h2>
+<p>Middlewares globais são middlewares que afetam todas as rotas da aplicação. Eles são úteis para tarefas como registro de logs, tratamento de autenticação, entre outros. Eles podem ou não influenciar o comportamento de todas as requisições.</p>
+<h2 id="middlewares-de-erro">Middlewares de Erro</h2>
+<p>Os middlewares de erro têm a função específica de capturar e tratar erros que ocorrem na aplicação. Eles permitem uma gestão centralizada dos erros, garantindo que a API responda de forma apropriada. Um exemplo seria capturar erros de leitura e escrita de arquivos, e retornar uma mensagem alertando sobre o problema.</p>
+<h2 id="roteamento-de-api">Roteamento de API</h2>
+<p>O roteamento no Express permite que você organize as rotas da sua aplicação de forma modular, usando o <code>express.Router()</code>. Com isso, você pode separar grupos de rotas relacionados, facilitando a manutenção e a leitura do código.</p>
+<h2 id="para-onde-vamos">Para onde vamos?</h2>
+<p>No próximo conteúdo, você aprenderá a:</p>
+<ul>
+<li>Testes Automatizados;</li>
+<li>Testes de Integração;</li>
+<li>Definir cenários de testes;</li>
+<li>Cobertura de testes;</li>
+<li>Configuração de testes com Jest.</li>
+</ul></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/17%20-%20Refatora%C3%A7%C3%A3o%20de%20C%C3%B3digo.html"><small>← Anterior</small><strong>3.17 - Refatoração de Código</strong></a>
+        <a class="next" id="next-link" href="../04%20-%20Se%C3%A7%C3%A3o%203%20-%20API%20REST%20com%20Express/19%20-%20Exerc%C3%ADcio%20Ecotourism%20API.html"><small>Próxima →</small><strong>3.19 - Exercício Ecotourism API</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

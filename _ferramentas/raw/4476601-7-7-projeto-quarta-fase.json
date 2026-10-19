@@ -1,0 +1,7 @@
+{
+  "slug": "4476601-7-7-projeto-quarta-fase",
+  "title": "7.7 - Projeto - quarta fase",
+  "html": "\n        <p>\n    Nesse exercício vamos criar uma <b>API REST</b>&nbsp; que será um Sistema de Gestão de Pedidos para um E-commerce utilizando o <b>Express</b>&nbsp;e o <b>MySQL</b>&nbsp;como banco de dados. Nessa <b>API</b>&nbsp;você vai armazenar e recuperar dados de pessoas usuárias, produtos e pedidos por meio de <b>endpoints</b>&nbsp;que realizam o CRUD dos dados.\n</p>\n<p>\n    <mark>Ao final da <b>quinta fase</b> do projeto, você irá responder um quiz sobre tudo o que você implementou nessa fase.</mark>\n</p>\n<h2>\n    Combinados\n</h2>\n<p>\n    Para fazer o exercício, acesse esse repositório ➡️ <a href=\"https://github.com/learnwithtrybe/flex-node-order-system-api\" target=\"_blank\">Projeto - Sistema de Gestão de Pedidos para um E-commerce</a>.\n</p>\n<p>\n    Nesse repositório a estrutura do código já está disponível, bem como o banco de dados criado e carregado via Docker. Basta você fazer a implementação criando novos arquivos e atualizando o arquivo de rotas.\n</p>\n<p>\n    Leia o arquivo <code>README.md</code> do repositório com ⚠️ atenção ⚠️ para saber como desenvolver e entregar seu exercício.\n</p>\n<p>\n    <mark>\n    Nessa fase dos estudos, você irá concluir o projeto fazendo o&nbsp;<b>requisito 4</b>.\n    </mark><b></b>\n</p>\n      ",
+  "videos": [],
+  "extras": []
+}

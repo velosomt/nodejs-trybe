@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.3 - Bcrypt.js: Segurança das Senhas · Node.js offline</title>
+<script>(()=>{try{const t=JSON.parse(localStorage.getItem('trybe-node:theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{document.documentElement.dataset.theme='light'}})()</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="lesson" data-lesson="4476597-7-3-bcrypt-js-seguranca-das-senhas">
+<div class="read-progress"></div>
+<header class="topbar">
+  <button class="icon-btn" id="menu-toggle" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="../index.html"><span class="brand__logo">{ }</span><span>Back-end em Node.js</span><span class="brand__tag">offline</span></a>
+  <button class="search-trigger" id="search-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar no curso…</span><kbd>Ctrl K</kbd></button>
+  <button class="icon-btn" id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Conteúdo do curso"></nav>
+  <div class="main">
+    <article class="lesson">
+      <div class="crumb"><a href="../index.html">Início</a><span>/</span><span>Seção 7 - Controle de Acesso e Autenticação</span><span>·</span><span>Lição 3 de 12</span></div>
+      <h1>7.3 - Bcrypt.js: Segurança das Senhas</h1>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min de leitura</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>7 blocos de código</span>
+        
+        
+        <a class="chip chip--obs" href="#obs-ia-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 16v4M17 18h4"/></svg>2 OBSs da IA</a>
+      </div>
+      
+      
+      <div class="content"><p>Até o momento, construímos aplicações nas quais não nos preocupávamos em utilizar e nem com a segurança do campo <strong>senha</strong>. No entanto, a partir de agora, utilizaremos esse campo, garantindo que as senhas sejam tratadas com segurança.</p>
+<p>Salvar senhas no banco de dados exatamente como chegam ao servidor é um risco significativo. Em caso de invasão ao banco de dados, essas informações podem ser expostas, permitindo acesso indevido a outros serviços ou redes. Para evitar isso, implementaremos criptografia de senhas com o módulo <code>bcryptjs</code>.</p>
+<!-- Vídeo lição 3 - explicar como que é o processo de armazenar a senha no banco e como conferimos se a senha está certa qdo realizado um login. -->
+
+<h2 id="instalando-o-bcrypt-js">Instalando o bcrypt.js</h2>
+<p>Para começar, instalamos o pacote bcryptjs em nosso projeto:</p>
+<pre><code class="language-bash">npm i -E bcryptjs@2.4.3
+</code></pre>
+
+<details class="obs-ia" id="obs-ia-1"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label">Alternativa mais moderna</p><ul><li>O <code>bcryptjs</code> já tem versão 3 (ESM e tipos inclusos). Prefira as funções assíncronas <code>await bcrypt.hash(senha, 10)</code> e <code>await bcrypt.compare(...)</code>: <code>hashSync</code>/<code>compareSync</code> bloqueiam o event loop.</li><li>A OWASP recomenda hoje <strong>Argon2id</strong> (pacote <code>argon2</code>) como primeira opção; bcrypt continua aceitável. O Node também tem <code>crypto.scrypt</code> nativo.</li></ul><p class="obs-ia__label obs-ia__label--cap">Para o SAP CAP</p><ul><li>Em CAP no SAP BTP a aplicação <strong>não armazena senhas</strong>: a autenticação é delegada ao <strong>SAP Cloud Identity Services (IAS)</strong> ou <strong>XSUAA</strong>. O conceito de hash continua importante, mas você não vai implementá-lo no CAP.</li></ul></div></details><h2 id="cadastrando-novas-pessoas-com-senhas-criptografadas">Cadastrando Novas Pessoas com Senhas Criptografadas</h2>
+<p>Com o <code>bcryptjs</code>, podemos modificar o processo de cadastro para que as senhas sejam armazenadas de forma segura no banco de dados. Alteraremos a função <code>createUser</code> no arquivo <code>src/service/user.service.js</code>:</p>
+<pre><code class="language-javascript">// src/service/user.service.js
+
+const bcrypt = require('bcryptjs');
+// const userModel = require('../model/user.model');
+
+// Outras Implementações
+
+const createUser = async (user) =&gt; {
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(user.password, salt);
+
+  const newUserWithBcrypt = { ...user, password: hashedPassword };
+  const newUser = await userModel.create(newUserWithBcrypt);
+
+  return newUser;
+};
+
+// Outras Implementações
+</code></pre>
+
+<h3 id="explicacao-do-codigo">Explicação do código</h3>
+<ol>
+<li>
+<p><code>bcrypt.genSaltSync(10)</code>: O <em>salt</em> é um valor aleatório adicionado à senha antes da criptografia. Ele dificulta ataques de força bruta e torna cada senha única, mesmo que duas pessoas utilizem a mesma senha. O parâmetro 10 indica o custo computacional do salt, balanceando segurança e desempenho.</p>
+</li>
+<li>
+<p><code>bcrypt.hashSync(user.password, salt)</code>: Combina a senha fornecida pelo usuário com o salt gerado, criando uma versão criptografada que será salva no banco de dados.</p>
+</li>
+<li>
+<p><code>{ ...user, password: hashedPassword }</code>: Criamos um novo objeto substituindo o campo password pela versão criptografada.</p>
+</li>
+</ol>
+<p>Após essa alteração, qualquer senha cadastrada será automaticamente criptografada. Teste a funcionalidade enviando uma requisição POST e verifique a resposta.</p>
+<h2 id="realizando-login">Realizando Login</h2>
+<p>A autenticação é um dos principais recursos de segurança em uma aplicação. No contexto deste projeto, o login envolve verificar se o email e a senha fornecidos pelo usuário estão corretos.</p>
+<h3 id="passo-1-buscar-um-usuario-pelo-email">Passo 1: Buscar um usuário pelo email</h3>
+<p>No arquivo <code>src/model/user.model.js</code>, criamos a função <code>findByEmail</code> para localizar usuários com base no email informado:</p>
+<pre><code class="language-javascript">// src/model/user.model.js
+
+// Outras Implementações
+
+const findByEmail = async (email) =&gt; {
+  const [result] = await conn.execute('SELECT * FROM users WHERE email = ?;', [email]);
+  return camelize(result[0]);
+};
+</code></pre>
+
+<h3 id="passo-2-verificar-a-senha">Passo 2: Verificar a senha</h3>
+<p>No arquivo <code>src/service/user.service.js</code>, implementamos a função <code>findUserByEmail</code> para verificar se a senha informada corresponde à senha criptografada salva no banco:</p>
+<pre><code class="language-javascript">// src/service/user.service.js
+
+// Outras Implementações
+
+const findUserByEmail = async ({ email, password }) =&gt; {
+  const user = await userModel.findByEmail(email);
+
+  if (!user) return { error: 'Invalid fields' };
+
+  const isPasswordValid = bcrypt.compareSync(password, user.password);
+
+  if (!isPasswordValid) return { error: 'Invalid fields' };
+
+  return user;
+};
+</code></pre>
+
+<h3 id="explicacao-do-codigo-2">Explicação do código</h3>
+<ol>
+<li>
+<p><code>bcrypt.compareSync(password, user.password)</code>: Compara a senha fornecida pelo usuário (<code>password</code>) com a senha criptografada armazenada no banco de dados (<code>user.password</code>). O <code>bcrypt</code> cuida de todo o processo de descriptografia e validação internamente.</p>
+</li>
+<li>
+<p><code>if (!user) e if (!isPasswordValid)</code>: Verificamos se o usuário existe e se a senha é válida. Em ambos os casos, retornamos <code>{ error: 'Invalid fields' }</code> para evitar o acesso não autorizado.</p>
+</li>
+</ol>
+<h2 id="criando-o-controller-de-login">Criando o Controller de Login</h2>
+<p>Criaremos e adicionaremos no arquivo <code>src/controller/auth.controller.js</code>, a lógica de autenticação:</p>
+<pre><code class="language-javascript">// src/controller/auth.controller.js
+
+const userService = require('../service/user.service');
+
+const login = async (req, res) =&gt; {
+  const { email, password } = req.body;
+  const findUser = await userService.findUserByEmail({ email, password });
+
+  if (findUser.error) {
+    return res.status(400).json({ error: findUser.error });
+  }
+
+  return res.status(201).json(findUser);
+};
+
+module.exports = {
+  login,
+};
+</code></pre>
+
+<details class="obs-ia" id="obs-ia-2"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"></path><path d="M19 16v4M17 18h4"></path></svg><span>OBS da IA</span></summary><div class="obs-ia__body"><p class="obs-ia__label obs-ia__label--warn">Atenção</p><ul><li>Nesta versão o login devolve o objeto do usuário inteiro, incluindo o hash da senha. Nunca retorne o hash na resposta (a lição 7.5 corrige isso ao devolver um token). Login bem-sucedido costuma responder <code>200</code>, não <code>201</code>.</li></ul></div></details><h2 id="criando-a-rota-de-login">Criando a Rota de Login</h2>
+<p>Agora, criaremos uma rota no arquivo <code>src/routes/auth.route.js</code> para lidar com a autenticação.</p>
+<pre><code class="language-javascript">// src/routes/auth.route.js
+
+const express = require('express');
+
+const authController = require('../controller/auth.controller');
+
+const router = express.Router();
+
+router.post('/', authController.login);
+
+module.exports = router;
+</code></pre>
+
+<p>Por fim, importaremos a rota no arquivo <code>src/app.js</code>.</p>
+<pre><code class="language-javascript">// src/app.js
+
+// Outras Importações
+
+const authRouter = require('./routes/auth.route');
+
+// Outras Implementações
+
+app.use('/login', authRouter);
+// app.use((_req, res) =&gt; res.status(404).json({ message: 'Route Not Found!' }));
+// app.use(errorHandler);
+
+// module.exports = app;
+</code></pre>
+
+<h2 id="testando-a-funcionalidade">Testando a Funcionalidade</h2>
+<p>Faça requisições para a rota <code>/login</code> com um email e senha válidos.</p>
+<ul>
+<li><code>Credenciais corretas</code>: A resposta deve incluir as informações do usuário.</li>
+<li><code>Credenciais incorretas</code>: Deve retornar <code>{ error: 'Invalid fields' }</code> com status 400.</li>
+</ul>
+<p>Agora, vamos fixar os conceitos aprendidos com o vídeo a seguir:</p></div>
+      
+      <section class="notes">
+        <div class="notes__head"><h2>Minhas anotações</h2><span class="notes__status" id="notes-status"></span></div>
+        <textarea id="notes" placeholder="Escreva aqui seus resumos, dúvidas e insights desta lição…"></textarea>
+      </section>
+      <div class="lesson-actions"><button class="btn" id="complete" type="button">Marcar como concluída</button></div>
+      <nav class="pager" aria-label="Navegação entre lições">
+        <a class="prev" id="prev-link" href="../09%20-%20Se%C3%A7%C3%A3o%207%20-%20Controle%20de%20Acesso%20e%20Autentica%C3%A7%C3%A3o/02%20-%20Cookmaster%20API.html"><small>← Anterior</small><strong>7.2 - Cookmaster API</strong></a>
+        <a class="next" id="next-link" href="../09%20-%20Se%C3%A7%C3%A3o%207%20-%20Controle%20de%20Acesso%20e%20Autentica%C3%A7%C3%A3o/04%20-%20Introdu%C3%A7%C3%A3o%20ao%20JWT.html"><small>Próxima →</small><strong>7.4 - Introdução ao JWT</strong></a>
+      </nav>
+      <p class="shortcut-hint">Atalhos: <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Ctrl K</kbd> ou <kbd>/</kbd> buscar</p>
+    </article>
+    <aside class="toc" id="toc"></aside>
+  </div>
+</div>
+<div class="search" id="search" hidden>
+  <div class="search__backdrop" data-close></div>
+  <div class="search__panel" role="dialog" aria-label="Buscar no curso">
+    <div class="search__bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search-input" type="search" placeholder="Buscar em todas as lições… (ex.: middleware, jwt, prepared statement)" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="search__results" id="search-results"></div>
+  </div>
+</div>
+<script src="../assets/vendor/highlight.min.js"></script>
+<script src="../assets/vendor/dockerfile.min.js"></script>
+<script src="../assets/js/course.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>
